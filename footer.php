@@ -13,7 +13,7 @@
 	<script src="assets/js/main.js"></script>
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script src="js/main/create-account/login/process.js"></script>
-	<!-- <script src="js/main/create-account/process.js"></script> -->
+	<script src="js/main/create-account/process.js"></script>
 	<script type="text/javascript">  
  $(function() {
     $( "#slider-range" ).slider({

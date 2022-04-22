@@ -29,7 +29,7 @@
                             <input type="text" id="tx-address" name="tx-address" placeholder="Address" />
                             <input type="text" id="tx-cnum" name="tx-cnum" placeholder="Contact #" />
                             <input type="password" id="tx-pass" name="tx-pass" placeholder="Password"/>
-                            <input type="password" id="tx-cpass" name="tx-name" placeholder="Confirm Password"/>
+                            <input type="password" id="tx-cpass" name="tx-cpass" placeholder="Confirm Password"/>
                             <button type="submit" id="tx-constumer-btn" name="tx-constumer-btn" class="btn btn-default">Signup</button>
                         </form>
                     </div><!--/sign up form-->
