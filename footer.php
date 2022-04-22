@@ -10,6 +10,7 @@
 	<script src="assets/js/gmaps.js"></script>
 	<script src="assets/js/contact.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="js/main/create-account/login/process.js"></script>
 	<script type="text/javascript">  
  $(function() {
     $( "#slider-range" ).slider({

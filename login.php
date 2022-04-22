@@ -5,15 +5,15 @@
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form"><!--login form-->
                         <h2>Login to your account</h2>
-                        <form>
+                        <form id="user_login-form">
                             
-                            <input type="email" placeholder="Email Address" name="cus_email" />
-                            <input type="password" placeholder="Password" name="cus_password" />
+                            <input type="email" placeholder="Email Address" id="cus_email" name="cus_email" required/>
+                            <input type="password" placeholder="Password" id="cus_password" name="cus_password" required/>
                             <span>
                                 <input type="checkbox" name="remember" value="on" class="checkbox"> 
                                 Keep me signed in
                             </span>
-                            <button type="submit" class="btn btn-default">Login</button>
+                            <button type="submit" id="user_login-button" name="user_login-button" class="btn btn-default">Login</button>
                         </form>
                     </div><!--/login form-->
                 </div>
