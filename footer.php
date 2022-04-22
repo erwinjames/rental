@@ -1,6 +1,7 @@
 	<footer id="footer">
 	</footer><!--/Footer-->
 	<script src="assets/js/jquery.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.scrollUp.min.js"></script>
 	<script src="assets/js/price-range.js"></script>
@@ -10,7 +11,9 @@
 	<script src="assets/js/gmaps.js"></script>
 	<script src="assets/js/contact.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script src="js/main/create-account/login/process.js"></script>
+	<!-- <script src="js/main/create-account/process.js"></script> -->
 	<script type="text/javascript">  
  $(function() {
     $( "#slider-range" ).slider({

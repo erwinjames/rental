@@ -13,7 +13,7 @@
                                 <input type="checkbox" name="remember" value="on" class="checkbox"> 
                                 Keep me signed in
                             </span>
-                            <button type="submit" id="user_login-button" name="user_login-button" class="btn btn-default">Login</button>
+                            <button type="submit" value="Login" id="user_login-button" name="user_login-button" class="btn btn-default">Login</button>
                         </form>
                     </div><!--/login form-->
                 </div>
@@ -23,14 +23,14 @@
                 <div class="col-sm-4">
                     <div class="signup-form"><!--sign up form-->
                         <h2>New User Signup!</h2>
-                        <form>
-                            <input type="text" placeholder="Name" />
-                            <input type="email" placeholder="Email Address"/>
-                            <input type="text" placeholder="Address" />
-                            <input type="text" placeholder="Contact #" />
-                            <input type="password" placeholder="Password"/>
-                            <input type="password" placeholder="Confirm Password"/>
-                            <button type="submit" class="btn btn-default">Signup</button>
+                        <form id="costumer-form">
+                            <input type="text" id="tx-name" name="tx-name" placeholder="Name" />
+                            <input type="email" id="tx-email" name="tx-email" placeholder="Email Address"/>
+                            <input type="text" id="tx-address" name="tx-address" placeholder="Address" />
+                            <input type="text" id="tx-cnum" name="tx-cnum" placeholder="Contact #" />
+                            <input type="password" id="tx-pass" name="tx-pass" placeholder="Password"/>
+                            <input type="password" id="tx-cpass" name="tx-name" placeholder="Confirm Password"/>
+                            <button type="submit" id="tx-constumer-btn" name="tx-constumer-btn" class="btn btn-default">Signup</button>
                         </form>
                     </div><!--/sign up form-->
                 </div>
