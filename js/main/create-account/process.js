@@ -22,7 +22,6 @@ $(document).ready(function() {
                     if (res === 'The email is already exist! Please try another.') {
                        
                     } else {
-    
                         setTimeout(function() {
                             window.location = "http://localhost/rental/login.php";
                         }, 100);

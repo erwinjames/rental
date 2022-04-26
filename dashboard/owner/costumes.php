@@ -142,10 +142,10 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                   <div class="modal-body">
                         <div class="table-responsive">
                             <form id="add-costume-record">   
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Costumes code</label>
                                    <input type="text" name="code" class="form-control" required/>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label>Costume name</label>
                                    <input type="text" name="costume_name" class="form-control" required/>
@@ -158,18 +158,18 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                                     <label>Category</label>
                                    <select class="form-control select2 select2-hidden-accessible" name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
                                         <option></option>
-                                        <option value="Safari Animals">Safari Animals</option>
-                                        <option value="Nutrition Month Costumes">Nutrition Month Costumes</option>
-                                        <option value="Disney Prince&Princess">Disney Prince&Princess</option>
-                                        <option value="Halloween Costumes">Halloween Costumes</option>
-                                        <option value="Cartoon Characters">Cartoon Characters</option>
-                                        <option value="Buwan ng Wika Costumes">Buwan ng Wika Costumes</option>
-                                        <option value="Bird">Bird</option>
-                                        <option value="Zebra">Zebra</option>
-                                        <option value="Elephant">Elephant</option>
-                                        <option value="Leopard">Leopard</option>
-                                        <option value="Giraffe">Giraffe</option>
-                                        <option value="Lion">Lion</option>
+                                        <option value="1">Safari Animals</option>
+                                        <option value="2">Nutrition Month Costumes</option>
+                                        <option value="3">Disney Prince&Princess</option>
+                                        <option value="4">Halloween Costumes</option>
+                                        <option value="5">Cartoon Characters</option>
+                                        <option value="6">Buwan ng Wika Costumes</option>
+                                        <option value="7">Bird</option>
+                                        <option value="8">Zebra</option>
+                                        <option value="9">Elephant</option>
+                                        <option value="10">Leopard</option>
+                                        <option value="1">Giraffe</option>
+                                        <option value="12">Lion</option>
                                        </select>
                                 </div>                           
                                 <div class="form-group">
@@ -190,7 +190,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                        <textarea class="form-control summernote" required></textarea>
+                                        <textarea name="discript" class="form-control" required></textarea>
                                 </div>
                             </form>
 
@@ -198,7 +198,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="bi bi-check"></i> &nbsp; Save</button>
+                    <button type="button" id="add-costumes-btn" name="add-costumes-btn" class="btn btn-primary"><i class="bi bi-check"></i> &nbsp; Save</button>
                   </div>
                 </div>
               </div>

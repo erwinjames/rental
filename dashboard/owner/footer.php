@@ -5,7 +5,11 @@
                     </div>
                     &nbsp;
               </footer>
-
+              <script src="assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+            <script src="process/js/main/jquery.validate.min.js"></script>
+          <script src="process/js/process.js"></script>
+              
+              
               <script>
 var xValues = ["2021", "2022", "2023", "2024", "2025"];
 var yValues = [0, 5000, 10000, 15000, 20000];
@@ -78,7 +82,7 @@ new Chart("myChart", {
         <script src='assets/plugins/clipboard/clipboard.min.js'></script>
         <!-- AdminLTE App -->
         <script src="assets/dist/js/app.min.js" type="text/javascript"></script>
-
+      
 
         <script src="assets/app.js" type="text/javascript"></script>   
                        
@@ -107,6 +111,7 @@ new Chart("myChart", {
             });
             
         </script>
+          
 </body>
 </html>
 
