@@ -141,7 +141,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                   </div>
                   <div class="modal-body">
                         <div class="table-responsive">
-                            <form>   
+                            <form id="add-costume-record">   
                                 <div class="form-group">
                                     <label>Costumes code</label>
                                    <input type="text" name="code" class="form-control" required/>

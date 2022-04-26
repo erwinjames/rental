@@ -20,11 +20,11 @@ $(document).ready(function() {
                 success: function(res) {
                     alert(res);
                     if (res === 'The email is already exist! Please try another.') {
-                        alert(res);
+                       
                     } else {
-                        alert(res);
+    
                         setTimeout(function() {
-                            window.location = "http://barkomatic.xyz/login.php";
+                            window.location = "http://localhost/rental/login.php";
                         }, 100);
                     }
                     $('#passenger-submit').attr('disabled', false);
