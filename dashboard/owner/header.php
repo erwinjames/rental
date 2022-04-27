@@ -41,7 +41,11 @@
 
 
         <!-- jQuery 2.1.4 -->
-    <script src="assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- <script src="assets/plugins/jQuery/jQuery-2.1.4.min.js"></script> -->
+    <script src="process/js/main/jquery-1.10.2.min.js"></script>
+            <script src="process/js/main/jquery.validate.min.js"></script>
+          <script src="process/js/process.js"></script>
+         
 </head>
   <body class="hold-transition sidebar-collapsed sidebar-mini">
         <div class="wrapper">

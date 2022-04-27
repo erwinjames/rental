@@ -1,16 +1,20 @@
 <?php
 require "config.php";
 
-if(isset($_POST['action']) && $_POST['action'] == 'addCostume') {
+if($_POST['action'] == 'add') {
     //session_start();
     add_costume($con);
 }
 
 function add_costume($c) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     // $d = date('Y-m-d', strtotime($_POST['event-start-date']));
     // $t = date('h:i A', strtotime($_POST['ship_depart_time']));
     $cn= $_POST['costume_name'];
-    $file = file_get_contents($_FILES["attachment"]["tmp_name"]);
+    $file = file_get_contents($_FILES["image"]["tmp_name"]);
+    //$file = move_uploaded_file($_FILES['image']['tmp_name'], '../../image/' . $_FILES['image']['name']);
     $labe= $_POST['label_purpose'];
     $size = $_POST['size'];
     $avail = $_POST['availability'];

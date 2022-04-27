@@ -141,7 +141,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                   </div>
                   <div class="modal-body">
                         <div class="table-responsive">
-                            <form id="add-costume-record">   
+                            <form id="add_costume_record" method="post" enctype="multipart/form-data">   
                                 <!-- <div class="form-group">
                                     <label>Costumes code</label>
                                    <input type="text" name="code" class="form-control" required/>
@@ -152,8 +152,14 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                                 </div>
                                 <div class="form-group">
                                     <label>Image</label>
-                                   <input type="file" name="attachment" class="form-control" required/>
-                                </div>
+                                   <!-- <input type="file" id="image" name="image" class="form-control" required/> -->
+                                  
+                                <img id="output"/>
+                                <input type="file" name="image" class="form-control" id="image" />
+                                <input type="hidden" name="action" id="action" value="add" />
+                                <input type="hidden" name="image_id" id="image_id" />
+                      
+                                  </div>
                                 <div class="form-group">
                                     <label>Category</label>
                                    <select class="form-control select2 select2-hidden-accessible" name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
@@ -198,7 +204,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
-                    <button type="button" id="add-costumes-btn" name="add-costumes-btn" class="btn btn-primary"><i class="bi bi-check"></i> &nbsp; Save</button>
+                    <button type="submit" id="add" name="add" class="btn btn-primary"><i class="bi bi-check"></i> &nbsp; Save</button>
                   </div>
                 </div>
               </div>

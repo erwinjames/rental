@@ -17,28 +17,59 @@ $(document).ready(function() {
     //         }
     //     });
     // }
-    $('#add-costume-record').validate();
-    $('#add-costumes-btn').click(function(e) {
-        if (document.querySelector('#add-costume-record').checkValidity()) {
-            e.preventDefault();
-            //$(':button[type="button"]').prop('disabled', true);
-            $('#add-costumes-btn').attr('disabled', true);
-            $.ajax({
-                url: './modules/process.php',
-                method: 'post',
-                data: $('#add-costume-record').serialize() + '&action=addCostume',
-                success: function(res) {
-                    alert(res);
-                    // setTimeout(function() {
-                    //     fetch_depart_detail();
-                    // }, 1000);
-                    setTimeout(function() {
-                        $(':button[type="button"]').prop('disabled', false);
-                    }, 1000);
-                }
-            });
+    // $('#add_costume_record').validate();
+    // $('#add').click(function(e) {
+    //     if (document.querySelector('#add_costume_record').checkValidity()) {
+    //         e.preventDefault();
+    //         //$(':button[type="button"]').prop('disabled', true);
+    //         $('#add').prop('disabled', true);
+    //         $.ajax({
+    //             url: './process/modules/process.php',
+    //             method: 'post',
+    //             data: $('#add_costume_record').serialize() + '&action=add',
+    //             success: function(res) {
+    //                 alert(res);
+    //                 // setTimeout(function() {
+    //                 //     fetch_depart_detail();
+    //                 // }, 1000);
+    //                 setTimeout(function() {
+    //                     $(':button[type="button"]').prop('disabled', false);
+    //                 }, 1000);
+    //             }
+    //         });
+    //     }
+    // });
+    $('#add_costume_record').submit(function(e){
+       // e.preventDefault();
+        var image_name = $('#image').val();
+        if (image_name == '') {
+            alert("Please Select Image");
+            return false;
+        } else {
+            var extension = $('#image').val().split('.').pop().toLowerCase();
+            if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                alert("Invalid Image File");
+                $('#image').val('');
+                return false;
+            } else {
+                $.ajax({
+                    url: "./process/modules/process.php",
+                    method: "POST",
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        alert(data);
+                        //fetch_edit_profile();
+                        $('#add_costume_record')[0].reset();
+                        // $('#imageModal').modal('hide');
+                    }
+                });
+            }
         }
     });
+});
+
     //* edit ship sched location
     // $("#edit_ship_sched_form").submit(function(e) {
     //     e.preventDefault();
@@ -98,4 +129,4 @@ $(document).ready(function() {
     //         }
     //     });
     // });
-});
+// });

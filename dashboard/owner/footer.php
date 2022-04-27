@@ -5,11 +5,6 @@
                     </div>
                     &nbsp;
               </footer>
-              <script src="assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-            <script src="process/js/main/jquery.validate.min.js"></script>
-          <script src="process/js/process.js"></script>
-              
-              
               <script>
 var xValues = ["2021", "2022", "2023", "2024", "2025"];
 var yValues = [0, 5000, 10000, 15000, 20000];

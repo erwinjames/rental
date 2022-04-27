@@ -40,8 +40,11 @@ function passenger_register($con) {
             $q3 = $con->prepare("INSERT INTO tbl_user_account (email,password) VALUES (?,?)");
             $q3->bind_param('ss', $email,$pass);
             $q3->execute();
-
-            echo 'Registered Successfully.';
+            if($q3){
+                echo 'Registered Successfully.';
+            }else{
+                echo "failed";
+            }
             $q1->close();
             $q2->close();
             $q3->close();
