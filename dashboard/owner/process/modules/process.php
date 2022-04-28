@@ -54,20 +54,16 @@ function add_costume($c) {
     $stmt->execute();
     $stmt->close();
 
-    // $stmt_sb = $c->prepare("INSERT INTO tbl_ship_belong (ship) VALUES (?)");
-    // $stmt_sb->bind_param('s', $ship_belong);
-    // $stmt_sb->execute();
-    // $stmt_sb->close();
 
     echo 'added successfully!';
 }
 
 function fetch_costume_category($c) {
-    //$ship_line_id = $_SESSION['ship_id'];
+   
     $ship_line_id = $_GET['cat'];
-    // $stmt = $c->prepare("SELECT ship_logo,ship_name,email FROM tbl_ship_detail WHERE id=?");
+   
     $stmt = $c->prepare("SELECT * FROM tbl_costume");
-    //$stmt->bind_param("i", $ship_line_id);
+   
     $stmt->execute();
     $result = $stmt->get_result();
     echo '   <table id="dataTablesFull" class="table table-hover table-stripped table-bordered">
@@ -116,10 +112,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
 }
 
 function fetch_costume($c) {
-    //$ship_line_id = $_SESSION['ship_id'];
-    // $stmt = $c->prepare("SELECT ship_logo,ship_name,email FROM tbl_ship_detail WHERE id=?");
     $stmt = $c->prepare("SELECT * FROM tbl_costume");
-    //$stmt->bind_param("i", $ship_line_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
