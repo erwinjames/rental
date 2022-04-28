@@ -11,153 +11,8 @@
 
                 <div class="col-xs-12">
                     <div class="box box-primary">
-                        <div class="box-body">
-                             <ul class="todo-list list-inline">
-
-                                <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Safari Animals</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Nutrition Month Costumes</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Disney Prince&Princess</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Halloween Costumes</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Cartoon Characters</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Buwan ng Wika Costumes</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Bird</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Zebra</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php"view_category.php>Elephant</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Leopard</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Giraffe</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Lion</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                                 <li id="" style="width:28%;margin:10px;padding:12px;">
-                                  <div class="row">
-                                    <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
-                                    <div class="col-xs-10"><a href="view_category.php">Erwin Costumes</a></div>
-                                  </div>
-                                  <div class="pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-                                      <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
-                                    </div>
-                                </li> 
-
-                             </ul>
+                        <div id="fetch_categories" class="box-body">
+      
                         </div>
                     </div>
                 </div>
@@ -171,18 +26,19 @@
                   </div>
                   <div class="modal-body">
                         <div class="table-responsive">
-                            <form>   
+                            <form id="add_category"  method="post" enctype="multipart/form-data">   
                                 <div class="form-group">
                                     <label>Categorty name</label>
                                    <input type="text" name="category_name" class="form-control" required/>
                                 </div>
-                            </form>
+                            
                         </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="bi bi-check"></i> &nbsp; Save</button>
+                    <button type="button" id="add_category_btn" data-dismiss="modal" class="btn btn-primary"><i class="bi bi-check"></i> &nbsp; Save</button>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>

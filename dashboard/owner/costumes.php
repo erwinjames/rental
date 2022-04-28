@@ -12,36 +12,8 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div class="box-body">
-                           <div class="table-responsive">
-                                <table id="dataTablesFull" class="table table-hover table-stripped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Image</th>
-                                            <th>Price</th>
-                                            <th>Availability</th>
-                                            <th>Stock</th>
-                                            <th class="no-sort">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Sample name</td>
-                                            <td class="text-center"><img src="assets/icon.png" alt=""></td>
-                                            <td>$45</td>
-                                            <td>Rent</td>
-                                            <td>7</td>
-                                            <td>
-                                                <div class="text-centert">
-                                                    <a href="#" class="text-red" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete record"
-data-toggle="tooltip" title="Manage Record"><i class="bi bi-x-circle-fill"></i></span></a>
-                                                <a href="#" class="text-yellow" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Manage record"
-data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i></span></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                           <div id="costume_list" class="table-responsive">
+                                
                            </div>
                         </div>
                     </div>

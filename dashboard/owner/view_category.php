@@ -2,7 +2,7 @@
    
    <aside class="right-side">
         <section class="content-header">
-                  <h1 class="pull-left">[ Category Name]</h1>
+                  <h1 class="pull-left"><?php echo $_GET['cat']; ?></h1>
         <div style="clear:both"></div>
         </section>
         <section class="content">
@@ -10,40 +10,8 @@
                 <div class="col-md-12">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="table-responsive">
-                                <table id="dataTablesFull" class="table table-hover table-stripped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th class="no-sort">Costume Code</th>
-                                            <th>Size</th>
-                                            <th>Photo</th>
-                                            <th>Description/Color</th>
-                                            <th>Price</th>
-                                            <th>Availability</th>
-                                            <th>Stocks</th>
-                                            <th class="no-sort">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Pvc8978scio</td>
-                                            <td>Medium</td>
-                                            <td><img src="assets/icon.png"></td>
-                                            <td>cotton black</td>
-                                            <td>$98</td>
-                                            <td>Rent</td>
-                                            <td>4</td>
-                                            <td>
-                                                 <div class="text-centert">
-                                                    <a href="#" class="text-red" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete record"
-data-toggle="tooltip" title="Manage Record"><i class="bi bi-x-circle-fill"></i></span></a>
-                                                <a href="#" class="text-yellow" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Delete record"
-data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i></span></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                            <div id="view_category" class="table-responsive">
+                                
                            </div>
                         </div>
                 </div>
