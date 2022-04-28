@@ -22,8 +22,8 @@ function add_costume($c) {
     $stak = $_POST['stock'];
     $des = $_POST['discript'];
 
-    $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_image,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?)");
-    $stmt->bind_param('sssssss', $cn,$file,$labe,$size,$avail,$price,$stak,$des);
+    $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_image,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('ssssssss', $cn,$file,$labe,$size,$avail,$price,$stak,$des);
     $stmt->execute();
     $stmt->close();
 

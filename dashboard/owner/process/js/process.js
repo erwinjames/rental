@@ -39,8 +39,8 @@ $(document).ready(function() {
     //         });
     //     }
     // });
-    $('#add_costume_record').submit(function(e){
-       // e.preventDefault();
+    $('form#add_costume_record').submit(function(e){
+        e.preventDefault();
         var image_name = $('#image').val();
         if (image_name == '') {
             alert("Please Select Image");

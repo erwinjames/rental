@@ -141,7 +141,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                   </div>
                   <div class="modal-body">
                         <div class="table-responsive">
-                            <form id="add_costume_record" method="post" enctype="multipart/form-data">   
+                            <form id="add_costume_record" action="process/modules/process.php" method="post" enctype="multipart/form-data">   
                                 <!-- <div class="form-group">
                                     <label>Costumes code</label>
                                    <input type="text" name="code" class="form-control" required/>
@@ -198,7 +198,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                                     <label>Description</label>
                                         <textarea name="discript" class="form-control" required></textarea>
                                 </div>
-                            </form>
+                           
 
                            </div>
                   </div>
@@ -206,6 +206,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
                     <button type="submit" id="add" name="add" class="btn btn-primary"><i class="bi bi-check"></i> &nbsp; Save</button>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
