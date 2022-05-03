@@ -27,7 +27,7 @@
 		<div class="product-image-wrapper">
 			<div class="single-products">
 				<div class="productinfo text-center">
-					<img src="assets/images/shop/product8.jpg" width="268px" height="249px" alt="" />
+					<img src="data:image/jpeg;base64,<?php echo base64_encode($row['c_image']);?>" width="268px" height="249px" alt="" />
 					<h2>PHP &nbsp<?php echo $row['c_price'] ?></h2>
 					<p><?php echo $row['c_description'];?></p>
 					<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
