@@ -12,73 +12,19 @@
 					</h4>
 				</div>
 			</div>
-			
+	<?php 
+	require "modules/config.php";
+	$stmt = $con->prepare("SELECT * FROM tbl_costume_categories");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while($row = $result->fetch_assoc()){
+	?>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Safari Animals</a></h4>
+					<h4 class="panel-title"><a href="#"><?php echo $row['cat_name']; ?></a></h4>
 				</div>
 			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Nutrition Month Costumes</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Disney Prince&Princess</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Halloween Costumes</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Cartoon Characters</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Buwan ng Wika Costumes</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Bird</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Zebra</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Elephant</a></h4>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Leopard</a></h4>
-				</div>
-			</div>
-				<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Giraffe</a></h4>
-				</div>
-			</div>
-				<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Lion</a></h4>
-				</div>
-			</div>
-				<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#">Erwin Costumes</a></h4>
-				</div>
-			</div>
-		
+	<?php }?>	
 		</div><!--/category-productsr-->
 
 	

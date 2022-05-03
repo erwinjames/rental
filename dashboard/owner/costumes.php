@@ -127,7 +127,7 @@
                                    <!-- <input type="file" id="image" name="image" class="form-control" required/> -->
                                   
                                 <img id="output"/>
-                                <input type="file" name="image" class="form-control" id="image" />
+                                <input type="file" name="image[]" class="form-control" id="image" multiple="multiple"/>
                                 <input type="hidden" name="action" id="action" value="add" />
                                 <input type="hidden" name="image_id" id="image_id" />
                       

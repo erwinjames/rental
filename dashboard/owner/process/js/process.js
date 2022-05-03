@@ -8,7 +8,7 @@ $(document).ready(function() {
         $.ajax({
             url: "./process/modules/process.php",
             method: "POST",
-            data: { action: get_action },
+            data: { action: get_action},
             success: function(response) {
                 $("#view_category").html(response);
             }

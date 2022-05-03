@@ -8,7 +8,10 @@ if(isset($_POST['action']) && $_POST['action'] == 'user_login') {
     session_start();
     usersLogin($con);
 }
-
+if(isset($_POST['action']) && $_POST['action'] == 'sign_out') {
+    session_start();
+    signoutUser();
+}
 
 function usersLogin($con) {
 /// costumer LOGIN ===========================================================================
@@ -77,5 +80,9 @@ function shipSession($c, $u) {
     }
 }
 
-
+function signoutUser() {
+    if(session_destroy()){
+        echo "Signout successfully!";
+    }
+}
 ?>

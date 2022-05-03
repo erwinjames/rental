@@ -1,4 +1,6 @@
-
+<?php
+require "modules/config.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,15 +69,32 @@
  					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
+						
 							<ul class="nav navbar-nav">
+							<?php 
+								session_start();
+								if(isset($_SESSION['name']) || $_SESSION['name']){?>
 								<li><a href="product_list.php">Shop</a></li>
 								<li><a href="items.php"> My Items</a></li>
 								<li><a href="wishlist.php"> Wishlist</a></li>
 								<li><a href="payment.php"> Checkout</a></li>
 								<li><a href="view_cart.php">Cart(12)</a></li>
+								<li>
+								<form id="sign_out">
+								<button class="ml-auto" type="button" id="btn-su" title="Click to Signout">	
+								<a id="session_name"><i class="fa fa-card"></i> <?php echo $_SESSION['name']; ?></a>
+								</button>
+								</form>
+								</li>
+								<?php } else{?>
+									<li><a href="product_list.php">Shop</a></li>
 								<li><a href="login.php"><i class="fa fa-card"></i> Login</a>
 								</li>
+								<?php } ?>
 							</ul>
+							
+							
+							
 						</div>
 					</div>
 				</div>

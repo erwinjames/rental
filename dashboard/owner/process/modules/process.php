@@ -37,25 +37,29 @@ function adding_categories($c) {
 }
 
 function add_costume($c) {
+    if(count($_FILES["image"]["tmp_name"]) > 0)
+{
+    for($count = 0; $count < count($_FILES["image"]["tmp_name"]); $count++)
+    {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     $cn= $_POST['costume_name'];
-    $file = file_get_contents($_FILES["image"]["tmp_name"]);
+    $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"][$count]));
     $labe= $_POST['label_purpose'];
     $size = $_POST['size'];
     $avail = $_POST['availability'];
     $price =$_POST['price'];
     $stak = $_POST['stock'];
     $des = $_POST['discript'];
-
+   
     $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_image,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?,?)");
     $stmt->bind_param('ssssssss', $cn,$file,$labe,$size,$avail,$price,$stak,$des);
     $stmt->execute();
     $stmt->close();
-
-
     echo 'added successfully!';
+    }
+    }
 }
 
 function fetch_costume_category($c) {
@@ -87,7 +91,7 @@ function fetch_costume_category($c) {
             <tr>
                 <td>Pvc8978s'.$row1['id'].'</td>
                 <td>'.$row1['c_size'].'</td>
-                <td><img src="assets/icon.png"></td>
+                <td><img src="data:image/jpeg;base64,'.base64_encode($row1['c_images'] ).'"></td>
                 <td>'.$row1['c_description'].'</td>
                 <td>P'.$row1['c_price'].'</td>
                 <td>'.$row1['c_availability'].'</td>
@@ -115,7 +119,7 @@ function fetch_costume($c) {
     $stmt = $c->prepare("SELECT * FROM tbl_costume");
     $stmt->execute();
     $result = $stmt->get_result();
-    $row = $result->fetch_array();
+   while($row = $result->fetch_array()){
         $output = '
         <table id="dataTablesFull" class="table table-hover table-stripped table-bordered">
                                     <thead>
@@ -131,7 +135,7 @@ function fetch_costume($c) {
                                     <tbody>
                                         <tr>
                                             <td>'.$row['c_name'].'</td>
-                                            <td class="text-center"> <img src="data:image/jpeg;base64,'.base64_encode($row["ship_logo"]).'" ></td>
+                                            <td class="text-center"> <img src="data:image/jpeg;base64,'.base64_encode($row["c_image"]).'" width="20%" class="img-thumbnail"></td>
                                             <td>'.$row['c_price'].'</td>
                                             <td>'.$row['c_availability'].'</td>
                                             <td>'.$row['c_stock'].'</td>
@@ -147,6 +151,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                                     </tfoot>
                                 </table>';
     echo $output;
+   }
     $stmt->close();
 }
 

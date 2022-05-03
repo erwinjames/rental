@@ -28,15 +28,21 @@ function fetch_costume($c) {
 													<form>
 															<h2>Php '.$row['c_price'].' </h2><!--This is under form because style factor when product price move to form then style is not formating-->
 															<p>'.$row['c_description'].'</p>
-															<a href="product_details.php" class="btn btn-default add-to-cart">Details</a>
+															<a href="product_details.php?costId='.$row['id'].'" class="btn btn-default add-to-cart">Details</a>
 														</form>	
 													</div>
 												</div>
 											</div>
 											<div class="choose">
 												<ul class="nav nav-pills nav-justified">
+                        <form class="form-submits">
+                        <input type="hidden" class="pid" value="'.$row['id'].'">
+                        <input type="hidden" class="pname" value="'.$row['c_name'].'">
+                        <input type="hidden" class="pprice" value="'.$row['c_price'].'">
+                        <input type="hidden" class="description" value="'.$row['c_description'].'">
+                        </form>
 													<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-													<li><a href=""><i class="fa fa-plus-square"></i>Add to Rent</a></li>
+													<li><button class="add_cart" ><i class="fa fa-plus-square"></i>&nbspAdd to Rent</button></li>
 												</ul>
 											</div>
 										</div>

@@ -32,3 +32,23 @@ $(document).ready(function() {
         }
     });
 });
+
+$(document).ready(function() {
+    $('#session_name').click(function(e) {
+        e.preventDefault();
+        $('#session_name').attr('disabled', true);
+        $.ajax({
+            url: './modules/create-account/login/process.php',
+            method: 'post',
+            data: $('#sign_out').serialize() + '&action=sign_out',
+            success: function(res) {
+                if (res == "Signout successfully!") {
+                    window.location.reload();
+                } else {
+                    console.log(res);
+                }
+                $('#session_name').attr('disabled', false);
+            }
+        });
+    });
+});
