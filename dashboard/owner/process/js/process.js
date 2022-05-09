@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 });
 $(document).ready(function() {
-    
+
     setTimeout(function() {
         fetch_cat();
     }, 100);
@@ -59,7 +59,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    
+
     setTimeout(function() {
         fetch_depart_detail();
     }, 100);
@@ -98,12 +98,10 @@ $(document).ready(function() {
                         alert(data);
                         //fetch_edit_cotume();
                         $('#add_costume_record')[0].reset();
-                        
+
                     }
                 });
             }
         }
     });
 });
-
-    

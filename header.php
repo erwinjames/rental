@@ -1,5 +1,5 @@
 <?php
-require "modules/config.php";
+// require "modules/config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,25 +15,25 @@ require "modules/config.php";
 	<link href="assets/css/prettyPhoto.css" rel="stylesheet">
 	<link href="assets/css/price-range.css" rel="stylesheet">
 	<link href="assets/css/animate.css" rel="stylesheet">
-	
+
 	<!-- <link href="assets/css/sliderprice.css" rel="stylesheet"> -->
 	<link href="assets/css/jquery-ui.css" rel="stylesheet">
 	<link href="assets/css/responsive.css" rel="stylesheet">
 	<link href="assets/css/main.css" rel="stylesheet">
-	
+
     <!--[if lt IE 9]>
     <script src="assets/js/html5shiv.js"></script>
     <script src="assets/js/respond.min.js"></script>
-    <![endif]-->       
+    <![endif]-->
     <link rel="shortcut icon" href="assets/images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/images/ico/apple-touch-icon-57-precomposed.png">
-	<script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		  <script src="js/jquery.validate.min.js"></script>
     <script src="js/process.js"></script>
-     
+
 </head><!--/head-->
 
 <body>
@@ -60,7 +60,7 @@ require "modules/config.php";
 				</div>
 			</div>
 		</div><!--/header_top-->
-		
+
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
@@ -69,11 +69,11 @@ require "modules/config.php";
  					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
-						
+
 							<ul class="nav navbar-nav">
-							<?php 
+							<?php
 								session_start();
-								if(isset($_SESSION['name']) || $_SESSION['name']){?>
+								if(isset($_SESSION['name'])){?>
 								<li><a href="product_list.php">Shop</a></li>
 								<li><a href="items.php"> My Items</a></li>
 								<li><a href="wishlist.php"> Wishlist</a></li>
@@ -81,20 +81,20 @@ require "modules/config.php";
 								<li><a href="view_cart.php">Cart(12)</a></li>
 								<li>
 								<form id="sign_out">
-								<button class="ml-auto" type="button" id="btn-su" title="Click to Signout">	
+								<button class="ml-auto" type="button" id="btn-su" title="Click to Signout">
 								<a id="session_name"><i class="fa fa-card"></i> <?php echo $_SESSION['name']; ?></a>
 								</button>
 								</form>
 								</li>
-								<?php } else{?>
+								<?php }else{?>
 									<li><a href="product_list.php">Shop</a></li>
 								<li><a href="login.php"><i class="fa fa-card"></i> Login</a>
 								</li>
 								<?php } ?>
 							</ul>
-							
-							
-							
+
+
+
 						</div>
 					</div>
 				</div>
@@ -123,12 +123,11 @@ require "modules/config.php";
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
 							<form method="post">
-							<input type="text" name="search" placeholder="search" />							
+							<input type="text" name="search" placeholder="search" />
 							</form>
-						</div> 
+						</div>
 					</div>
 				</div>
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-	

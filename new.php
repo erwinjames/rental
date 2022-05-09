@@ -1,10 +1,10 @@
 
 <div class="features_items"><!--features_items-->
 	<h2 class="title text-center">new custumes</span></h2>
-	<?php 
-	require "modules/config.php";
+	<?php
+	// require "modules/config.php";
 	error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+  ini_set('display_errors', 1);
 	$sql_slct ="SELECT   tc.c_name,
 						 tc.c_image,
 						 tc.c_category_id,
@@ -13,9 +13,9 @@
 						 tc.c_price,
 						 tc.c_stock,
 						 tc.c_description,
-						 tcc.cat_name 
+						 tcc.cat_name
 						 FROM tbl_costume tc
-						 JOIN tbl_costume_categories tcc ON tc.c_category_id=tcc.id 
+						 JOIN tbl_costume_categories tcc ON tc.c_category_id=tcc.id
 						 ORDER BY tc.id DESC";
     $stmt = $con->prepare($sql_slct);
 	echo $con->error;
@@ -33,7 +33,7 @@
 					<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 				</div>
 				<div class="product-overlay">
-					<div class="overlay-content">			
+					<div class="overlay-content">
 					<form>
 
 							<h2>PHP &nbsp<?php echo $row['c_price'] ?></h2><!--This is under form because style factor when product price move to form then style is not formating-->
@@ -44,8 +44,8 @@
 								Add to cart
 							</button>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-info"></i>Details</a>
-						</form>	
-						
+						</form>
+
 					</div>
 				</div>
 			</div>
@@ -59,6 +59,6 @@
 	</div>
 	<?php
 
-}?>	
-	
+}?>
+
 </div><!--features_items-->

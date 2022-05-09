@@ -24,12 +24,12 @@ function fetch_costume($c) {
 													<p>'.$row['c_description'].'</p>
 												</div>
 												<div class="product-overlay">
-													<div class="overlay-content">			
+													<div class="overlay-content">
 													<form>
 															<h2>Php '.$row['c_price'].' </h2><!--This is under form because style factor when product price move to form then style is not formating-->
 															<p>'.$row['c_description'].'</p>
 															<a href="product_details.php?costId='.$row['id'].'" class="btn btn-default add-to-cart">Details</a>
-														</form>	
+														</form>
 													</div>
 												</div>
 											</div>
@@ -47,9 +47,8 @@ function fetch_costume($c) {
 											</div>
 										</div>
 									</div>
-
-										
-										</div>';
+										</div>
+                    ';
     echo $output;
     }
     $stmt->close();
@@ -59,12 +58,12 @@ function fetch_cat($c) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_costume_categories"); 
+    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_costume_categories");
     $stmt_ship_sd->execute();
     $row_ship_sd = $stmt_ship_sd->get_result();
     echo '<ul class="todo-list list-inline">';
     while ($row1 = $row_ship_sd->fetch_assoc()){
-        $output = '   
+        $output = '
         <li id="" style="width:28%;margin:10px;padding:12px;">
           <div class="row">
             <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
@@ -74,7 +73,7 @@ function fetch_cat($c) {
             <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
               <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
             </div>
-        </li> 
+        </li>
        ';
     echo $output;
 }

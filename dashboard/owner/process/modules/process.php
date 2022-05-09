@@ -1,9 +1,9 @@
 <?php
 require "config.php";
-if(isset($_POST["action"]) && $_POST["action"] == "view_category") {
+// if(isset($_POST["action"]) && $_POST["action"] == "view_category") {
     //session_start();fetch_categories
-    fetch_costume_category($con);
-}
+//     fetch_costume_category($con);
+// }
 if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume") {
     //session_start();fetch_categories
     fetch_costume($con);
@@ -52,7 +52,7 @@ function add_costume($c) {
     $price =$_POST['price'];
     $stak = $_POST['stock'];
     $des = $_POST['discript'];
-   
+
     $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_image,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?,?)");
     $stmt->bind_param('ssssssss', $cn,$file,$labe,$size,$avail,$price,$stak,$des);
     $stmt->execute();
@@ -63,11 +63,8 @@ function add_costume($c) {
 }
 
 function fetch_costume_category($c) {
-   
-    $ship_line_id = $_GET['cat'];
-   
     $stmt = $c->prepare("SELECT * FROM tbl_costume");
-   
+
     $stmt->execute();
     $result = $stmt->get_result();
     echo '   <table id="dataTablesFull" class="table table-hover table-stripped table-bordered">
@@ -86,12 +83,12 @@ function fetch_costume_category($c) {
     </thead>';
     while ($row1 = $result->fetch_assoc()){
         $output = '
-     
+
         <tbody>
             <tr>
                 <td>Pvc8978s'.$row1['id'].'</td>
                 <td>'.$row1['c_size'].'</td>
-                <td><img src="data:image/jpeg;base64,'.base64_encode($row1['c_images'] ).'"></td>
+                <td><img src="data:image/jpeg;base64,'.base64_encode($row1['c_image'] ).'"></td>
                 <td>'.$row1['c_description'].'</td>
                 <td>P'.$row1['c_price'].'</td>
                 <td>'.$row1['c_availability'].'</td>
@@ -109,7 +106,7 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
         </tfoot>
     ';
     echo $output;
-   
+
     }
     echo '</table>';
     $stmt->close();
@@ -159,12 +156,12 @@ function fetch_cat($c) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_costume_categories"); 
+    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_costume_categories");
     $stmt_ship_sd->execute();
     $row_ship_sd = $stmt_ship_sd->get_result();
     echo '<ul class="todo-list list-inline">';
     while ($row1 = $row_ship_sd->fetch_assoc()){
-        $output = '   
+        $output = '
         <li id="" style="width:28%;margin:10px;padding:12px;">
           <div class="row">
             <div class="col-xs-1" style="vertical-align:middle"><i class="bi bi-box-seam"></i> &nbsp;  </div>
@@ -174,7 +171,7 @@ function fetch_cat($c) {
             <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
               <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
             </div>
-        </li> 
+        </li>
        ';
     echo $output;
 }
