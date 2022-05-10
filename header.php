@@ -8,8 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Renz Costumes</title>
-
+	
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
 	<link href="assets/css/prettyPhoto.css" rel="stylesheet">
@@ -30,8 +31,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/images/ico/apple-touch-icon-57-precomposed.png">
-		<script src="js/jquery-1.10.2.min.js"></script>
-		  <script src="js/jquery.validate.min.js"></script>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
     <script src="js/process.js"></script>
 
 </head><!--/head-->

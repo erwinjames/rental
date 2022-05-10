@@ -1,9 +1,9 @@
 <?php
 require "config.php";
-if(isset($_POST["action"]) && $_POST["action"] == "view_category") {
+// if(isset($_POST["action"]) && $_POST["action"] == "view_category") {
     //session_start();fetch_categories
-    fetch_costume_category($con);
-}
+//     fetch_costume_category($con);
+// }
 if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume") {
     //session_start();fetch_categories
     fetch_costume($con);
@@ -35,15 +35,16 @@ function fetch_costume($c) {
 											</div>
 											<div class="choose">
 												<ul class="nav nav-pills nav-justified">
-                        <form class="form-submits">
+                        <form class="form_submits">
                         <input type="hidden" class="pid" value="'.$row['id'].'">
                         <input type="hidden" class="pname" value="'.$row['c_name'].'">
+                        <input type="hidden" class="qty" value="1">
                         <input type="hidden" class="pprice" value="'.$row['c_price'].'">
                         <input type="hidden" class="description" value="'.$row['c_description'].'">
-                        </form>
 													<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-													<li><button class="add_cart" ><i class="fa fa-plus-square"></i>&nbspAdd to Rent</button></li>
-												</ul>
+													<li><button type="submit"><i class="fa fa-plus-square"></i>&nbspAdd to Rent</button></li>
+                        </form>
+                          </ul>
 											</div>
 										</div>
 									</div>
