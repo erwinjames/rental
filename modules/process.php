@@ -35,12 +35,7 @@ function fetch_costume($c) {
 											</div>
 											<div class="choose">
 												<ul class="nav nav-pills nav-justified">
-                        <form class="form_submits">
-                        <input type="hidden" class="pid" value="'.$row['id'].'">
-                        <input type="hidden" class="pname" value="'.$row['c_name'].'">
-                        <input type="hidden" class="qty" value="1">
-                        <input type="hidden" class="pprice" value="'.$row['c_price'].'">
-                        <input type="hidden" class="description" value="'.$row['c_description'].'">
+                        <form class="form-item">
 													<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
 													<li><button type="submit"><i class="fa fa-plus-square"></i>&nbspAdd to Rent</button></li>
                         </form>

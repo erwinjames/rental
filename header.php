@@ -6,8 +6,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Renz Costumes</title>
 	
@@ -31,9 +29,59 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/images/ico/apple-touch-icon-57-precomposed.png">
-	<script src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<script src="js/jquery.validate.min.js"></script>
-    <script src="js/process.js"></script>
+	<script src="js/process.js"></script>
+	<script>
+$(document).ready(function(){	
+		$(".form-item").submit(function(e){
+			var form_data = $(this).serialize();
+			var button_content = $(this).find('button[type=submit]');
+			button_content.html('Adding...'); //Loading button text 
+
+			$.ajax({ //make ajax request to cart_process.php
+				url: "modules/cart_process.php",
+				type: "POST",
+				dataType:"json", //expect json value from server
+				data: form_data
+			}).done(function(data){ //on Ajax success
+				$("#cart-info").html(data.items); //total items in cart-info element
+				button_content.html('Add to Cart'); //reset button text to original text
+				alert("Item added to Cart!"); //alert user
+				if($(".shopping-cart-box").css("display") == "block"){ //if cart box is still visible
+					$(".cart-box").trigger( "click" ); //trigger click to update the cart box.
+				}
+			})
+			e.preventDefault();
+		});
+
+	//Show Items in Cart
+	$( ".cart-box").click(function(e) { //when user clicks on cart box
+		e.preventDefault(); 
+		$(".shopping-cart-box").fadeIn(); //display cart box
+		$("#shopping-cart-results").html('<img src="images/ajax-loader.gif">'); //show loading image
+		$("#shopping-cart-results" ).load( "modules/cart_process.php", {"load_cart":"1"}); //Make ajax request using jQuery Load() & update results
+	});
+	
+	//Close Cart
+	$( ".close-shopping-cart-box").click(function(e){ //user click on cart box close link
+		e.preventDefault(); 
+		$(".shopping-cart-box").fadeOut(); //close cart-box
+	});
+	
+	//Remove items from cart
+	$("#shopping-cart-results").on('click', 'a.remove-item', function(e) {
+		e.preventDefault(); 
+		var pcode = $(this).attr("data-code"); //get product code
+		$(this).parent().fadeOut(); //remove item element from box
+		$.getJSON( "modules/cart_process.php", {"remove_code":pcode} , function(data){ //get Item count from Server
+			$("#cart-info").html(data.items); //update Item count in cart-info
+			$(".cart-box").trigger( "click" ); //trigger click on cart-box to update the items list
+		});
+	});
+
+});
+</script>
 
 </head><!--/head-->
 
@@ -88,6 +136,24 @@
 								</form>
 								</li>
 								<?php }else{?>
+									      <li><a href="#" class="cart-box" title="View Cart">
+													<?php 
+													if(isset($_SESSION["products"])){
+														echo count($_SESSION["products"]); 
+													}else{
+														echo 0; 
+													}
+													?>
+													</a>
+													</li>
+
+													<div class="shopping-cart-box">
+													<a href="#" class="close-shopping-cart-box" >Close</a>
+
+														<div id="shopping-cart-results">
+														</div>
+													</div>
+												
 									<li><a href="product_list.php">Shop</a></li>
 								<li><a href="login.php"><i class="fa fa-card"></i> Login</a>
 								</li>
