@@ -1,5 +1,9 @@
 
-<?php require('header.php'); ?>
+<?php
+session_start(); //start session
+include("modules/config.php"); //include config file
+include "header.php";
+?>
 <section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -63,8 +67,7 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<?php
-									session_start(); //start session
-									include("modules/config.php");					
+													
 									
 									if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){
 									$total 			= 0;
@@ -74,7 +77,7 @@
 									foreach($_SESSION["products"] as $product){ //Print each item, quantity and price.
 										$product_name = $product["c_name"];
 										$product_qty = 1;
-										$product_price = $product["product_price"];
+										$product_price = $product["c_price"];
 										$product_code = $product["product_code"];
 										$product_size = $product["product_size"];
 										
