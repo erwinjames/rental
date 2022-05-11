@@ -59,7 +59,7 @@ $(document).ready(function(){
 	$( ".cart-box").click(function(e) { //when user clicks on cart box
 		e.preventDefault(); 
 		$(".shopping-cart-box").fadeIn(); //display cart box
-		$("#shopping-cart-results").html('<img src="images/ajax-loader.gif">'); //show loading image
+		$("#shopping-cart-results").html('<img src="assets/images/ajax-loader.gif">'); //show loading image
 		$("#shopping-cart-results" ).load( "modules/cart_process.php", {"load_cart":"1"}); //Make ajax request using jQuery Load() & update results
 	});
 	
@@ -126,9 +126,23 @@ $(document).ready(function(){
 								<li><a href="product_list.php">Shop</a></li>
 								<li><a href="items.php"> My Items</a></li>
 								<li><a href="wishlist.php"> Wishlist</a></li>
-								<li><a href="payment.php"> Checkout</a></li>
-								<li><a href="view_cart.php">Cart(12)</a></li>
-								<li>
+								<li><a href="#" class="cart-box" title="View Cart"><i class="fa-solid fa-cart-plus"></i>
+													<?php 
+													if(isset($_SESSION["products"])){
+														echo count($_SESSION["products"]); 
+													}else{
+														echo 0; 
+													}
+													?>
+													</a>
+													</li>
+													<div class="shopping-cart-box">
+													<a href="#" class="close-shopping-cart-box" >Close</a>
+														<div id="shopping-cart-results">
+														</div>
+													</div>
+												</li>
+								<li>					
 								<form id="sign_out">
 								<button class="ml-auto" type="button" id="btn-su" title="Click to Signout">
 								<a id="session_name"><i class="fa fa-card"></i> <?php echo $_SESSION['name']; ?></a>
@@ -146,13 +160,22 @@ $(document).ready(function(){
 													?>
 													</a>
 													</li>
-
+													<?php 	if(isset($_SESSION['name'])){ ?>
 													<div class="shopping-cart-box">
 													<a href="#" class="close-shopping-cart-box" >Close</a>
-
+													
 														<div id="shopping-cart-results">
 														</div>
 													</div>
+													<?php }else{?>
+														<div class="shopping-cart-box">
+													<a href="#" class="close-shopping-cart-box" >Close</a>
+													
+														<div>
+															<p>Please Sign in</p>
+														</div>
+													</div>
+													<?php }?>
 												
 									<li><a href="product_list.php">Shop</a></li>
 								<li><a href="login.php"><i class="fa fa-card"></i> Login</a>

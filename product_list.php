@@ -12,7 +12,6 @@ if (!$results){
     printf("Error: %s\n", $con->error);
     exit;
 }
-
 while($row = $results->fetch_assoc()) {
 $products_list .= <<<EOT
 <li>
@@ -36,12 +35,11 @@ $products_list .= <<<EOT
 <div class="choose">
 <ul class="nav nav-pills nav-justified">
 
-<input name="product_color" type="hidden" value="default">
 <input name="product_size" type="hidden" value="1">
 <input name="product_size" type="hidden" value="{$row["c_size"]}">
 <input name="product_code" type="hidden" value="{$row["id"]}">
-					<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-				    <li><button type="submit"><i class="fa fa-plus-square"></i>&nbspAdd to Rent</button></li>
+<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+<li><button type="submit"><i class="fa fa-plus-square"></i>&nbspAdd to Rent</button></li>
                        
 </ul>
 </div>
