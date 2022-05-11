@@ -1,3 +1,4 @@
+
 <?php require('header.php'); ?>
 <section id="cart_items">
 		<div class="container">
@@ -61,24 +62,56 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="total_area">
-						<ul>
-							<li>item 1 <span>Php 000 </span></li>
-							<li>item 3 <span>Php 000 </span></li>
-							<li>item 2 <span>Php 000 </span></li>
-							<br>
-							<li>Total <span>
-								Php 000
-							 </span></li>
-						</ul>
-							<form >
-							<input type="submit" class="btn btn-default update"  value="Update"/>
-							<a href="product_list.php" style="margin-top: 19px; margin-left: 1em;" class="btn btn-default update">Continue Shopping</a>
-							<a class="btn btn-default check_out" href="payment.php">Check Out</a>
-							</form>	
+						<?php
+									session_start(); //start session
+									include("modules/config.php");					
+									
+									if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){
+									$total 			= 0;
+									$list_tax 		= '';
+									$cart_box 		= '<ul class="view-cart">';
+
+									foreach($_SESSION["products"] as $product){ //Print each item, quantity and price.
+										$product_name = $product["c_name"];
+										$product_qty = 1;
+										$product_price = $product["product_price"];
+										$product_code = $product["product_code"];
+										$product_size = $product["product_size"];
+										
+										$item_price 	= sprintf("%01.2f",($product_price * $product_qty));  // price x qty = total item price
+										
+										$cart_box 		.=  "<li> $product_code &ndash;  $product_name (Qty : $product_qty | $product_size) <span> $currency. $item_price </span></li>";
+										
+										$subtotal 		= ($product_price * $product_qty); //Multiply item quantity * price
+										$total 			= ($total + $subtotal); //Add up to total price
+									}
+									$grand_total = $total + $shipping_cost; //grand total
+									
+									foreach($taxes as $key => $value){ //list and calculate all taxes in array
+											$tax_amount 	= round($total * ($value / 100));
+											$tax_item[$key] = $tax_amount;
+											$grand_total 	= $grand_total + $tax_amount; 
+									}
+									
+									foreach($tax_item as $key => $value){ //taxes List
+										$list_tax .= $key. ' '. $currency. sprintf("%01.2f", $value).'<br />';
+									}
+									
+									$shipping_cost = ($shipping_cost)?'Shipping Cost : '.$currency. sprintf("%01.2f", $shipping_cost).'<br />':'';
+									
+									//Print Shipping, VAT and Total
+									$cart_box .= "<li class=\"view-cart-total\">$shipping_cost  $list_tax <hr>Payable Amount : $currency ".sprintf("%01.2f", $grand_total)."</li>";
+									$cart_box .= "</ul>";
+									
+									echo $cart_box;
+								}else{
+									echo "Your Cart is empty";
+								}
+								?>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section><!--/#do_action-->
-
+	</section>
+	
 	<?php require('footer.php'); ?>
