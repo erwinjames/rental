@@ -2,7 +2,7 @@
 
 //fetch.php
 require "config.php";
-// ini_set('display_errors', 1); 
+// ini_set('display_errors', 1);
 // error_reporting(E_ALL);
 if(isset($_POST['minimum']) && isset($_POST['maximum'])) {
 $results = $con->query("SELECT * FROM tbl_costume WHERE c_price BETWEEN '".$_POST["minimum"]."' AND '".$_POST["maximum"]."' ORDER BY c_price ASC");
@@ -12,7 +12,7 @@ if (!$results){
     exit;
 }
 while($row = $results->fetch_assoc()) {
-$products_list .= <<<EOT
+$products_list= <<<EOT
 
 <div class="col-md-3">
 <div class="product-image-wrapper">
@@ -38,15 +38,16 @@ $products_list .= <<<EOT
 <input name="product_code" type="hidden" value="{$row["id"]}">
 <li><button href="" class="btn btn-default add-to-cart"><i class="fa fa-plus-square"></i>Add to wishlist</button></li>
 <li><button type="submit" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>&nbspAdd to Rent</button></li>
-                       
+
 </ul>
 </div>
 </div>
 </div>
 
 EOT;
-}
 echo $products_list;
+}
+
 }
 else{
     echo "Nothing";

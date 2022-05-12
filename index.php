@@ -1,6 +1,5 @@
 <?php
-session_start(); //start session
-include("modules/config.php"); //include config file
+session_start(); //start session //include config file
 include "header.php";
 ?>
 	<section id="slider"><!--slider-->
@@ -29,7 +28,7 @@ include "header.php";
 									</h4>
 								</div>
 							</div>
-					<?php 
+					<?php
 					require "modules/config.php";
 					$stmt = $con->prepare("SELECT * FROM tbl_costume_categories");
 					$stmt->execute();
@@ -41,20 +40,20 @@ include "header.php";
 									<h4 class="panel-title"><a href="#"><?php echo $row['cat_name']; ?></a></h4>
 								</div>
 							</div>
-					<?php }?>	
+					<?php }?>
 						</div><!--/category-productsr-->
 					</div>
 				</div>
-								
 
-				
+
+
 				<div class="col-sm-9 padding-right">
 					<?php require('new.php'); ?>
-					
+
 					<!-- This is Category Post option -->
-					
+
 					<?php require('most_rented.php'); ?>
-					
+
 				</div>
 			</div>
 		</div>

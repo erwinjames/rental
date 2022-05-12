@@ -12,8 +12,7 @@
 					</h4>
 				</div>
 			</div>
-	<?php 
-	require "modules/config.php";
+	<?php
 	$stmt = $con->prepare("SELECT * FROM tbl_costume_categories");
     $stmt->execute();
     $result = $stmt->get_result();
@@ -24,10 +23,10 @@
 					<h4 class="panel-title"><a href="#"><?php echo $row['cat_name']; ?></a></h4>
 				</div>
 			</div>
-	<?php }?>	
+	<?php }?>
 		</div><!--/category-productsr-->
 
-	
+
 		<div class="">
 			<h2>price range</h2>
 			<p id="amount" style="text-align:center"></p>
@@ -41,7 +40,6 @@
 			</div>
 		</div>
 		<!--/price-range-->
-		
+
 	</div>
 </div>
-				

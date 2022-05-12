@@ -12,7 +12,7 @@ $maximum_range = 500;
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Renz Costumes</title>
-	
+
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
 	<link href="assets/css/prettyPhoto.css" rel="stylesheet">
@@ -37,11 +37,11 @@ $maximum_range = 500;
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/process.js"></script>
 	<script>
-$(document).ready(function(){	
+$(document).ready(function(){
 		$(".form-item").submit(function(e){
 			var form_data = $(this).serialize();
 			var button_content = $(this).find('button[type=submit]');
-			button_content.html('Adding...'); //Loading button text 
+			button_content.html('Adding...'); //Loading button text
 
 			$.ajax({ //make ajax request to cart_process.php
 				url: "modules/cart_process.php",
@@ -61,21 +61,21 @@ $(document).ready(function(){
 
 	//Show Items in Cart
 	$( ".cart-box").click(function(e) { //when user clicks on cart box
-		e.preventDefault(); 
+		e.preventDefault();
 		$(".shopping-cart-box").fadeIn(); //display cart box
 		$("#shopping-cart-results").html('<img src="assets/images/ajax-loader.gif">'); //show loading image
 		$("#shopping-cart-results" ).load( "modules/cart_process.php", {"load_cart":"1"}); //Make ajax request using jQuery Load() & update results
 	});
-	
+
 	//Close Cart
 	$( ".close-shopping-cart-box").click(function(e){ //user click on cart box close link
-		e.preventDefault(); 
+		e.preventDefault();
 		$(".shopping-cart-box").fadeOut(); //close cart-box
 	});
-	
+
 	//Remove items from cart
 	$("#shopping-cart-results").on('click', 'a.remove-item', function(e) {
-		e.preventDefault(); 
+		e.preventDefault();
 		var pcode = $(this).attr("data-code"); //get product code
 		$(this).parent().fadeOut(); //remove item element from box
 		$.getJSON( "modules/cart_process.php", {"remove_code":pcode} , function(data){ //get Item count from Server
@@ -125,17 +125,17 @@ $(document).ready(function(){
 
 							<ul class="nav navbar-nav">
 							<?php
-								session_start();
+
 								if(isset($_SESSION['name'])){?>
 								<li><a href="product_list.php">Shop</a></li>
 								<li><a href="items.php"> My Items</a></li>
 								<li><a href="wishlist.php"> Wishlist</a></li>
 								<li><a href="#" class="cart-box" title="View Cart"><i class="fa fa-shopping-cart"></i>
-													<?php 
+													<?php
 													if(isset($_SESSION["products"])){
-														echo count($_SESSION["products"]); 
+														echo count($_SESSION["products"]);
 													}else{
-														echo 0; 
+														echo 0;
 													}
 													?>
 													</a>
@@ -146,7 +146,7 @@ $(document).ready(function(){
 														</div>
 													</div>
 												</li>
-								<li>					
+								<li>
 								<form id="sign_out">
 								<button class="ml-auto" type="button" id="btn-su" title="Click to Signout">
 								<a id="session_name"><i class="fa fa-card"></i> <?php echo $_SESSION['name']; ?></a>
@@ -155,11 +155,11 @@ $(document).ready(function(){
 								</li>
 								<?php }else{?>
 									      <li><a href="#" class="cart-box" title="View Cart">
-													<?php 
+													<?php
 													if(isset($_SESSION["products"])){
-														echo count($_SESSION["products"]); 
+														echo count($_SESSION["products"]);
 													}else{
-														echo 0; 
+														echo 0;
 													}
 													?>
 													</a>
@@ -167,20 +167,20 @@ $(document).ready(function(){
 													<?php 	if(isset($_SESSION['name'])){ ?>
 													<div class="shopping-cart-box">
 													<a href="#" class="close-shopping-cart-box" >Close</a>
-													
+
 														<div id="shopping-cart-results">
 														</div>
 													</div>
 													<?php }else{?>
 														<div class="shopping-cart-box">
 													<a href="#" class="close-shopping-cart-box" >Close</a>
-													
+
 														<div>
 															<p>Please Sign in</p>
 														</div>
 													</div>
 													<?php }?>
-												
+
 									<li><a href="product_list.php">Shop</a></li>
 								<li><a href="login.php"><i class="fa fa-card"></i> Login</a>
 								</li>

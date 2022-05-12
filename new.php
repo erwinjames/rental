@@ -2,8 +2,6 @@
 <div class="features_items"><!--features_items-->
 	<h2 class="title text-center">new custumes</span></h2>
 	<?php
-	// require "modules/config.php";
-
 $results = $con->query("SELECT tc.c_name,
 							   tc.id,
 							   tc.c_image,
@@ -21,9 +19,10 @@ if (!$results){
     printf("Error: %s\n", $con->error);
     exit;
 }
+
 while($row = $results->fetch_assoc()) {
-	$picture = base64_encode($row['c_image']);
-$products_list .= <<<EOT
+$picture = base64_encode($row['c_image']);
+$products_list=<<<EOT
 <form class="form-item">
 <div class="col-sm-4">
 <div class="product-image-wrapper">
@@ -50,10 +49,10 @@ $products_list .= <<<EOT
 </div>
 </div>
 </form>
-
 EOT;
-}
 echo $products_list;
+}
+
 ?>
 
 </div><!--features_items-->
