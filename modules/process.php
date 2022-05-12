@@ -11,65 +11,53 @@ if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume") {
 
 
 function fetch_costume($c) {
-    $stmt = $c->prepare("SELECT * FROM tbl_costume");
+    $stmt = $c->prepare("SELECT tc.c_name,
+    							   tc.id,
+    							   tc.c_image,
+    							   tc.c_category_id,
+    							   tc.c_size,
+    							   tc.c_availability,
+    							   tc.c_price,
+    							   tc.c_stock,
+    							   tc.c_description,
+    							   tcc.cat_name
+    							   FROM tbl_costume tc
+    							   JOIN tbl_costume_categories tcc ON tc.c_category_id=tcc.id");
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     while($row = $result->fetch_assoc()){
         $output = '
-        <div class="col-sm-12">
-				 <div class="col-sm-12">
-					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
-						</ol>
-						
-						<div class="carousel-inner">
-							<div class=\'item active\'>
+        <div class=\'item active\'>
+                <div class="col-sm-6">
+                  <form>
+                  <h1>Panglaki</h1>
+                  <h2>Dress</h2>
+                  <p>Dress pero pang laki</p>
+                  <button type="submit" class="btn btn-default add-to-cart">Get it now</button>
+                  </form>
+                </div>
+                <div class="col-sm-6">
+                  <img src="assets/images/shop/product8.jpg" class="girl img-responsive" alt="" />
+                  <img src="images/home/pricing.png" class="pricing" alt="" />
+                </div>
+              </div>
+							<div class=\'item \'>
 								<div class="col-sm-6">
 									<form>
-									<h1>Panglaki</h1>
-									<h2>Dress</h2>
-									<p>Dress pero pang laki</p>
-									<button type="submit" class="btn btn-default add-to-cart">Get it now</button>
-									</form>	
+									<h1>'.$row['c_name'].'</h1>
+									<h2>'.$row['cat_name'].'</h2>
+									<p>'.$row['c_description'].'</p>
+									<button class="btn btn-default add-to-cart"><a href="product_details.php?costId='.$row['id'].'">Get it now</a></button>
+									</form>
 								</div>
 								<div class="col-sm-6">
-									<img src="assets/images/shop/product8.jpg" class="girl img-responsive" alt="" />
+								        <img src="data:image/jpeg;base64,'.base64_encode($row['c_image']).'" width="268px" height="249px" alt="" />
 									<img src="images/home/pricing.png" class="pricing" alt="" />
 								</div>
-							</div>
-
-							<div class=\'item\'>
-								<div class="col-sm-6">
-									<form>
-									<h1>Panglaki2</h1>
-									<h2>Dress</h2>
-									<p>Dress pero pang laki</p>
-									<button type="submit" class="btn btn-default add-to-cart">Get it now</button>
-									</form>	
-								</div>
-								<div class="col-sm-6">
-									<img src="assets/images/shop/product8.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png" class="pricing" alt="" />
-								</div>
-							</div>
-						</div>
-						
-						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-							<i class="fa fa-angle-left"></i>
-						</a>
-						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</div>
-					
-				</div>
-
-				</div>    ';
-    echo $output;
+							</div> ';
     }
+      echo $output;
     $stmt->close();
 }
 

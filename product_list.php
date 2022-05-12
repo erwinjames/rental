@@ -1,6 +1,5 @@
 <?php
 session_start(); //start session
-include("modules/config.php"); //include config file
 include "header.php";
 ?>
 <body>

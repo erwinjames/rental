@@ -29,7 +29,7 @@ include "header.php";
 								</div>
 							</div>
 					<?php
-					require "modules/config.php";
+
 					$stmt = $con->prepare("SELECT * FROM tbl_costume_categories");
 					$stmt->execute();
 					$result = $stmt->get_result();

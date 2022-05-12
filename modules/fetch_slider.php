@@ -47,7 +47,6 @@ $products_list= <<<EOT
 EOT;
 echo $products_list;
 }
-
 }
 else{
     echo "Nothing";

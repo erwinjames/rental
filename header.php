@@ -1,5 +1,5 @@
 <?php
-// require "modules/config.php";
+require "modules/config.php";
 
 $minimum_range = 50;
 $maximum_range = 500;
