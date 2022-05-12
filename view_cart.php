@@ -24,33 +24,62 @@ include "header.php";
 							<td></td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img  width="100" src="assets/images/shop/product8.jpg" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Name</a></h4>
-							</td>
-							<td class="cart_price">
-								<p>Php 1231</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<form >
-										<a class="cart_quantity_up" href=""> + </a>
-										<input class="cart_quantity_input" type="text" name="qty" autocomplete="off" size="2">
-										<a class="cart_quantity_down" href=""> - </a>
-									<form>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">Php 000</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete"><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+					<tbody>	
+						<?php
+										
+										if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){
+											$totals 			= 0;
+											$list_taxs		= '';
+											
+		
+											foreach($_SESSION["products"] as $products){ //Print each item, quantity and price.
+												$product_names = $products["c_name"];
+												$product_description = $products["c_description"];
+												$product_qtys = 1;
+												$product_prices = $products["c_price"];
+												$product_codes = $products["product_code"];
+												$product_sizes = $products["product_size"];
+												
+												$item_prices 	= sprintf("%01.2f",($product_prices * $product_qtys));  // price x qty = total item price
+												$cart_boxs 		.= '<tr>';
+												$cart_boxs 		.=  "<td class=\"cart_product\"><a><img  width=\"100\" src='assets/images/shop/product8.jpg'></a></td>";
+												$cart_boxs 		.=  "<td class=\"cart_description\"> $product_names</td>";
+												$cart_boxs 		.=  "<td class=\"cart_price\"> $product_prices</td>";
+												$cart_boxs 		.=  "<td class=\"cart_quantity\"> $product_qtys</td>";
+												$cart_boxs 		.=  "<td class=\"cart_total\"><p class=\"cart_total_price\"> $product_prices</p></td>";
+												$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_code\"><i class=\"fa fa-times\"></i></a></td>";
+												$cart_boxs .= "<tr>";
+
+												$subtotals 		= ($product_prices * $product_qtys); //Multiply item quantity * price
+												$totals 			= ($totals + $subtotals); //Add up to total price
+											}
+											$grand_totals = $totals + $shipping_costs; //grand total
+											
+											foreach($taxes as $keys => $values){ //list and calculate all taxes in array
+													$tax_amounts 	= round($totals * ($values / 100));
+													$tax_items[$keys] = $tax_amounts;
+													$grand_totals 	= $grand_totals + $tax_amounts; 
+											}
+											
+											foreach($tax_items as $keys => $values){ //taxes List
+												$list_taxs .= $keys. ' '. $currency. sprintf("%01.2f", $values).'<br />';
+											}
+											
+											$shipping_costs = ($shipping_costs)?'Shipping Cost : '.$currency. sprintf("%01.2f", $shipping_costs).'<br />':'';
+											
+											//Print Shipping, VAT and Total
+											//$cart_boxs .= "<td class=\"view-cart-total\">$shipping_costs  $list_taxs <hr>Payable Amount : $currency ".sprintf("%01.2f", $grand_totals)."</td>";
+											
+											
+											echo $cart_boxs;
+										}else{
+											echo "Your Cart is empty";
+										}
+										?>
+						
+			
+				
+						
 
 					</tbody>
 				</table>

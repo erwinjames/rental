@@ -35,9 +35,8 @@
 
 			<div class="pricerange">
 			  <form>
-			    <input type="hidden" id="amount1" name="amount1" value="">
-			    <input type="hidden" id="amount2" name="amount2" value="">
-			    <input type="submit" name="submit_range" value="FILTER">
+			    <input type="hidden" id="minimum" name="minimum" value="">
+			    <input type="hidden" id="maximum" name="maximum" value="">
 			  </form>
 			</div>
 		</div>

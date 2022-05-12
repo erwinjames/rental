@@ -1,5 +1,9 @@
 <?php
 // require "modules/config.php";
+
+$minimum_range = 50;
+$maximum_range = 500;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +130,7 @@ $(document).ready(function(){
 								<li><a href="product_list.php">Shop</a></li>
 								<li><a href="items.php"> My Items</a></li>
 								<li><a href="wishlist.php"> Wishlist</a></li>
-								<li><a href="#" class="cart-box" title="View Cart"><i class="fa-solid fa-cart-plus"></i>
+								<li><a href="#" class="cart-box" title="View Cart"><i class="fa fa-shopping-cart"></i>
 													<?php 
 													if(isset($_SESSION["products"])){
 														echo count($_SESSION["products"]); 

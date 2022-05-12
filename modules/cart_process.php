@@ -1,7 +1,6 @@
 <?php
 session_start(); //start session
 include_once("config.php"); //include config file
-setlocale(LC_MONETARY,"en_US"); // US national format (see : http://php.net/money_format)
 ############# add products to session #########################
 if(isset($_POST["product_code"]))
 {
