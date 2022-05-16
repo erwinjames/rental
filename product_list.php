@@ -1,5 +1,4 @@
 <?php
-session_start(); //start session
 include "header.php";
 ?>
 <body>
@@ -12,6 +11,5 @@ include "category.php";
 <?php
 include "footer.php";
 ?>
-
 </body>
 </html>

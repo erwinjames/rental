@@ -1,6 +1,6 @@
 <?php
 require "modules/config.php";
-
+session_start();
 $minimum_range = 50;
 $maximum_range = 500;
 
@@ -125,7 +125,6 @@ $(document).ready(function(){
 
 							<ul class="nav navbar-nav">
 							<?php
-
 								if(isset($_SESSION['name'])){?>
 								<li><a href="product_list.php">Shop</a></li>
 								<li><a href="items.php"> My Items</a></li>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +49,7 @@
     <script src="process/js/main/jquery-1.10.2.min.js"></script>
     <script src="process/js/main/jquery.validate.min.js"></script>
     <script src="process/js/process.js"></script>
-         
+
 </head>
   <body class="hold-transition sidebar-collapsed sidebar-mini">
         <div class="wrapper">
@@ -76,11 +80,11 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                     <img src="assets/icon.png" class="img-circle" /> 
+                                     <img src="assets/icon.png" class="img-circle" />
                                      <p>Username<small>
                                       Admin<br>Renz Costumes</small></p>
-                                    
-                                   
+
+
 
                                 </li>
                                 <!-- Menu Footer-->
@@ -108,10 +112,10 @@
                 <div class="pull-left info">
                   <p style="color: #fff">User name</p>
                     <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
-                     
+
                 </div>
               </div><br>
-              
+
                 <!-- search form -->
                 <form method="get" class="sidebar-form">
                     <div class="input-group">
@@ -122,7 +126,7 @@
                         </span>
                     </div>
                 </form>
-              
+
                 <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
@@ -132,40 +136,37 @@
                   <a href="index.php">
                       <i class="bi bi-speedometer2"></i> &nbsp; <span>Dashboard</span>
                   </a>
-              </li>    
+              </li>
                <li>
                   <a href="inventory.php">
                       <i class="bi bi-upc-scan"></i> &nbsp;  <span>Inventory</span>
                   </a>
-              </li>                 
-              
-            
+              </li>
+
+
                <li>
                   <a href="costumes.php">
                       <i class="bi bi-box-seam"></i> &nbsp;  <span>Costumes</span>
                   </a>
-              </li> 
-        
+              </li>
 
-        
+
+
               <li>
                   <a href="rentals.php">
                       <i class="bi bi-envelope-exclamation"></i> &nbsp;  <span>Rental</span>
                   </a>
               </li>
-             
-         
+
+
               <li>
                   <a href="rented.php">
                       <i class="bi bi-cart-check"></i> &nbsp;  <span>Rented Costumes</span>
                   </a>
-              </li> 
-              
-            
+              </li>
+
+
           </ul>
         </section>
         <!-- /.sidebar -->
       </aside>
-
-
- 

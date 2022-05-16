@@ -1,5 +1,5 @@
 <?php
-session_start(); //start session //include config file
+ //start session //include config file
 include "header.php";
 ?>
 	<section id="slider"><!--slider-->

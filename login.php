@@ -6,13 +6,13 @@
                     <div class="login-form"><!--login form-->
                         <h2>Login to your account</h2>
                         <form id="user_login-form">
-                            
+
                             <input type="email" placeholder="Email Address" id="cus_email" name="cus_email" required/>
                             <input type="password" placeholder="Password" id="cus_password" name="cus_password" required/>
-                            <span>
-                                <input type="checkbox" name="remember" value="on" class="checkbox"> 
+                            <!-- <span>
+                                <input type="checkbox" name="remember" value="on" class="checkbox">
                                 Keep me signed in
-                            </span>
+                            </span> -->
                             <button type="submit" value="Login" id="user_login-button" name="user_login-button" class="btn btn-default">Login</button>
                         </form>
                     </div><!--/login form-->

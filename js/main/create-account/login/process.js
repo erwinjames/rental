@@ -11,24 +11,17 @@ $(document).ready(function() {
                 data: $('#user_login-form').serialize() + '&action=user_login',
                 success: function(res) {
                    alert(res);
-                   
+
                     if (res == "Login Successfully!") {
                         setTimeout(function() {
                             //for costumer
                             window.location = 'http://localhost/rental/';
                         }, 100);
                     }
-                    else if (res == "Owner login Successfully!") {
+                    else if (res == "Admin Logging In!") {
                         setTimeout(function() {
                             //for onwer
-                            //window.location = 'http://localhost/rental/onwer';
-                            console.log(res);
-                        }, 100);
-                    }
-                    else if (res == "Admin login Successfully!") {
-                        setTimeout(function() {
-                            //for admin
-                            //window.location = 'http://localhost/rental/admin';
+                            window.location = 'http://localhost/rental/dashboard/owner/';
                             console.log(res);
                         }, 100);
                     }

@@ -49,7 +49,7 @@ if(isset($_POST["load_cart"]) && $_POST["load_cart"]==1)
 			$product_name = $product["c_name"];
 			$product_price = $product["c_price"];
 			$product_code = $product["product_code"];
-			$product_qty = 1;
+			$product_qty = $product["product_qty"];
 			$product_size = $product["product_size"];
 
 			$cart_box .=  "<li> $product_name (Qty : $product_qty | Size: $product_size ) &mdash; PHP ".sprintf("%01.2f", ($product_price * $product_qty)). " <a href=\"#\" class=\"remove-item\" data-code=\"$product_code\">&times;</a></li>";
