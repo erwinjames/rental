@@ -17,5 +17,25 @@ $(document).ready(function() {
 
 });
 
+$(document).ready(function(){
+  $('#insert_rent').validate();
+  $('#insert_rent').submit(function(e) {
+    e.preventDefault();
+    $(':input[type="submit"]').prop('disabled', true);
+    $.ajax({
+        url: "./modules/process.php",
+        method: 'POST',
+        data: $('#insert_rent').serialize() + '&action=rentToPay',
+        success: function(response) {
+            setTimeout(function() {
+                console.log(response);
+            }, 100);
+            setTimeout(function() {
+                $(':input[type="submit"]').prop('disabled', false);
+            }, 100);
 
+        }
+    });
+});
 
+});

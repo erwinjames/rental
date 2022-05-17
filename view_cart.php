@@ -33,26 +33,48 @@ include "header.php";
 
 
 											foreach($_SESSION["products"] as $products){ //Print each item, quantity and price.
-												$product_names = $products["c_name"];
-												$product_description = isset($products["c_description"]);
-												$product_qtys = $products["product_qty"];
-												$product_prices = $products["c_price"];
-												$product_codes = isset($products["product_code"]);
-												$product_sizes = isset($products["product_size"]);
+												if(isset($products["product_qty"])){
+													$product_names = $products["c_name"];
+													$product_description = isset($products["c_description"]);
+													$product_qtys = $products["product_qty"];
+													$product_prices = $products["c_price"];
+													$product_codes = isset($products["product_code"]);
+													$product_sizes = isset($products["product_size"]);
 
-												$item_prices 	= sprintf("%01.2f",($product_prices * $product_qtys));  // price x qty = total item price
-												$cart_boxs 		.= '<tr>';
-												$cart_boxs 		.=  "<td class=\"cart_product\"><a><img  width=\"100\" src='assets/images/shop/product8.jpg'></a></td>";
-												$cart_boxs 		.=  "<td class=\"cart_description\"> $product_names</td>";
-												$cart_boxs 		.=  "<td class=\"cart_price\"> $product_prices</td>";
-												$cart_boxs 		.=  "<td class=\"cart_quantity\"> $product_qtys</td>";
-												$cart_boxs 		.=  "<td class=\"cart_total\"><p class=\"cart_total_price\"> $item_prices</p></td>";
-												$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_codes\"><i class=\"fa fa-times\"></i></a></td>";
-												$cart_boxs .= "<tr>";
+													$item_prices 	= sprintf("%01.2f",($product_prices * $product_qtys));  // price x qty = total item price
+													$cart_boxs 		.= '<tr>';
+													$cart_boxs 		.=  "<td class=\"cart_product\"><a><img  width=\"100\" src='assets/images/shop/product8.jpg'></a></td>";
+													$cart_boxs 		.=  "<td class=\"cart_description\"> $product_names</td>";
+													$cart_boxs 		.=  "<td class=\"cart_price\"> $product_prices</td>";
+													$cart_boxs 		.=  "<td class=\"cart_quantity\"> $product_qtys</td>";
+													$cart_boxs 		.=  "<td class=\"cart_total\"><p class=\"cart_total_price\"> $item_prices</p></td>";
+													$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_codes\"><i class=\"fa fa-times\"></i></a></td>";
+													$cart_boxs .= "<tr>";
 
-												$subtotals 		= ($product_prices * $product_qtys); //Multiply item quantity * price
-												$totals 			= ($totals + $subtotals); //Add up to total price
+													$subtotals 		= ($product_prices * $product_qtys); //Multiply item quantity * price
+													$totals 			= ($totals + $subtotals); //Add up to total price
+												}else{
 
+													$product_names = $products["c_name"];
+													$product_description = isset($products["c_description"]);
+													$product_qtys = 1;
+													$product_prices = $products["c_price"];
+													$product_codes = isset($products["product_code"]);
+													$product_sizes = isset($products["product_size"]);
+
+													$item_prices 	= sprintf("%01.2f",($product_prices * $product_qtys));  // price x qty = total item price
+													$cart_boxs 		.= '<tr>';
+													$cart_boxs 		.=  "<td class=\"cart_product\"><a><img  width=\"100\" src='assets/images/shop/product8.jpg'></a></td>";
+													$cart_boxs 		.=  "<td class=\"cart_description\"> $product_names</td>";
+													$cart_boxs 		.=  "<td class=\"cart_price\"> $product_prices</td>";
+													$cart_boxs 		.=  "<td class=\"cart_quantity\"> $product_qtys</td>";
+													$cart_boxs 		.=  "<td class=\"cart_total\"><p class=\"cart_total_price\"> $item_prices</p></td>";
+													$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_codes\"><i class=\"fa fa-times\"></i></a></td>";
+													$cart_boxs .= "<tr>";
+
+													$subtotals 		= ($product_prices * $product_qtys); //Multiply item quantity * price
+													$totals 			= ($totals + $subtotals); //Add up to total price
+												}
 
 											}
 												echo $cart_boxs;
@@ -91,11 +113,20 @@ include "header.php";
 									$cart_box 		= '<ul>';
 
 									foreach($_SESSION["products"] as $product){ //Print each item, quantity and price.
-										$product_name = $product["c_name"];
-										$product_qty = $product["product_qty"];
-										$product_price = $product["c_price"];
-										$product_code = $product["product_code"];
-										$product_size = $product["product_size"];
+											if(isset($product["product_qty"])){
+												$product_name = $product["c_name"];
+												$product_qty = $product["product_qty"];
+												$product_price = $product["c_price"];
+												$product_code = $product["product_code"];
+												$product_size = $product["product_size"];
+											}else{
+												$product_name = $product["c_name"];
+												$product_qty = 1;
+												$product_price = $product["c_price"];
+												$product_code = $product["product_code"];
+												$product_size = $product["product_size"];
+											}
+
 
 										$item_price 	= sprintf("%01.2f",($product_price * $product_qty));  // price x qty = total item price
 
@@ -108,7 +139,7 @@ include "header.php";
 
 									//Print Shipping, VAT and Total
 									$cart_box .= "<li class=\"view-cart-total\">Payable Amount : PHP&nbsp".sprintf("%01.2f", $grand_total)."</li>";
-										$cart_box .= "<li class=\"view-cart-total\"> <button type='submit'>PAY ONLINE</button>  <button type='submit'>PAY ON STORE</button></li>";
+										$cart_box .= "<li class=\"view-cart-total\"> <button type='submit'>PAY ONLINE</button>  <button><a href=payment.php>PAY ON STORE</a></button></li>";
 									$cart_box .= "</ul>";
 
 									echo $cart_box;

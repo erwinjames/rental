@@ -3,10 +3,13 @@ require "config.php";
 // if(isset($_POST["action"]) && $_POST["action"] == "view_category") {
     //session_start();fetch_categories
 //     fetch_costume_category($con);
-// }
+// } fetch_categories
 if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume") {
-    //session_start();fetch_categories
+    session_start();
     fetch_costume($con);
+}
+if(isset($_POST["action"]) && $_POST["action"] == "rentToPay") {
+    InserToRent($con);
 }
 
 
@@ -86,6 +89,22 @@ function fetch_cat($c) {
 }
 echo '</ul>';
 }
+
+function InserToRent($c){
+  $cost_id = $_POST['pcode'];
+  $sid = $_POST['s_id'];
+  if(isset($_POST['id'])){
+    $q2 = $c->prepare("INSERT INTO user_rent (cost_id,costumer_id) VALUES (?,?)");
+    $q2->bind_param('ss', $cost_id,$sid);
+    $q2->execute();
+    $q2->close();
+        echo 'Rent Successfully.';
+  }
+
+
+
+
+  }
 
 
 ?>

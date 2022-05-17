@@ -1,4 +1,4 @@
-<?php 
+<?php
 $scriptpath = __DIR__;
 
     require($scriptpath . DIRECTORY_SEPARATOR . 'header.php');

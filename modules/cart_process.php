@@ -46,11 +46,20 @@ if(isset($_POST["load_cart"]) && $_POST["load_cart"]==1)
 		foreach($_SESSION["products"] as $product){ //loop though items and prepare html content
 
 			//set variables to use them in HTML content below
-			$product_name = $product["c_name"];
-			$product_price = $product["c_price"];
-			$product_code = $product["product_code"];
-			$product_qty = $product["product_qty"];
-			$product_size = $product["product_size"];
+			if(isset($product["product_qty"])){
+				$product_name = $product["c_name"];
+				$product_price = $product["c_price"];
+				$product_code = $product["product_code"];
+				$product_qty = $product["product_qty"];
+				$product_size = $product["product_size"];
+			}else{
+				$product_name = $product["c_name"];
+				$product_price = $product["c_price"];
+				$product_code = $product["product_code"];
+				$product_qty = 1;
+				$product_size = $product["product_size"];
+			}
+
 
 			$cart_box .=  "<li> $product_name (Qty : $product_qty | Size: $product_size ) &mdash; PHP ".sprintf("%01.2f", ($product_price * $product_qty)). " <a href=\"#\" class=\"remove-item\" data-code=\"$product_code\">&times;</a></li>";
 			$subtotal = ($product_price * $product_qty);
