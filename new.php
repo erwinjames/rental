@@ -23,7 +23,7 @@ if (!$results){
 while($row = $results->fetch_assoc()) {
 $picture = base64_encode($row['c_image']);
 $products_list=<<<EOT
-<form class="form-item">
+<div class="form-item">
 <div class="col-sm-4">
 <div class="product-image-wrapper">
 	<div class="single-products">
@@ -37,10 +37,7 @@ $products_list=<<<EOT
 
 		<h2>PHP &nbsp{$row['c_price']}</h2><!--This is under form because style factor when product price move to form then style is not formating-->
 		<p>{$row['c_description']}</p>
-		<input name="product_qty" type="hidden" value="1">
-		<input name="product_size" type="hidden" value="{$row["c_size"]}">
-		<input name="product_code" type="hidden" value="{$row["id"]}">
-		<button type="submit" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>&nbspAdd to Rent</button>
+
 		<a href="product_details.php?costId={$row['id']}" class="btn btn-default add-to-cart"><i class="fa fa-info"></i>Details</a>
 		</div>
 	</div>
@@ -48,7 +45,7 @@ $products_list=<<<EOT
 
 </div>
 </div>
-</form>
+</div>
 EOT;
 echo $products_list;
 }

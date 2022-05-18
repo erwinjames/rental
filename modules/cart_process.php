@@ -73,6 +73,7 @@ if(isset($_POST["load_cart"]) && $_POST["load_cart"]==1)
 	}
 }
 
+
 // ################# remove item from shopping cart ################
 if(isset($_GET["remove_code"]) && isset($_SESSION["products"]))
 {

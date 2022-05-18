@@ -58,6 +58,29 @@ $(document).ready(function(){
 			})
 			e.preventDefault();
 		});
+		$(".form-item1").submit(function(e){
+			var form_data = $(this).serialize();
+			var button_content1 = $(this).find('button[type=submit]');
+			button_content1.html('Adding...'); //Loading button text
+
+			$.ajax({ //make ajax request to cart_process.php
+				url: "modules/cart_process.php",
+				type: "POST",
+				dataType:"json", //expect json value from server
+				data: form_data,
+				success:function(data){
+						  window.location = 'http://localhost/rental/checkout.php';
+				}
+			}).done(function(data){ //on Ajax success
+				$("#cart-info").html(data.items); //total items in cart-info element
+				button_content.html('Add to Cart'); //reset button text to original text
+				alert("Item added to Cart!"); //alert user
+				if($(".shopping-cart-box").css("display") == "block"){ //if cart box is still visible
+					$(".cart-box").trigger( "click" ); //trigger click to update the cart box.
+				}
+			})
+			e.preventDefault();
+		});
 
 	//Show Items in Cart
 	$( ".cart-box").click(function(e) { //when user clicks on cart box

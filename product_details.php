@@ -2,7 +2,36 @@
 	<section>
 		<div class="container">
 			<div class="row">
-					<?php require('category.php'); ?>
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>categories</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#">
+											<span class="badge pull-right">
+											</span>
+										</a>
+									</h4>
+								</div>
+							</div>
+					<?php
+					$stmt = $con->prepare("SELECT * FROM tbl_costume_categories");
+				    $stmt->execute();
+				    $result = $stmt->get_result();
+				    while($row = $result->fetch_assoc()){
+					?>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#"><?php echo $row['cat_name']; ?></a></h4>
+								</div>
+							</div>
+					<?php }?>
+						</div><!--/category-productsr-->
+					</div>
+				</div>
+
 
 				<div class="col-sm-9 padding-right">
 					<?php
@@ -28,7 +57,7 @@
 					while($row1 = $results->fetch_assoc()) {
 					$picture = base64_encode($row1['c_image']);
 					$products_list=<<<EOT
-					<form class="form-item">
+
 					<div class="product-details"><!--product-details-->
 					<div class="col-sm-5">
 					<div class="view-product">
@@ -68,20 +97,38 @@
 							<!-- product div information -->
 											<div class="col-sm-7">
 															<div class="product-information"><!--/product-information-->
+															<span>
 																<h2>{$row1['c_name']}</h2>
 																<p>{$row1['c_description']}</p>
 																<img src="assets/images/product-details/rating.png" alt="" />
+																</span>
 																<span>
+																<form class="form-item">
 																		<span>Php {$row1['c_price']}</span>
 																		<label>Quantity:</label>
+
 																		<input type="text" value="1" name="product_qty"/>
 																		<input name="product_size" type="hidden" value="{$row1["c_size"]}">
 																		<input name="product_code" type="hidden" value="{$row1["id"]}">
-																		<button type="submit" class="btn btn-fefault cart add-to-cart">
+																		<hr>
+																		<span>
+																			<button type="submit" class="btn btn-fefault cart add-to-cart">
 																			<i class="fa fa-shopping-cart"></i>
 																			Add to cart
 																		</button>
+
+																		</span>
+																	</form>
+																	<form class="form-item1">
+																	<input name="product_size" type="hidden" value="{$row1["c_size"]}">
+																	<input name="product_code" type="hidden" value="{$row1["id"]}">
+																	<button href="" class="btn btn-fefault cart add-to-cart">
+																	<i class="fa fa-shopping-cart"></i>
+																	Rent it Now
+																	</button>
+																	</form>
 																</span>
+																<hr>
 																<p><b>Availability:</b>
 																	{$row1['c_availability']}
 																</p>
@@ -92,7 +139,7 @@
 											</div>
 											<!-- end of product div information -->
 									</div>
-					</form>
+
 					EOT;
 					echo $products_list;
 					}

@@ -6,7 +6,7 @@
     </section>
     <section class="content">
     	 <div class="row">
-        
+
          <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
            <!-- small box -->
@@ -61,7 +61,7 @@
              <a href="sales.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
            </div>
          </div>
-       
+
          <!-- ./col -->
        </div>
 
@@ -85,33 +85,56 @@
            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
            </div>
                 </div>
+                  <div class="box-body">
+                    <ul class="products-list product-list-in-box">
                 <!-- /.box-header -->
-                <div class="box-body">
-                  <ul class="products-list product-list-in-box">
-                    <li class="item">
-              <div class="product-img">
-                 <img src="assets/icon.png">
-               </div>
-                      <div class="product-info">
-                          <a href="#">Costume Name
-                            <span class="label pull-right" style="background-color:#fff;color:green; border:1px solid;"> Status</span>
-                          </a>
-                          <a href="" class="products-title"><span></span></a>
-                          <span class="product-description">Details</span>
-         
-                      </div>
-                    </li>
-         
-                  </ul>
-                </div>
+                <?php
+              $results = $con->query("SELECT tc.c_name,
+                               tc.id,
+                               tc.c_image,
+                               tc.c_category_id,
+                               tc.c_size,
+                               tc.c_availability,
+                               tc.c_price,
+                               tc.c_stock,
+                               tc.c_description,
+                               tcc.cat_name
+                               FROM tbl_costume tc
+                               JOIN tbl_costume_categories tcc ON tc.c_category_id=tcc.id
+                               ORDER BY tc.id DESC ");
+              if (!$results){
+                  printf("Error: %s\n", $con->error);
+                  exit;
+              }
+
+              while($row = $results->fetch_assoc()) {
+              $picture = base64_encode($row['c_image']);
+              $products_list=<<<EOT
+                  <li class="item">
+                <div class="product-img">
+                   	<img src="data:image/jpeg;base64,{$picture}"/>
+                 </div>
+                    <div class="product-info">
+                        <a href="#">{$row['c_name']}
+                          <span class="label pull-right" style="background-color:#fff;color:green; border:1px solid;"> Status</span>
+                        </a>
+                        <a href="" class="products-title"><span></span></a>
+                        <span class="product-description">Details</span>
+
+                    </div>
+                  </li>
+              EOT;
+              echo $products_list;
+            }?>
+
                 <!-- /.box-body -->
+                    </ul>
+                  </div>
               </div>
-              
+
             </div>
-        </div>   
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <body>
      </section>
    </aside>
-
-  
