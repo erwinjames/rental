@@ -5,7 +5,7 @@
 					<?php require('category.php'); ?>
 
 				<div class="col-sm-9 padding-right">
-					<?php	
+					<?php
 					if(isset($_GET['costId'])){
 					$getCat = $_GET['costId'];
 					$stmt = $con->prepare("SELECT tc.id,
@@ -20,15 +20,16 @@
 												tcc.cat_name,
 												tci.images
 												FROM tbl_costume tc
-												JOIN tbl_costume_image tci ON tc.id = tci.cost_id 
-												JOIN tbl_costume_categories tcc  ON tc.c_category_id=tcc.id 
+												JOIN tbl_costume_image tci ON tc.id = tci.cost_id
+												JOIN tbl_costume_categories tcc  ON tc.c_category_id=tcc.id
 												WHERE tc.id=?");
 					$stmt->bind_param('s', $getCat);
 					$stmt->execute();
 					$result = $stmt->get_result();
 					$row1 = $result->fetch_array();
-					$picture = base64_encode($row1['images']) ;
-					$output .='
+					$picture = base64_encode($row1["c_image"]);
+					$output='';
+					$output.='
 						<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 						<div class="view-product">
@@ -36,20 +37,20 @@
 							<!-- <h3>ZOOM</h3> -->
 						</div>
 						<div id="similar-product" class="carousel slide" data-ride="carousel">
-	
+
 							<div class="carousel-inner">
 							<div class="item active">
-						
-							
+
+
 					';
 				   while($row = $result->fetch_array()){
 					$pictures = base64_encode($row['images']) ;
-						$output .= '
+						$output.= '
 									<a href="">	<img width="20%" src="data:image/jpeg;base64,'.$pictures.'" alt="" /></a>
 							';
-				
+
 				   }
-				   $output .='
+				   $output.='
 				   </div></div>
 				   <a class="left item-control" href="#similar-product" data-slide="prev">
 					   <i class="fa fa-angle-left"></i>
@@ -77,15 +78,15 @@
 																   <input type="hidden" class="pcode" value="'.$getCat.'">
 														   </span>
 														   <hr>
-													   
+
 														   <button type="submit" class="btn btn-fefault addItemBtn cart add-to-cart">
 														   <i class="fa fa-shopping-cart"></i>
 														   Add to cart
 														   </button>
-												   
+
 													   </form>
 													   <hr>
-													   
+
 														   <p><b>Availability:</b>
 															   '.$row1['c_availability'].'
 														   </p>
@@ -107,4 +108,3 @@
 	</section>
 
 <?php require('footer.php'); ?>
-

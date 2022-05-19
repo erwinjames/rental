@@ -1,5 +1,5 @@
    <?php require('header.php'); ?>
-   
+
    <aside class="right-side">
         <section class="content-header">
             <h1 class="pull-left">Costume List</h1>
@@ -12,8 +12,23 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div class="box-body">
-                           <div id="costume_list" class="table-responsive">
-                                
+                           <div  class="table-responsive">
+                             <table id="dataTablesFull"  class="table table-hover table-stripped table-bordered">
+                                                         <thead>
+                                                             <tr>
+                                                                 <th>Name</th>
+                                                                 <th>Image</th>
+                                                                 <th>Price</th>
+                                                                 <th>Availability</th>
+                                                                 <th>Stock</th>
+                                                                 <th class="no-sort">&nbsp;</th>
+                                                             </tr>
+                                                         </thead>
+                                                         <tbody id="costume_list">
+
+
+                                                          </tfoot>
+                                                         </table
                            </div>
                         </div>
                     </div>
@@ -43,7 +58,7 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Manage Record</h5>
                   </div>
                   <div class="modal-body">
-                     <form>   
+                     <form>
                                 <div class="form-group">
                                     <label>Costumes code</label>
                                    <input type="text" name="code" class="form-control" required/>
@@ -74,7 +89,7 @@
                                         <option value="Giraffe">Giraffe</option>
                                         <option value="Lion">Lion</option>
                                        </select>
-                                </div>                           
+                                </div>
                                 <div class="form-group">
                                     <label>Size</label>
                                    <input type="text" name="size" class="form-control" required/>
@@ -113,7 +128,7 @@
                   </div>
                   <div class="modal-body">
                         <div class="table-responsive">
-                            <form id="add_costume_record" method="post" enctype="multipart/form-data">   
+                            <form id="add_costume_record" method="post" enctype="multipart/form-data">
                                 <!-- <div class="form-group">
                                     <label>Costumes code</label>
                                    <input type="text" name="code" class="form-control" required/>
@@ -125,13 +140,24 @@
                                 <div class="form-group">
                                     <label>Image</label>
                                    <!-- <input type="file" id="image" name="image" class="form-control" required/> -->
-                                  
+
                                 <img id="output"/>
-                                <input type="file" name="image[]" class="form-control" id="image" multiple accept=".jpg, .png, .gif"/>
+                                <input type="file" name="images" class="form-control" id="image" accept=".jpg, .png, .gif"/>
                                 <input type="hidden" name="action" id="action" value="add" />
                                 <input type="hidden" name="image_id" id="image_id" />
-                      
+
                                   </div>
+                                  <div class="form-group">
+                                      <label>Other Images</label>
+                                     <!-- <input type="file" id="image" name="image" class="form-control" required/> -->
+
+                                  <img id="output"/>
+                                  <input type="file" name="image[]" class="form-control" id="image" multiple accept=".jpg, .png, .gif"/>
+                                  <input type="hidden" name="action" id="action" value="add" />
+                                  <input type="hidden" name="image_id" id="image_id" />
+
+                                    </div>
+
                                 <div class="form-group">
                                     <label>Category</label>
                                    <select class="form-control select2 select2-hidden-accessible" name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
@@ -149,7 +175,7 @@
                                         <option value="1">Giraffe</option>
                                         <option value="12">Lion</option>
                                        </select>
-                                </div>                           
+                                </div>
                                 <div class="form-group">
                                     <label>Size</label>
                                    <input type="text" name="size" class="form-control" required/>
@@ -170,7 +196,7 @@
                                     <label>Description</label>
                                         <textarea name="discript" class="form-control" required></textarea>
                                 </div>
-                           
+
 
                            </div>
                   </div>

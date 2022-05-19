@@ -1,5 +1,5 @@
    <?php require('header.php');
-          require "process/modules/config.php";
+      
    ?>
 
    <aside class="right-side">

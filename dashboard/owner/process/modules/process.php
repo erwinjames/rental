@@ -12,6 +12,10 @@ if(isset($_POST["action"]) && $_POST["action"] == "fetch_categories") {
     //session_start();
     fetch_cat($con);
 }
+if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume_rented") {
+    //session_start();
+    fetch_rented_cost($con);
+}
 if($_POST['action'] == 'add') {
     //session_start();
     add_costume($con);
@@ -45,22 +49,24 @@ function add_costume($c) {
 
     $labe= $_POST['label_purpose'];
     $size = $_POST['size'];
+    $image_files = file_get_contents($_FILES["images"]["tmp_name"]);
     $avail = $_POST['availability'];
     $price =$_POST['price'];
     $stak = $_POST['stock'];
     $des = $_POST['discript'];
 
-    $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?)");
-    $stmt->bind_param('sssssss', $cn,$labe,$size,$avail,$price,$stak,$des);
+    $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_image,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('ssssssss', $cn,$image_files,$labe,$size,$avail,$price,$stak,$des);
     $stmt->execute();
     if($stmt){
     $lastid=$c->insert_id;
-  
+
      for($count = 0; $count < count($_FILES["image"]["tmp_name"]); $count++)
      {
       $image_file = addslashes(file_get_contents($_FILES["image"]["tmp_name"][$count]));
-      $query = "INSERT INTO tbl_costume_image(cost_id,images) VALUES ('$lastid','$image_file')";
+      $query = ("INSERT INTO tbl_costume_image(cost_id,images) VALUES (?,?)");
       $statement = $c->prepare($query);
+        $statement->bind_param('ss', $lastid,$image_file);
       $statement->execute();
       $statement->close();
      }
@@ -124,21 +130,10 @@ function fetch_costume($c) {
     $stmt = $c->prepare("SELECT * FROM tbl_costume");
     $stmt->execute();
     $result = $stmt->get_result();
+
    while($row = $result->fetch_array()){
         $output = '
-        <table id="dataTablesFull" class="table table-hover table-stripped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Image</th>
-                                            <th>Price</th>
-                                            <th>Availability</th>
-                                            <th>Stock</th>
-                                            <th class="no-sort">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
+ <tr>
                                             <td>'.$row['c_name'].'</td>
                                             <td class="text-center"> <img src="data:image/jpeg;base64,'.base64_encode($row["c_image"]).'" width="20%" class="img-thumbnail"></td>
                                             <td>'.$row['c_price'].'</td>
@@ -152,9 +147,35 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-x-circle-fill"></i><
 data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i></span></a>
                                                 </div>
                                             </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>';
+       </tr>
+                                    >';
+    echo $output;
+   }
+    $stmt->close();
+}
+
+function fetch_rented_cost($c) {
+    $stmt = $c->prepare("SELECT * FROM orders where paid_status = 1");
+    $stmt->execute();
+    $result = $stmt->get_result();
+   while($row = $result->fetch_array()){
+        $output = '
+        <tr>
+            <td>'.$row['name'].'</td>
+            <td>'.$row['address'].'</td>
+            <td>'.$row['phone'].'</td>
+            <td>'.$row['email'].'</td>
+            <td>'.$row['name'].'</td>
+            <td>'.$row['name'].'</td>
+            <td>'.$row['id'].'</td>
+            <td><img src="assets/icon.png"></td>
+            <td >
+                <div class="text-center">
+                    <a href="#" class="btn btn-success btn-sm"><i class="bi bi-pen"></i> &nbsp; Manage</a>
+                  <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-x"></i> &nbsp; Delete</a>
+                </div>
+            </td>
+        </tr>';
     echo $output;
    }
     $stmt->close();

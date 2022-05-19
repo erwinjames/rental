@@ -1,6 +1,9 @@
 <?php
 require "process/modules/config.php";
 session_start();
+if(isset($_SESSION['pre'])!="Admin"){
+	header("location:../404.php");
+}
 ?>
 
 

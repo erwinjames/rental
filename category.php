@@ -31,7 +31,6 @@
 			<h2>price range</h2>
 			<p id="amount" style="text-align:center"></p>
 			<div id="slider-range"></div>
-
 			<div class="pricerange">
 			  <form>
 			    <input type="hidden" id="minimum" name="minimum" value="">

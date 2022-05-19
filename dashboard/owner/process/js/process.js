@@ -1,9 +1,9 @@
 $(document).ready(function() {
     setTimeout(function() {
-        fetch_cat();
+        view_cat();
     }, 100);
 
-    function fetch_cat() {
+    function view_cat() {
         var get_action = "view_category";
         $.ajax({
             url: "./process/modules/process.php",
@@ -17,7 +17,6 @@ $(document).ready(function() {
 
 });
 $(document).ready(function() {
-
     setTimeout(function() {
         fetch_cat();
     }, 100);
@@ -56,10 +55,25 @@ $(document).ready(function() {
         }
     });
 });
+$(document).ready(function(){
 
+    setTimeout(function() {
+        fetch_rented_costume();
+    }, 100);
 
+    function fetch_rented_costume() {
+        var fcr_action = "fetch_costume_rented";
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            data: { action: fcr_action },
+            success: function(response) {
+                $("#rentedInfo").html(response);
+            }
+        });
+    }
+});
 $(document).ready(function() {
-
     setTimeout(function() {
         fetch_depart_detail();
     }, 100);
@@ -75,6 +89,8 @@ $(document).ready(function() {
             }
         });
     }
+    });
+    $(document).ready(function() {
     $('form#add_costume_record').submit(function(e){
         e.preventDefault();
         var image_name = $('#image').val();
@@ -104,4 +120,4 @@ $(document).ready(function() {
             }
         }
     });
-});
+        });

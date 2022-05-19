@@ -1,20 +1,8 @@
 
 <?php
 include "header.php";
-$cart=new Cart();
 ?>
 <section id="cart_items">
-<div style="display:<?php if (isset($_SESSION['showAlert'])) {
-  echo $_SESSION['showAlert'];
-} else {
-  echo 'none';
-} unset($_SESSION['showAlert']); ?>" class="alert alert-success alert-dismissible mt-3">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong><?php if (isset($_SESSION['message'])) {
-  echo $_SESSION['message'];
-} unset($_SESSION['showAlert']); ?></strong>
-        </div>
-
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
@@ -23,7 +11,6 @@ $cart=new Cart();
 				</ol>
 			</div>
 			<div class="table-responsive cart_info">
-		
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
@@ -37,28 +24,23 @@ $cart=new Cart();
 					</thead>
 					<tbody>
 					<?php
-                require 'config.php';
-                $stmt = $conn->prepare('SELECT * FROM cart');
+
+                $stmt = $con->prepare('SELECT * FROM cart');
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $grand_total = 0;
                 while ($row = $result->fetch_assoc()):
               ?>
-
-				
-													<tr>	
-												  <td class="cart_product"><a><img  width="100" src='assets/images/shop/product8.jpg'></a></td>";
-													<td class="cart_description"> $product_names</td>
-													<td class="cart_price"> $product_prices</td>
-													<td class="cart_quantity"> $product_qtys</td>
-													<td class="cart_total\"><p class="cart_total_price"> $item_prices</p></td>
-													<td class="<td class="cart_delete\"><a class="cart_quantity_delete remove-item" data-code="$product_codes"><i class="fa fa-times"></i></a></td>
-												<tr>
-												
-
-
-
-
+													<tr>
+													<input type="hidden" class="pid" value="<?= $row['id'] ?>">
+												  <td class="cart_product"><a><img  width="100" src='assets/images/shop/product8.jpg'></a></td>
+													<td class="cart_description"><?= $row['product_name'] ?></td>
+													<td class="cart_price"> <?= number_format($row['product_price'],2); ?></td>
+                          <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+													<td class="cart_quantity"><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:70px;"></td>
+													<td class="cart_total\"><p class="cart_total_price"><?= number_format($row['total_price'],2); ?></p></td>
+													<td class="<td class="cart_delete\"><a  href="modules/cart_process.php?remove=<?= $row['id'] ?>"  onclick="return confirm('Are you sure want to remove this item?');" class="cart_quantity_delete remove-item" data-code="$product_codes"><i class="fa fa-times"></i></a></td>
+                     </tr>
 					</tbody>
 				</table>
 			</div>
@@ -73,12 +55,26 @@ $cart=new Cart();
 				</div>
 				<div class="col-sm-6">
 					<div class="total_area">
+							 <?php $grand_total += $row['total_price']; ?>
 
-					</div>
+						<ul>
+							<li><?= $row['product_name'] ?><span>Php  <?= number_format($row['product_price'],2); ?></span></li>
+							<br>
+							<li>Total <span>
+							<?= number_format($grand_total,2); ?>
+							</li>
+
+							 				</ul>
+
+					 <span>
+						  <hr>
+						 	 <?php endwhile; ?>
+			 					<a href="index.php" style="margin-top: 19px; margin-left: 1em;" class="btn btn-default update <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Continue Shopping</a>
+							 <a href="checkout.php" class="btn btn-default check_out <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
+						</span>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<?php require('footer.php'); ?>
-	

@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	require 'config.php';
 
 	// Add products into the cart table
@@ -10,7 +9,7 @@
 	  $pimage = $_POST['pimage'];
 	  $pcode = $_POST['pcode'];
 	  $pqty = $_POST['pqty'];
-	 
+
 	  ini_set('display_errors', 1);
 	  ini_set('display_startup_errors', 1);
 	  error_reporting(E_ALL);
@@ -29,7 +28,7 @@
 	    $querys->execute();
 		$querys->close();
         echo 'Rent Successfully.';
-	  } 
+	  }
 	}
 
 	// Get no.of items available in the cart table
@@ -52,16 +51,16 @@
 
 	  $_SESSION['showAlert'] = 'block';
 	  $_SESSION['message'] = 'Item removed from the cart!';
-	  header('location:cart.php');
+	  header('location:../view_cart.php');
 	}
 
 	// Remove all items at once from cart
 	if (isset($_GET['clear'])) {
-	  $stmt = $conn->prepare('DELETE FROM cart');
+	  $stmt = $con->prepare('DELETE FROM cart');
 	  $stmt->execute();
 	  $_SESSION['showAlert'] = 'block';
 	  $_SESSION['message'] = 'All Item removed from the cart!';
-	  header('location:cart.php');
+	  header('location:../view_cart.php');
 	}
 
 	// Set total price of the product in the cart table
@@ -85,14 +84,14 @@
 	  $products = $_POST['products'];
 	  $grand_total = $_POST['grand_total'];
 	  $address = $_POST['address'];
-	  $pmode = $_POST['pmode'];
+	  ///$pmode = $_POST['pmode'];
 
 	  $data = '';
 
-	  $stmt = $con->prepare('INSERT INTO orders (name,email,phone,address,pmode,products,amount_paid)VALUES(?,?,?,?,?,?,?)');
-	  $stmt->bind_param('sssssss',$name,$email,$phone,$address,$pmode,$products,$grand_total);
+	  $stmt = $con->prepare('INSERT INTO orders (name,email,phone,address,products,amount_paid)VALUES(?,?,?,?,?,?)');
+	  $stmt->bind_param('ssssss',$name,$email,$phone,$address,$products,$grand_total);
 	  $stmt->execute();
-	  $stmt2 = $conn->prepare('DELETE FROM cart');
+	  $stmt2 = $con->prepare('DELETE FROM cart');
 	  $stmt2->execute();
 	  $data .= '<div class="text-center">
 								<h1 class="display-4 mt-2 text-danger">Thank You!</h1>
@@ -102,7 +101,7 @@
 								<h4>Your E-mail : ' . $email . '</h4>
 								<h4>Your Phone : ' . $phone . '</h4>
 								<h4>Total Amount Paid : ' . number_format($grand_total,2) . '</h4>
-								<h4>Payment Mode : ' . $pmode . '</h4>
+
 						  </div>';
 	  echo $data;
 	}

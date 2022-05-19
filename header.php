@@ -1,9 +1,8 @@
 <?php
-require "modules/config.php";
-
-session_start();
 include "modules/cart_process.php";
-
+session_start();
+$minimum_range = 50;
+$maximum_range = 400;
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +33,7 @@ include "modules/cart_process.php";
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/images/ico/apple-touch-icon-57-precomposed.png">
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/process.js"></script>
 	<script type="text/javascript">
@@ -87,7 +86,82 @@ include "modules/cart_process.php";
     }
   });
   </script>
+	<script type="text/javascript">
+   $(document).ready(function() {
 
+     // Change the item quantity
+     $(".itemQty").on('change', function() {
+       var $el = $(this).closest('tr');
+
+       var pid = $el.find(".pid").val();
+       var pprice = $el.find(".pprice").val();
+       var qty = $el.find(".itemQty").val();
+       location.reload(true);
+       $.ajax({
+        url: 'modules/cart_process.php',
+         method: 'post',
+         cache: false,
+         data: {
+           qty: qty,
+           pid: pid,
+           pprice: pprice
+         },
+         success: function(response) {
+           console.log(response);
+         }
+       });
+     });
+
+     // Load total no.of items added in the cart and display in the navbar
+     load_cart_item_number();
+
+     function load_cart_item_number() {
+       $.ajax({
+        url: 'modules/cart_process.php',
+         method: 'get',
+         data: {
+           cartItem: "cart_item"
+         },
+         success: function(response) {
+           $("#cart-item").html(response);
+         }
+       });
+     }
+   });
+   </script>
+	 <script type="text/javascript">
+  $(document).ready(function() {
+
+    // Sending Form data to the server
+    $("#placeOrder").submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+      	url: 'modules/cart_process.php',
+        method: 'post',
+        data: $('form').serialize() + "&action=order",
+        success: function(response) {
+          $("#order").html(response);
+        }
+      });
+    });
+
+    // Load total no.of items added in the cart and display in the navbar
+    load_cart_item_number();
+
+    function load_cart_item_number() {
+      $.ajax({
+    	url: 'modules/cart_process.php',
+        method: 'get',
+        data: {
+          cartItem: "cart_item"
+        },
+        success: function(response) {
+          $("#cart-item").html(response);
+        }
+      });
+    }
+  });
+  </script>
 </head><!--/head-->
 
 <body>
@@ -126,44 +200,26 @@ include "modules/cart_process.php";
 
 							<ul class="nav navbar-nav">
 							<?php
-								if(isset($_SESSION['name'])){?>
+								if(isset($_SESSION['c_name'])){?>
 								<li><a href="product_list.php">Shop</a></li>
 								<li><a href="items.php"> My Items</a></li>
 								<li><a href="wishlist.php"> Wishlist</a></li>
-								<li><a href="#" class="cart-box" title="View Cart"><i class="fa fa-shopping-cart"></i>
-													<?php
-													if(isset($_SESSION["products"])){
-														echo count($_SESSION["products"]);
-													}else{
-														echo 0;
-													}
-													?>
-													</a>
-													</li>
-													<div class="shopping-cart-box">
-													<a href="#" class="close-shopping-cart-box" >Close</a>
-														<div id="shopping-cart-results">
-														</div>
-													</div>
-												</li>
+								<li><a  href="view_cart.php" class="cart-box" title="View Cart"><i class="fa fa-shopping-cart"></i>
+									</a>
+									<span id="cart-item"></span>
+								</li>
+
 								<li>
 								<form id="sign_out">
 								<button class="ml-auto" type="button" id="btn-su" title="Click to Signout">
-								<a id="session_name"><i class="fa fa-card"></i> <?php echo $_SESSION['name']; ?></a>
+								<a id="session_name"><i class="fa fa-card"></i> <?php echo $_SESSION['c_name']; ?></a>
 								</button>
 								</form>
 								</li>
 								<?php }else{?>
-									      <li><a href="#" class="cart-box" title="View Cart">
-													<?php
-													if(isset($_SESSION["products"])){
-														echo count($_SESSION["products"]);
-													}else{
-														echo 0;
-													}
-													?>
-													</a>
-													</li>
+									<li><a  href="view_cart.php" class="cart-box" title="View Cart"><i class="fa fa-shopping-cart"></i></a>
+										<span id="cart-item"></span>
+									</li>
 													<?php 	if(isset($_SESSION['name'])){ ?>
 													<div class="shopping-cart-box">
 													<a href="#" class="close-shopping-cart-box" >Close</a>

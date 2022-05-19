@@ -1,93 +1,33 @@
 <?php require('header.php'); ?>
-<section id="cart_items">
-		<div class="container">
-			<div class="breadcrumbs">
-				<ol class="breadcrumb">
-				  <li><a href="index.php">Home</a></li>
-				  <li>Information</li>
-				</ol>
-			</div>
-			<div class="table-responsive cart_info">
-				<table class="table table-condensed">
-					<thead>
-						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
-							<td></td>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
+<?php
 
-										if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){
-											$taxes = 30;
-											$totals 			= 0;
-											$list_taxs		= '';
-											$cart_boxs = '';
+	$grand_total = 0;
+	$allItems = '';
+	$items = [];
 
+	$sql = "SELECT CONCAT(product_name, '(',qty,')') AS ItemQty, total_price FROM cart";
+	$stmt = $con->prepare($sql);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	while ($row = $result->fetch_assoc()) {
+	  $grand_total += $row['total_price'];
+	  $items[] = $row['ItemQty'];
+	}
+	$allItems = implode(', ', $items);
 
-											foreach($_SESSION["products"] as $products){ //Print each item, quantity and price.
-												if(isset($products["product_qty"])){
-													$product_names = $products["c_name"];
-													$product_description = isset($products["c_description"]);
-													$product_qtys = $products["product_qty"];
-													$product_prices = $products["c_price"];
-													$product_codes = isset($products["product_code"]);
-													$product_sizes = isset($products["product_size"]);
+?>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 px-4 pb-4" id="order">
+        <h4 class="text-center text-info p-2">Complete your order!</h4>
+        <div class="jumbotron p-3 mb-2 text-center">
+          <h6 class="lead"><b>Product(s) : </b><?= $allItems; ?></h6>
+          <h5><b>Total Amount Payable : </b><?= number_format($grand_total,2) ?>/-</h5>
+        </div>
 
-													$item_prices 	= sprintf("%01.2f",($product_prices * $product_qtys));  // price x qty = total item price
-													$cart_boxs 		.= '<tr>';
-													$cart_boxs 		.=  "<td class=\"cart_product\"><a><img  width=\"100\" src='assets/images/shop/product8.jpg'></a></td>";
-													$cart_boxs 		.=  "<td class=\"cart_description\"> $product_names</td>";
-													$cart_boxs 		.=  "<td class=\"cart_price\"> $product_prices</td>";
-													$cart_boxs 		.=  "<td class=\"cart_quantity\"> $product_qtys</td>";
-													$cart_boxs 		.=  "<td class=\"cart_total\"><p class=\"cart_total_price\"> $item_prices</p></td>";
-													//$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_codes\"><i class=\"fa fa-times\"></i></a></td>";
-													$cart_boxs .= "<tr>";
-
-													$subtotals 		= ($product_prices * $product_qtys); //Multiply item quantity * price
-													$totals 			= ($totals + $subtotals); //Add up to total price
-												}else{
-
-													$product_names = $products["c_name"];
-													$product_description = isset($products["c_description"]);
-													$product_qtys = 1;
-													$product_prices = $products["c_price"];
-													$product_codes = isset($products["product_code"]);
-													$product_sizes = isset($products["product_size"]);
-
-													$item_prices 	= sprintf("%01.2f",($product_prices * $product_qtys));  // price x qty = total item price
-													$cart_boxs 		.= '<tr>';
-													$cart_boxs 		.=  "<td class=\"cart_product\"><a><img  width=\"100\" src='assets/images/shop/product8.jpg'></a></td>";
-													$cart_boxs 		.=  "<td class=\"cart_description\"> $product_names</td>";
-													$cart_boxs 		.=  "<td class=\"cart_price\"> $product_prices</td>";
-													$cart_boxs 		.=  "<td class=\"cart_quantity\"> $product_qtys</td>";
-													$cart_boxs 		.=  "<td class=\"cart_total\"><p class=\"cart_total_price\"> $item_prices</p></td>";
-												//	$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_codes\"><i class=\"fa fa-times\"></i></a></td>";
-													$cart_boxs .= "<tr>";
-
-													$subtotals 		= ($product_prices * $product_qtys); //Multiply item quantity * price
-													$totals 			= ($totals + $subtotals); //Add up to total price
-												}
-
-											}
-												echo $cart_boxs;
-
-										}else{
-											echo "Your Cart is empty";
-										}
-										?>
-
-
-
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</section> <!--/#cart_items-->
+      </div>
+    </div>
+  </div>
 
 	<section id="do_action">
 		<div class="container">
@@ -97,14 +37,18 @@
 					<div class="bill-to">
 					<p>Shipping Address</p>
 						<div class="form-two">
-							<form>
-								<input type="text" placeholder="Name" name="cus_name">
+							<?php
+
+							if(!isset($_SESSION['c_name'])){?>
+
+							<form method="post" id="placeOrder">
+								<input type="text" placeholder="Name" name="name" required>
 								<input type="hidden" name="shipping_id" value="">
-								<input type="text" placeholder="Email*" name="cus_email">
-								<input type="text" placeholder="Mobile" name="cus_mobile">
-								<input type="text" placeholder="Address*" name="cus_address">
-								<input type="text" placeholder="City" name="cus_city">
-								<select name="cus_country">
+								<input type="text" placeholder="Email*" name="email" required>
+								<input type="tel" placeholder="Mobile" name="phone" required>
+								<textarea type="text" placeholder="Address*" name="address" rows="3" cols="10" required></textarea>
+								<input type="text" placeholder="City" name="cus_city" required>
+								<select name="country" required>
 									<option>-- Country --</option>
 									<option>United States</option>
 									<option>Bangladesh</option>
@@ -115,11 +59,26 @@
 									<option>Canada</option>
 									<option>Dubai</option>
 								</select>
-									<input type="text" placeholder="Zip" name="cus_zip">
-									<input type="text" placeholder="Fax" name="cus_fax">
-									<input type="submit" value="Save & Continue" class="btn btn-primary">
+									<input type="text" placeholder="Zip" name="zip" required>
+									<input type="hidden" name="products" value="<?= $allItems; ?>">
+									<input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
+									<input type="submit" name="submit" value="Save & Continue" class="btn btn-primary">
 								</form>
+							<?php }else{?>
+
+															<form method="post" id="placeOrder">
+																	<input type="hidden" name="name" value="<?php echo $_SESSION["c_name"]; ?>">
+																	<input type="hidden" name="email" value="<?php echo $_SESSION["c_email"]; ?>">
+																	<input type="hidden" name="phone" value="<?php echo $_SESSION["c_number"]; ?>">
+																	<input type="hidden" name="address" value="<?php echo $_SESSION["c_address"]; ?>">
+																				<input type="hidden" name="products" value="<?= $allItems; ?>">
+																	<input type="hidden" name="products" value="<?= $allItems; ?>">
+																	<input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
+																	<input type="submit" name="submit" value="Save & Continue" class="btn btn-primary">
+															</form>
+							<?php }?>
 							</div>
+
 					</div>
 				<div class="col-sm-12 hidden" id="info">
 					<div class="total_area">

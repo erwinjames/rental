@@ -71,11 +71,12 @@ function shipSession($c, $u) {
                 mysqli_stmt_bind_result($stmt, $id,$name,$address,$number,$email);
                 if(mysqli_stmt_fetch($stmt)) {
                     if($id != '' && $name != '' && $address != '' && $number != '' && $email != '') {
-                        $_SESSION['id'] = $id;
-                        $_SESSION['name'] = $name;
-                        $_SESSION['address'] = $address;
+                        $_SESSION['c_id'] = $id;
+                        $_SESSION['c_name'] = $name;
+                        $_SESSION['c_address'] = $address;
                         $_SESSION['c_number'] = $number;
-                        $_SESSION['email'] = $email;
+                        $_SESSION['c_email'] = $email;
+                        $_SESSION['pre'] ="costumer" ;
                         echo "Login Successfully!";
                     }
                     else{
@@ -109,6 +110,7 @@ function adminSession($c, $s) {
                     if($id != '' && $name != '') {
                         $_SESSION['id'] = $id;
                         $_SESSION['name'] = $name;
+                        $_SESSION['pre'] = "Admin";
                         echo "Admin Logging In!";
                     }
                     else{
