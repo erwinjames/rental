@@ -1,8 +1,9 @@
 <?php
 require "modules/config.php";
+
 session_start();
-$minimum_range = 50;
-$maximum_range = 500;
+include "modules/cart_process.php";
+
 
 ?>
 <!DOCTYPE html>
@@ -36,79 +37,56 @@ $maximum_range = 500;
 	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/process.js"></script>
-	<script>
-$(document).ready(function(){
-		$(".form-item").submit(function(e){
-			var form_data = $(this).serialize();
-			var button_content = $(this).find('button[type=submit]');
-			button_content.html('Adding...'); //Loading button text
+	<script type="text/javascript">
+  $(document).ready(function() {
+    // Send product details in the server
+    $(".addItemBtn").click(function(e) {
+      e.preventDefault();
+      var $form = $(this).closest(".form-submit");
+      var pid = $form.find(".pid").val();
+      var pname = $form.find(".pname").val();
+      var pprice = $form.find(".pprice").val();
+      var pimage = $form.find(".pimage").val();
+      var pcode = $form.find(".pcode").val();
+      var pqty = $form.find(".pqty").val();
 
-			$.ajax({ //make ajax request to cart_process.php
-				url: "modules/cart_process.php",
-				type: "POST",
-				dataType:"json", //expect json value from server
-				data: form_data
-			}).done(function(data){ //on Ajax success
-				$("#cart-info").html(data.items); //total items in cart-info element
-				button_content.html('Add to Cart'); //reset button text to original text
-				alert("Item added to Cart!"); //alert user
-				if($(".shopping-cart-box").css("display") == "block"){ //if cart box is still visible
-					$(".cart-box").trigger( "click" ); //trigger click to update the cart box.
-				}
-			})
-			e.preventDefault();
-		});
-		$(".form-item1").submit(function(e){
-			var form_data = $(this).serialize();
-			var button_content1 = $(this).find('button[type=submit]');
-			button_content1.html('Adding...'); //Loading button text
+      $.ajax({
+        url: 'modules/cart_process.php',
+        method: 'post',
+        data: {
+          pid: pid,
+          pname: pname,
+          pprice: pprice,
+          pqty: pqty,
+          pimage: pimage,
+          pcode: pcode
+        },
+        success: function(response) {
+			console.log(response);
+          $("#message").html(response);
+          window.scrollTo(0, 0);
+          load_cart_item_number();
+        }
+      });
+    });
 
-			$.ajax({ //make ajax request to cart_process.php
-				url: "modules/cart_process.php",
-				type: "POST",
-				dataType:"json", //expect json value from server
-				data: form_data,
-				success:function(data){
-						  window.location = 'http://localhost/rental/checkout.php';
-				}
-			}).done(function(data){ //on Ajax success
-				$("#cart-info").html(data.items); //total items in cart-info element
-				button_content.html('Add to Cart'); //reset button text to original text
-				alert("Item added to Cart!"); //alert user
-				if($(".shopping-cart-box").css("display") == "block"){ //if cart box is still visible
-					$(".cart-box").trigger( "click" ); //trigger click to update the cart box.
-				}
-			})
-			e.preventDefault();
-		});
+    // Load total no.of items added in the cart and display in the navbar
+    load_cart_item_number();
 
-	//Show Items in Cart
-	$( ".cart-box").click(function(e) { //when user clicks on cart box
-		e.preventDefault();
-		$(".shopping-cart-box").fadeIn(); //display cart box
-		$("#shopping-cart-results").html('<img src="assets/images/ajax-loader.gif">'); //show loading image
-		$("#shopping-cart-results" ).load( "modules/cart_process.php", {"load_cart":"1"}); //Make ajax request using jQuery Load() & update results
-	});
-
-	//Close Cart
-	$( ".close-shopping-cart-box").click(function(e){ //user click on cart box close link
-		e.preventDefault();
-		$(".shopping-cart-box").fadeOut(); //close cart-box
-	});
-
-	//Remove items from cart
-	$("#shopping-cart-results").on('click', 'a.remove-item', function(e) {
-		e.preventDefault();
-		var pcode = $(this).attr("data-code"); //get product code
-		$(this).parent().fadeOut(); //remove item element from box
-		$.getJSON( "modules/cart_process.php", {"remove_code":pcode} , function(data){ //get Item count from Server
-			$("#cart-info").html(data.items); //update Item count in cart-info
-			$(".cart-box").trigger( "click" ); //trigger click on cart-box to update the items list
-		});
-	});
-
-});
-</script>
+    function load_cart_item_number() {
+      $.ajax({
+        url: 'modules/cart_process.php',
+        method: 'get',
+        data: {
+          cartItem: "cart_item"
+        },
+        success: function(response) {
+          $("#cart-item").html(response);
+        }
+      });
+    }
+  });
+  </script>
 
 </head><!--/head-->
 

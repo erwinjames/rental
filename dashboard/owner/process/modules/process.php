@@ -69,6 +69,7 @@ function add_costume($c) {
     $stmt->close();
 }
 
+
 function fetch_costume_category($c) {
     $stmt = $c->prepare("SELECT * FROM tbl_costume");
 
