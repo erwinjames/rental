@@ -37,15 +37,12 @@ function adding_categories($c) {
 }
 
 function add_costume($c) {
-    if(count($_FILES["image"]["tmp_name"]) > 0)
-{
-    for($count = 0; $count < count($_FILES["image"]["tmp_name"]); $count++)
-    {
+
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     $cn= $_POST['costume_name'];
-    $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"][$count]));
+
     $labe= $_POST['label_purpose'];
     $size = $_POST['size'];
     $avail = $_POST['availability'];
@@ -53,13 +50,23 @@ function add_costume($c) {
     $stak = $_POST['stock'];
     $des = $_POST['discript'];
 
-    $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_image,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('ssssssss', $cn,$file,$labe,$size,$avail,$price,$stak,$des);
+    $stmt = $c->prepare("INSERT INTO tbl_costume(c_name,c_category_id,c_size,c_availability,c_price,c_stock,c_description) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssss', $cn,$labe,$size,$avail,$price,$stak,$des);
     $stmt->execute();
-    $stmt->close();
+    if($stmt){
+    $lastid=$c->insert_id;
+  
+     for($count = 0; $count < count($_FILES["image"]["tmp_name"]); $count++)
+     {
+      $image_file = addslashes(file_get_contents($_FILES["image"]["tmp_name"][$count]));
+      $query = "INSERT INTO tbl_costume_image(cost_id,images) VALUES ('$lastid','$image_file')";
+      $statement = $c->prepare($query);
+      $statement->execute();
+      $statement->close();
+     }
+    }
     echo 'added successfully!';
-    }
-    }
+    $stmt->close();
 }
 
 function fetch_costume_category($c) {

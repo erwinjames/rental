@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Image</label>
-                                   <input type="file" name="attachment" class="form-control" required/>
+                                   <input type="file" name="attachement[]" id="attachement[]" class="form-control" multiple accept=".jpg, .png, .gif"/>
                                    <img src="assets/icon.png" alt=""> (Old image)
                                 </div>
                                 <div class="form-group">
@@ -113,7 +113,7 @@
                   </div>
                   <div class="modal-body">
                         <div class="table-responsive">
-                            <form id="add_costume_record" action="process/modules/process.php" method="post" enctype="multipart/form-data">   
+                            <form id="add_costume_record" method="post" enctype="multipart/form-data">   
                                 <!-- <div class="form-group">
                                     <label>Costumes code</label>
                                    <input type="text" name="code" class="form-control" required/>
@@ -127,7 +127,7 @@
                                    <!-- <input type="file" id="image" name="image" class="form-control" required/> -->
                                   
                                 <img id="output"/>
-                                <input type="file" name="image[]" class="form-control" id="image" multiple="multiple"/>
+                                <input type="file" name="image[]" class="form-control" id="image" multiple accept=".jpg, .png, .gif"/>
                                 <input type="hidden" name="action" id="action" value="add" />
                                 <input type="hidden" name="image_id" id="image_id" />
                       
