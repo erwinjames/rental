@@ -30,6 +30,7 @@ function fetch_costume($c) {
     $result = $stmt->get_result();
 
     while($row = $result->fetch_assoc()){
+      $output = '';
         $output = '
         <div class=\'item active\'>
                 <div class="col-sm-6">
@@ -60,6 +61,7 @@ function fetch_costume($c) {
 								</div>
 							</div> ';
     }
+      $output = '';
       echo $output;
     $stmt->close();
 }

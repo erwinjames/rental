@@ -27,7 +27,7 @@
 					$stmt->execute();
 					$result = $stmt->get_result();
 					$row1 = $result->fetch_array();
-					$picture = base64_encode($row1["c_image"]);
+					$picture = base64_encode(isset($row1["c_image"]));
 					$output='';
 					$output.='
 						<div class="product-details"><!--product-details-->
@@ -63,19 +63,19 @@
 					   <!-- product div information -->
 									   <div class="col-sm-7">
 													   <div class="product-information"><!--/product-information-->
-														   <h2>'.$row1['c_name'].'</h2>
-														   <p>'.$row1['c_description'].'</p>
+														   <h2>'.isset($row1['c_name']).'</h2>
+														   <p>'.isset($row1['c_description']).'</p>
 														   <img src="assets/images/product-details/rating.png" alt="" />
 													   <form class="form-submit">
 														   <span>
-																   <span>Php '.$row1['c_price'].'</span>
+																   <span>Php '.isset($row1['c_price']).'</span>
 																   <label>Quantity:</label>
 																   <input type="text" value="1" class="pqty"/>
-																   <input type="hidden" class="pid" value="'.$row1['id'].'">
-																   <input type="hidden" class="pname" value="'.$row1['c_name'].'">
-																   <input type="hidden" class="pprice" value="'.$row1['c_price'].'">
-																   <input type="hidden" class="pimage" value="'.$row1['c_image'].'">
-																   <input type="hidden" class="pcode" value="'.$getCat.'">
+																   <input type="hidden" class="pid" value="'.isset($row['id']).'">
+																   <input type="hidden" class="pname" value="'.isset($row1['c_name']).'">
+																   <input type="hidden" class="pprice" value="'.isset($row1['c_price']).'">
+																   <input type="hidden" class="pimage" value="'.isset($row1['c_image']).'">
+																   <input type="hidden" class="pcode" value="'.isset($getCat).'">
 														   </span>
 														   <hr>
 
@@ -88,10 +88,10 @@
 													   <hr>
 
 														   <p><b>Availability:</b>
-															   '.$row1['c_availability'].'
+															   '.isset($row1['c_availability']).'
 														   </p>
 														   <!-- <p><b>Condition:</b> New</p> -->
-														   <p><b>Category:</b> '.$row1['cat_name'].'</p>
+														   <p><b>Category:</b> '.isset($row1['cat_name']).'</p>
 														   <a href=""><img src="assets/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 													   </div><!--/product-information-->
 									   </div>
