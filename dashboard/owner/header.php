@@ -1,4 +1,5 @@
 <?php
+require "process/modules/config.php";
 session_start();
 ?>
 

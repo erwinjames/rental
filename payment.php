@@ -4,6 +4,8 @@
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="index.php">Home</a></li>
+				  <li><a href="$">Information</a></li>
+				  <li><a href="$">Shipping</a></li>
 				  <li class="active">Payment</li>
 				</ol>
 			</div>
@@ -45,7 +47,7 @@
 													$cart_boxs 		.=  "<td class=\"cart_price\"> $product_prices</td>";
 													$cart_boxs 		.=  "<td class=\"cart_quantity\"> $product_qtys</td>";
 													$cart_boxs 		.=  "<td class=\"cart_total\"><p class=\"cart_total_price\"> $item_prices</p></td>";
-													$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_codes\"><i class=\"fa fa-times\"></i></a></td>";
+													//$cart_boxs 		.=  "<td class=\"<td class=\"cart_delete\"><a class=\"cart_quantity_delete remove-item\" data-code=\"$product_codes\"><i class=\"fa fa-times\"></i></a></td>";
 													$cart_boxs .= "<tr>";
 
 													$subtotals 		= ($product_prices * $product_qtys); //Multiply item quantity * price
@@ -91,19 +93,53 @@
 
 	<section id="do_action">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="total_area">
-						<?php
+						<ul>
+							<li><!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/ph/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/ph/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.png" alt="Pay with PayPal" /></a></td></tr></table><!-- PayPal Logo --></li>
+							<li><input type="radio" name="payment_mode"> Bank Deposit</li>
+							<li><input type="radio" name="payment_mode"> Cash (In-Store-Payment)</li>
+							<li><input type="radio" name="payment_mode"> Gcash</li>
+							<li><input type="radio" name="payment_mode"> Online Bank Tranfer (via SwiftPay)</li>
+						</ul>
+					</div>
+					<div class="bill-to" style="margin-top: -3em;">
+						<h5 class="shipping_info"></h5>
+							<p>Billing Address</p>
+						<div class="form-two">
+							<?php
+							 if(isset($_SESSION['id']) && $_SESSION['id']){	?>
+							<form>
+								<input type="text" placeholder="Name" name="cus_name">
+								<input type="hidden" name="shipping_id" value="">
+								<input type="text" placeholder="Email*" name="cus_email">
+								<input type="text" placeholder="Mobile" name="cus_mobile">
+								<input type="text" placeholder="Address*" name="cus_address">
+								<input type="text" placeholder="City" name="cus_city">
+								<select name="cus_country">
+									<option>-- Country --</option>
+									<option>United States</option>
+									<option>Bangladesh</option>
+									<option>UK</option>
+									<option>India</option>
+									<option>Pakistan</option>
+									<option>Ucrane</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+									<input type="text" placeholder="Zip" name="cus_zip">
+									<input type="text" placeholder="Fax" name="cus_fax">
+									<center><input type="submit" value="Pay now" class="btn btn-primary" style="width:50%; height: 40px;"></center>
 
-
+									</form>
+								<?php }else{
 									if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){
 									$tax_item = 0;
 									$taxes = 30;
 									$total 			= 0;
 									$list_tax 		= '';
-									$cart_box 		= '<ul>';
+									$cart_box 		= '	<form>';
 
 									foreach($_SESSION["products"] as $product){ //Print each item, quantity and price.
 											if(isset($product["product_qty"])){
@@ -131,36 +167,32 @@
 									$grand_total = $total; //grand total
 
 									//Print Shipping, VAT and Total
-									$cart_box .= "<li class=\"view-cart-total\">Payable Amount : <span> PHP&nbsp".sprintf("%01.2f", $grand_total)."</span></li>";
-										// $cart_box .= "<li class=\"view-cart-total\"> <button type='submit'>PAY ONLINE</button>  <button><a href=payment.php>PAY ON STORE</a></button></li>";
-									$cart_box .= "</ul>";
 
+										$cart_box .= "<center><input type=\"submit\" value=\"Pay now\" class=\"btn btn-primary\" style=\"width:50%; height: 40px;\"></center>";
+
+										$cart_box = "</form>";
 									echo $cart_box;
-								}else{
+									}else{
 									echo "Your Cart is empty";
-								}
-								?>
+									}
+
+							}		?>
+							</div>
 					</div>
 				</div>
 				<div class="col-sm-6">
-					<form id="insert_rent">
-						<div class="payment-options"><br><br><br>
+					<div class="total_area">
+						<ul>
+							<li><strong>Contact: </strong>Sample Email / Digits <span><a href="#">Change</a></span></li>
+							<li><strong>Ship to: </strong> Complete Shipping Address <span><a href="#">Change</a></span></li>
+							<li><strong>Method: </strong> Sample Method <span><a href="#">Change</a></span></li>
+						</ul>
+					</div>
+						<div class="payment-options">
 							<div class="order-message">
 								<textarea name="payment_message"  placeholder="Notes about your rented costume(s)" rows="10"></textarea>
 							</div>
-							<span>
-								<label><input type="radio" > Pick-up</label>
-							</span>
-							<!-- <span>
-								<label><input type="radio"  name="payment_gateway" value="paypal_payment"> Paypal</label>
-							</span> -->
-									<span>
-											<input type='hidden' name='pcode' value='<?php echo $product_code?>'>
-											<input type='hidden' name='s_id' value='<?php echo $_SESSION['id'];?>'>
-											<input type="submit" name="payment_btn" id="payment_btn" class="btn btn-primary" value="Place order">
-										</span>
 						</div>
-					</form>
 				</div>
 
 			</div>
