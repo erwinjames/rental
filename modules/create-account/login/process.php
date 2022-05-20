@@ -17,7 +17,7 @@ function usersLogin($con) {
 /// costumer LOGIN ===========================================================================
 
     $email_sp_ownr = $_POST['cus_email'];
-    $hash_password_sh_user = $_POST['cus_password'];
+    $hash_password_sh_user = sha1($_POST['cus_password']);
     $stmt = $con->prepare("SELECT * FROM tbl_user_account WHERE email=? AND password=?");
     $stmt->bind_param('ss', $email_sp_ownr,$hash_password_sh_user);
     $stmt->execute();
