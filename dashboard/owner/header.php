@@ -1,6 +1,17 @@
 <?php
 require "process/modules/config.php";
 session_start();
+$query = "SELECT DYM,year(DYM) as dateYear,SUM(amount_paid) as totalProfit FROM orders ORDER BY dateYear ";
+//execute query
+$result = $con->query($query);
+//loop through the returned data
+$data = array();
+foreach ($result as $row) {
+$date = date("Y",strtotime($row['dateYear']));
+$productname[] =$date;
+$sale[]= $row['totalProfit'];
+}
+
 
 ?>
 

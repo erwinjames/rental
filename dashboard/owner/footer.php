@@ -6,9 +6,10 @@
                     &nbsp;
               </footer>
               <script>
-                
-var xValues = ["2021", "2022", "2023", "2024", "2025"];
-var yValues = [0, 5000, 10000, 15000, 20000];
+                    var xValues = <?php echo json_encode($productname);?>;
+                   var yValues =  <?php echo json_encode($sale);?>;
+// var xValues = ["2021", "2022", "2023", "2024", "2025"];
+// var yValues = [0, 5000, 10000, 15000, 20000];
 var barColors = ["skyblue", "skyblue","skyblue","skyblue","skyblue"];
 
 new Chart("myChart", {
@@ -28,9 +29,7 @@ new Chart("myChart", {
     }
   }
 });
-
-    
-
+console.log(xValues);
 </script>    
         <script>
           $.widget.bridge('uibutton', $.ui.button);
