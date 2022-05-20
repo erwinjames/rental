@@ -1,7 +1,27 @@
 
 <?php
 include "header.php";
+if(!isset($_SESSION['c_id'])){
 ?>
+<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+						<center><p>Must Login First </p> <a href="login.php"><b>LOGIN HERE!</b></a></center>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+
+<?php } else {?>
+	
 <section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -77,4 +97,4 @@ include "header.php";
 		</div>
 	</section>
 
-	<?php require('footer.php'); ?>
+	<?php } require('footer.php'); ?>

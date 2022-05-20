@@ -33,9 +33,46 @@ $maximum_range = 400;
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/images/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="stylesheet" href="assets/css/datePicker.css">
+<!--[if IE]><script type="text/javascript" src="scripts/jquery.bgiframe.js"></script><![endif]-->
+<!-- jquery.datePicker.js -->
+
 	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.datePicker.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/process.js"></script>
+	<script type="text/javascript">
+     $(document).ready(function () {
+
+         $( ".no_of_days" ).change(function() {
+            var periodval=$(".no_of_days").val();
+            var startDate = $('.start_date');
+            var endDate = $('.end_date');
+            endDate.setDate(endDate.getDate() + periodval);
+          });
+
+            $( '.start_date' ).datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true,
+                changeYear: true,      
+                showAnim: 'slideDown',
+                duration: 'fast',   
+                minDate: +1,
+        });
+
+            $( '.end_date' ).datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true,
+                changeYear: true,      
+                showAnim: 'slideDown',
+                duration: 'fast',   
+                minDate: +1,
+                yearRange: new Date().getFullYear() + ':' + new Date().getFullYear(),
+                enableOnReadonly: true,
+            });
+    });
+</script>
 	<script type="text/javascript">
   $(document).ready(function() {
     // Send product details in the server
@@ -162,6 +199,30 @@ $maximum_range = 400;
     }
   });
   </script>
+  <style>
+	  a.dp-choose-date {
+	float: left;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url(calendar.png) no-repeat; 
+}
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}
+/* makes the input field shorter once the date picker code
+ * has run (to allow space for the calendar icon
+ */
+input.dp-applied {
+	width: 140px;
+	float: left;
+}
+  </style>
 </head><!--/head-->
 
 <body>

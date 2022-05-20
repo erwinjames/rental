@@ -35,13 +35,14 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="bill-to">
+						
 					<p>Shipping Address</p>
 						<div class="form-two">
 							<?php
 
 							if(!isset($_SESSION['c_name'])){?>
-
-							<form method="post" id="placeOrder">
+							<form method="post"  id="placeOrder">
+							
 								<input type="text" placeholder="Name" name="name" required>
 								<input type="hidden" name="shipping_id" value="">
 								<input type="text" placeholder="Email*" name="email" required>
@@ -59,6 +60,7 @@
 									<option>Canada</option>
 									<option>Dubai</option>
 								</select>
+									
 									<input type="text" placeholder="Zip" name="zip" required>
 									<input type="hidden" name="products" value="<?= $allItems; ?>">
 									<input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
@@ -67,6 +69,8 @@
 							<?php }else{?>
 
 															<form method="post" id="placeOrder">
+															<input placeholder="Pickup date"  type="text" class="start_date" >
+															<input  placeholder="Return Date" type="text" class="end_date"  >
 																	<input type="hidden" name="name" value="<?php echo $_SESSION["c_name"]; ?>">
 																	<input type="hidden" name="email" value="<?php echo $_SESSION["c_email"]; ?>">
 																	<input type="hidden" name="phone" value="<?php echo $_SESSION["c_number"]; ?>">
@@ -82,14 +86,28 @@
 					</div>
 				<div class="col-sm-12 hidden" id="info">
 					<div class="total_area">
+				<div class="form-to">
+					<form id=placeOrder">
 						<ul>
-							<li>[ store name ]<br>
-							  [ store address here ]
+						<input type="hidden" name="cid" value="<?php echo $_SESSION["c_id"]; ?>">
+						<input type="hidden" name="name" value="<?php echo $_SESSION["c_name"]; ?>">
+							<input type="hidden" name="email" value="<?php echo $_SESSION["c_email"]; ?>">
+							<input type="hidden" name="phone" value="<?php echo $_SESSION["c_number"]; ?>">
+							<input type="hidden" name="address" value="<?php echo $_SESSION["c_address"]; ?>">
+							<input type="hidden" name="products" value="<?= $allItems; ?>">
+							<input type="hidden" name="products" value="<?= $allItems; ?>">
+							<input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
+							<li><input placeholder="Pickup date" name="p_date" type="text" class="form-control start_date" ></li>
+							<li><input placeholder="Return Date" name="r_date" type="text" class="form-control end_date"  ></li>
+							<li>Renz Rental Store<br>
+							  	Lapu Lapu City Cebu
 							</li>
 
 							<a href="payment.php" class="btn btn-primary">Continue to payment</a>
-
+							
 						</ul>
+						</from>
+						</div>
 					</div>
 				</div>
 				</div>
@@ -110,6 +128,8 @@
 			</div>
 		</div>
 	</section><!--/#do_action-->
+	<!-- jQuery -->
+
 <script type="text/javascript" src="assets/js/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -123,4 +143,5 @@
 		});
 	});
 </script>
+
 <?php require('footer.php'); ?>

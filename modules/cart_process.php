@@ -1,6 +1,7 @@
 <?php
 	require 'config.php';
 
+
 	// Add products into the cart table
 	if (isset($_POST['pid'])) {
 	  $pid = $_POST['pid'];
@@ -33,11 +34,12 @@
 
 	// Get no.of items available in the cart table
 	if (isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item') {
+
+	
 	  $stmt = $con->prepare('SELECT * FROM cart');
 	  $stmt->execute();
 	  $stmt->store_result();
 	  $rows = $stmt->num_rows;
-
 	  echo $rows;
 	}
 

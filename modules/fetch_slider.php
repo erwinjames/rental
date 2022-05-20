@@ -36,7 +36,6 @@ $products_list= <<<EOT
 <input name="product_size" type="hidden" value="1">
 <input name="product_size" type="hidden" value="{$row["c_size"]}">
 <input name="product_code" type="hidden" value="{$row["id"]}">
-<li><center><button type="submit" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>&nbspAdd to Rent</button></center></li>
 
 </ul>
 </div>

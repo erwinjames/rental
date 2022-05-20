@@ -30,15 +30,13 @@ function fetch_costume($c) {
     $result = $stmt->get_result();
 
     while($row = $result->fetch_assoc()){
-      $output = '';
         $output = '
         <div class=\'item active\'>
                 <div class="col-sm-6">
                   <form>
-                  <h1>Panglaki</h1>
-                  <h2>Dress</h2>
-                  <p>Dress pero pang laki</p>
-                  <button type="submit" class="btn btn-default add-to-cart">Get it now</button>
+                  <h1>Bunny Girl</h1>
+                  <p>Costume for Girls</p>
+                  <button type="submit" class="btn btn-default add-to-cart" disabled>Get it now</button>
                   </form>
                 </div>
                 <div class="col-sm-6">
@@ -56,12 +54,12 @@ function fetch_costume($c) {
 									</form>
 								</div>
 								<div class="col-sm-6">
-								        <img src="data:image/jpeg;base64,'.base64_encode($row['c_image']).'" width="268px" height="249px" alt="" />
+								        <img src="data:image/jpeg;base64,'.base64_encode($row['c_image']).'" height="280px" alt="" />
 									<img src="images/home/pricing.png" class="pricing" alt="" />
 								</div>
 							</div> ';
     }
-      $output = '';
+     
       echo $output;
     $stmt->close();
 }
