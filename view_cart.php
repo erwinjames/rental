@@ -2,7 +2,8 @@
 <?php
 include "header.php";
 
-if(!isset($_SESSION['c_id'])){
+if(!isset($_SESSION['id'])){
+
 ?>
 <section id="cart_items">
 		<div class="container">
@@ -22,7 +23,7 @@ if(!isset($_SESSION['c_id'])){
 
 
 <?php } else {?>
-	
+
 <section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -45,7 +46,7 @@ if(!isset($_SESSION['c_id'])){
 					</thead>
 					<tbody>
 					<?php
-				$cid= $_SESSION['c_id'];
+				$cid= $_SESSION['id'];
                 $stmt = $con->prepare('SELECT * FROM cart WHERE cid=?');
 				$stmt->bind_param('s',$cid);
                 $stmt->execute();
@@ -78,36 +79,36 @@ if(!isset($_SESSION['c_id'])){
 				</div>
 				<div class="col-sm-6">
 					<div class="total_area">
-							
+
 						<ul>
 						<?php
 
-$cid= $_SESSION['c_id'];
+$cid= $_SESSION['id'];
 $stmt = $con->prepare('SELECT * FROM cart WHERE cid=?');
 $stmt->bind_param('s',$cid);
 $stmt->execute();
 $result = $stmt->get_result();
 $grand_total = 0;
 while ($row = $result->fetch_assoc()):
-?> 
+?>
 <?php $grand_total += $row['total_price']; ?>
 
 							<li><?= $row['product_name'] ?><span>Php  <?= number_format($row['product_price'],2); ?></span></li>
-							<?php endwhile; ?> 					
+							<?php endwhile; ?>
 							<br>
-				
+
 							<li>Total <span>
 							<?= number_format($grand_total,2); ?>
 							</li>
-		
+
 						</ul>
-			
+
 					 <span>
 						  <hr>
 			 					<a href="index.php" style="margin-top: 19px; margin-left: 1em;" class="btn btn-default update <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Continue Shopping</a>
 							 <a href="checkout.php" class="btn btn-default check_out <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
 						</span>
-					
+
 				</div>
 			</div>
 		</div>

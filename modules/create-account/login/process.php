@@ -71,7 +71,7 @@ function shipSession($c, $u) {
                 mysqli_stmt_bind_result($stmt, $id,$name,$address,$number,$email);
                 if(mysqli_stmt_fetch($stmt)) {
                     if($id != '' && $name != '' && $address != '' && $number != '' && $email != '') {
-                        $_SESSION['c_id'] = $id;
+                        $_SESSION['id'] = $id;
                         $_SESSION['c_name'] = $name;
                         $_SESSION['c_address'] = $address;
                         $_SESSION['c_number'] = $number;

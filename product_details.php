@@ -6,6 +6,7 @@
 
 				<div class="col-sm-9 padding-right">
 					<?php
+
 					if(isset($_GET['costId'])){
 					$getCat = $_GET['costId'];
 					$stmt = $con->prepare("SELECT tc.id,
@@ -22,12 +23,13 @@
 												FROM tbl_costume tc
 												JOIN tbl_costume_image tci ON tc.id = tci.cost_id
 												JOIN tbl_costume_categories tcc  ON tc.c_category_id=tcc.id
-												WHERE tc.id=?");
+												WHERE tc.id=? LIMIT 1");
 					$stmt->bind_param('s', $getCat);
 					$stmt->execute();
 					$result = $stmt->get_result();
 				   while($row = $result->fetch_array()){
 				   $picture=base64_encode($row['c_image']);
+
 				   $pictures = base64_encode($row['images']);
 						$output= '<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
@@ -43,7 +45,7 @@
 							</div>
 							<div class="item">
 							<a href="">	<img width="100%" height="100%" src="data:image/jpeg;base64,'.$pictures.'" alt="" /></a>
-							</div>	
+							</div>
 							</div>
 									<a class="left item-control" href="#similar-product" data-slide="prev">
 										<i class="fa fa-angle-left"></i>
@@ -52,7 +54,7 @@
 										<i class="fa fa-angle-right"></i>
 									</a>
 								</div>
-								
+
 										</div>
 										<!-- product div information -->
 														<div class="col-sm-7">
@@ -63,24 +65,25 @@
 																		<form class="form-submit">
 																			<span>
 																					<span>Php '.$row['c_price'].'</span>
+
 																					<label>Quantity:</label>
 																					<input type="text" value="1" class="pqty"/>
-																					<input type="hidden" class="cid" value="'.$_SESSION['c_id'].'">
+																					<input type="hidden" class="cid" value="'.isset($_SESSION['id']).'">
 																					<input type="hidden" class="pid" value="'.$row['id'].'">
 																					<input type="hidden" class="pname" value="'.$row['c_name'].'">
 																					<input type="hidden" class="pprice" value="'.$row['c_price'].'">
 																					<input type="hidden" class="pcode" value="'.$getCat.'">
 																			</span>
 																			<hr>
-				 
+
 																			<button type="submit" class="btn btn-fefault addItemBtn cart add-to-cart">
 																			<i class="fa fa-shopping-cart"></i>
 																			Add to cart
 																			</button>
-				 
+
 																		</form>
 																		<hr>
-				 
+
 																			<p><b>Availability:</b>
 																				'.$row['c_availability'].'
 																			</p>
@@ -93,10 +96,10 @@
 												</div>
 									';
 									echo $output;
-								
+
 				   }
 				   $stmt->close();
-				
+
 				}
 ?>
 				</div>

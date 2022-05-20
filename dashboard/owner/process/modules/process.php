@@ -69,13 +69,13 @@ function add_costume($c) {
     $stmt->execute();
     if($stmt){
     $lastid=$c->insert_id;
-
      for($count = 0; $count < count($_FILES["image"]["tmp_name"]); $count++)
      {
       $image_file = addslashes(file_get_contents($_FILES["image"]["tmp_name"][$count]));
       $query = ("INSERT INTO tbl_costume_image(cost_id,images) VALUES (?,?)");
+      echo $c->error;
       $statement = $c->prepare($query);
-        $statement->bind_param('ss', $lastid,$image_file);
+      $statement->bind_param('ss', $lastid,$image_file);
       $statement->execute();
       $statement->close();
      }
@@ -215,7 +215,7 @@ function fetch_cat($c) {
 }
 echo '</ul>';
 }
-function fetch_user_rent(){
+function fetch_user_rent($c){
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);

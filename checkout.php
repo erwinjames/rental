@@ -35,16 +35,16 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="bill-to">
-						
+
 					<p>Shipping Address</p>
 						<div class="form-two">
-						
+
 
 															<form method="post" id="placeOrder">
 																	<input placeholder="Pickup date" name="p_date" type="text" class="form-control start_date" >
 																	<input placeholder="Return Date" name="r_date" type="text" class="form-control end_date"  >
-														
-																	<input type="hidden" name="cid" value="<?php echo $_SESSION["c_id"]; ?>">
+
+																	<input type="hidden" name="cid" value="<?php echo $_SESSION["id"]; ?>">
 																	<input type="hidden" name="name" value="<?php echo $_SESSION["c_name"]; ?>">
 																	<input type="hidden" name="email" value="<?php echo $_SESSION["c_email"]; ?>">
 																	<input type="hidden" name="phone" value="<?php echo $_SESSION["c_number"]; ?>">
@@ -52,13 +52,13 @@
 																	<input type="hidden" name="products" value="<?= $allItems; ?>">
 																	<input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
 																	<input type="submit" name="submit" value="Save & Continue" class="btn btn-primary">
-					
+
 								</form>
-							
+
 							</div>
 
 					</div>
-			
+
 
 			</div>
 		</div>

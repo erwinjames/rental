@@ -1,6 +1,6 @@
 <?php
 include "modules/cart_process.php";
-session_start();
+
 $minimum_range = 50;
 $maximum_range = 400;
 
@@ -55,18 +55,18 @@ $maximum_range = 400;
             $( '.start_date' ).datepicker({
                 dateFormat: 'dd-mm-yy',
                 changeMonth: true,
-                changeYear: true,      
+                changeYear: true,
                 showAnim: 'slideDown',
-                duration: 'fast',   
+                duration: 'fast',
                 minDate: +1,
         });
 
             $( '.end_date' ).datepicker({
                 dateFormat: 'dd-mm-yy',
                 changeMonth: true,
-                changeYear: true,      
+                changeYear: true,
                 showAnim: 'slideDown',
-                duration: 'fast',   
+                duration: 'fast',
                 minDate: +1,
                 yearRange: new Date().getFullYear() + ':' + new Date().getFullYear(),
                 enableOnReadonly: true,
@@ -212,7 +212,7 @@ $maximum_range = 400;
 	display: block;
 	text-indent: -2000px;
 	overflow: hidden;
-	background: url(calendar.png) no-repeat; 
+	background: url(calendar.png) no-repeat;
 }
 a.dp-choose-date.dp-disabled {
 	background-position: 0 -20px;
