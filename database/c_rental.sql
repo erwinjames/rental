@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 20, 2022 at 09:50 AM
+-- Generation Time: May 20, 2022 at 11:17 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -51,8 +51,16 @@ CREATE TABLE `orders` (
   `aaddress` varchar(255) NOT NULL,
   `products` varchar(255) NOT NULL,
   `amount_paid` varchar(100) NOT NULL,
-  `paid_status` int(1) NOT NULL
+  `paid_status` int(1) NOT NULL,
+  `DYM` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `names`, `email`, `phone`, `aaddress`, `products`, `amount_paid`, `paid_status`, `DYM`) VALUES
+(40, 'Erwin James Manugas', 'manugasewinjames@gmail.com', '09236948643', 'Babag ', 'katong costyer', '500', 1, '2022-05-20 16:44:24');
 
 -- --------------------------------------------------------
 
@@ -124,7 +132,8 @@ CREATE TABLE `tbl_user_account` (
 
 INSERT INTO `tbl_user_account` (`id`, `email`, `password`) VALUES
 (1, 'test@gmail.com', 'test'),
-(2, 'james@gmail.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3');
+(2, 'james@gmail.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3'),
+(3, 'erwinjamesmanugas@gmail.com', 'e090ad826a0332e86ab7082c8d2c27063c3a0055');
 
 -- --------------------------------------------------------
 
@@ -144,7 +153,8 @@ CREATE TABLE `tbl_user_details` (
 --
 
 INSERT INTO `tbl_user_details` (`id`, `name`, `address`, `c_number`) VALUES
-(1, 'Erwin James Manugas', 'babag Lapu Lapu City Cebu', '09062419916');
+(1, 'Erwin James Manugas', 'babag Lapu Lapu City Cebu', '09062419916'),
+(3, 'james', 'Inyuha', '09236948643');
 
 -- --------------------------------------------------------
 
@@ -251,7 +261,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tbl_costume`
@@ -275,13 +285,13 @@ ALTER TABLE `tbl_costume_image`
 -- AUTO_INCREMENT for table `tbl_user_account`
 --
 ALTER TABLE `tbl_user_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_details`
 --
 ALTER TABLE `tbl_user_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_admin`
