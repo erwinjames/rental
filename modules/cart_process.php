@@ -1,6 +1,6 @@
 <?php
 	require 'config.php';
-
+	session_start();
 
 	// Add products into the cart table
 	if (isset($_POST['pid'])) {
@@ -79,25 +79,27 @@
 	// Checkout and save customer info in the orders table
 	if (isset($_POST['action']) && isset($_POST['action']) == 'order') {
 	  $name = $_POST['name'];
-	  $id = $_POST['cid'];
-	  $pdate=$_POST['p_date'];
-	  $rdate=$_POST['r_date'];
 	  $email = $_POST['email'];
 	  $phone = $_POST['phone'];
+		$pdate = date('Y-m-d', strtotime($_POST['p_date']));
+		$rdate = date('Y-m-d', strtotime($_POST['r_date']));
 	  $products = $_POST['products'];
 	  $grand_total = $_POST['grand_total'];
 	  $address = $_POST['address'];
 	  ///$pmode = $_POST['pmode'];
-
+		$stat = 0;
 	  $data = '';
-	  $stmt = $con->prepare('INSERT INTO orders (names,email,phone,aaddress,products,amount_paid)VALUES(?,?,?,?,?,?)');
-	  $stmt->bind_param('ssssss',$name,$email,$phone,$address,$products,$grand_total);
+	  $stmt = $con->prepare('INSERT INTO orders (names,email,phone,aaddress,products,amount_paid,paid_status)VALUES(?,?,?,?,?,?,?)');
+	  $stmt->bind_param('sssssss',$name,$email,$phone,$address,$products,$grand_total,$stat);
 	  if($stmt->execute()){
-	  $lastId = $con->insert_id;
-	  $stmts = $con->prepare('INSERT INTO user_rent(ord_id,costumer_id,pickup_date,return_date)VALUES(?,?,?,?)');
-	  $stmts->bind_param('ssss',$lastId,$id,$pdate,$rdate);
-	  $stmts->execute();
-	  $stmt2 = $con->prepare('DELETE FROM cart');
+		$id = $_SESSION['c_id'];
+		  $lastid = $con->insert_id;
+		  $stmts = $con->prepare('INSERT INTO user_rent (ord_id,costumer_id,pickup_date,return_date)VALUES(?,?,?,?)');
+		  $stmts->bind_param('ssss',$lastid,$id,$pdate,$rdate);
+    if($stmts->execute()){
+		$id = $_SESSION['c_id'];
+	  $stmt2 = $con->prepare('DELETE FROM cart WHERE cid=?');
+	  $stmt2 -> bind_param('s',$id);
 	  $stmt2->execute();
 	  $data .= '<div class="text-center">
 								<h1 class="display-4 mt-2 text-danger">Thank You!</h1>
@@ -111,5 +113,6 @@
 						  </div>';
 	  echo $data;
 	}
+}
 }
 ?>
