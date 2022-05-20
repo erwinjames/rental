@@ -161,19 +161,16 @@
                                 <div class="form-group">
                                     <label>Category</label>
                                    <select class="form-control select2 select2-hidden-accessible" name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
-                                        <option></option>
-                                        <option value="1">Safari Animals</option>
-                                        <option value="2">Nutrition Month Costumes</option>
-                                        <option value="3">Disney Prince&Princess</option>
-                                        <option value="4">Halloween Costumes</option>
-                                        <option value="5">Cartoon Characters</option>
-                                        <option value="6">Buwan ng Wika Costumes</option>
-                                        <option value="7">Bird</option>
-                                        <option value="8">Zebra</option>
-                                        <option value="9">Elephant</option>
-                                        <option value="10">Leopard</option>
-                                        <option value="1">Giraffe</option>
-                                        <option value="12">Lion</option>
+                                   <option></option>
+                                        <?php 
+                                           $stmt_ship_sd = $con->prepare("SELECT * FROM tbl_costume_categories"); 
+                                           $stmt_ship_sd->execute();
+                                           $row_ship_sd = $stmt_ship_sd->get_result();
+                                           while ($row1 = $row_ship_sd->fetch_assoc()){
+                                        ?>
+                              
+                                        <option value="<?php echo $row1["id"]?>"><?php echo $row1["cat_name"]?></option>
+                                       <?php } ?>
                                        </select>
                                 </div>
                                 <div class="form-group">
