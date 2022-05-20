@@ -79,6 +79,7 @@ $maximum_range = 400;
     $(".addItemBtn").click(function(e) {
       e.preventDefault();
       var $form = $(this).closest(".form-submit");
+      var cid = $form.find(".cid").val();
       var pid = $form.find(".pid").val();
       var pname = $form.find(".pname").val();
       var pprice = $form.find(".pprice").val();
@@ -90,6 +91,7 @@ $maximum_range = 400;
         url: 'modules/cart_process.php',
         method: 'post',
         data: {
+          cids:cid,
           pid: pid,
           pname: pname,
           pprice: pprice,
@@ -177,6 +179,7 @@ $maximum_range = 400;
         method: 'post',
         data: $('form').serialize() + "&action=order",
         success: function(response) {
+          console.log(response);
           $("#order").html(response);
         }
       });

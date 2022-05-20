@@ -1,9 +1,7 @@
 <?php
 require "process/modules/config.php";
 session_start();
-if(isset($_SESSION['pre'])!="Admin"){
-	header("location:../404.php");
-}
+
 ?>
 
 
@@ -85,16 +83,13 @@ if(isset($_SESSION['pre'])!="Admin"){
                                 <!-- User image -->
                                 <li class="user-header">
                                      <img src="assets/icon.png" class="img-circle" />
-                                     <p>Username<small>
+                                     <p><?php echo $_SESSION['name'];?><small>
                                       Admin<br>Renz Costumes</small></p>
-
-
-
                                 </li>
                                 <!-- Menu Footer-->
                                   <li class="user-footer">
                                       <div class="text-center">
-                                          <a href="#" class="btn btn-default btn-flat">Sign Out</a>
+                                          <a href="#" id="ship_ownr_signout" class="btn btn-default btn-flat">Sign Out</a>
                                       </div>
                                   </li>
                             </ul>

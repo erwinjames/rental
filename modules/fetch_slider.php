@@ -12,13 +12,14 @@ if (!$results){
     exit;
 }
 while($row = $results->fetch_assoc()) {
+	$picture = base64_encode($row['c_image']);
 $products_list= <<<EOT
 
 <div class="col-md-3">
 <div class="product-image-wrapper">
 <div class="single-products">
 	<div class="productinfo text-center">
-		<img src="assets/images/shop/product8.jpg" width="268px" height="249px" alt="" />
+		<img src="data:image/jpeg;base64,{$picture}" width="268px" height="249px"alt="" />
 		<h2>PHP&nbsp{$row['c_price']}</h2>
 		<p>{$row['c_description']}</p>
 	</div>
@@ -32,10 +33,6 @@ $products_list= <<<EOT
 </div>
 <div class="choose">
 <ul class="nav nav-pills nav-justified">
-
-<input name="product_size" type="hidden" value="1">
-<input name="product_size" type="hidden" value="{$row["c_size"]}">
-<input name="product_code" type="hidden" value="{$row["id"]}">
 
 </ul>
 </div>

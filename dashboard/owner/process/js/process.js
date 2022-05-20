@@ -121,3 +121,20 @@ $(document).ready(function() {
         }
     });
         });
+
+        $(document).ready(function() {
+            $("#ship_ownr_signout").click(function(event) {
+                var signout = "ship_ownr_signout";
+                $.ajax({
+                    url: "./process/modules/process.php",
+                    method: "POST",
+                    data: { action: signout },
+                    success: function(data) {
+                        alert(data);
+                        setTimeout(function() {
+                            window.location = "http://localhost/rental/";
+                        }, 1000);
+                }
+        });
+    });
+});

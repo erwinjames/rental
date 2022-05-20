@@ -10,10 +10,8 @@
 	  $pimage = $_POST['pimage'];
 	  $pcode = $_POST['pcode'];
 	  $pqty = $_POST['pqty'];
+	  $id = $_POST['cids'];
 
-	  ini_set('display_errors', 1);
-	  ini_set('display_startup_errors', 1);
-	  error_reporting(E_ALL);
 
 	  $stmt = $con->prepare('SELECT product_code FROM cart WHERE product_code=?');
 	  $stmt->bind_param('s',$pcode);
@@ -24,8 +22,8 @@
 	  $code = $r['product_code'] ?? '';
 	  $total_price = $pprice * $pqty;
 	  if (!$code){
-	    $querys = $con->prepare('INSERT INTO cart (product_name,product_price,qty,total_price,product_code) VALUES (?,?,?,?,?)');
-	    $querys->bind_param('sssss',$pname,$pprice,$pqty,$total_price,$pcode);
+	    $querys = $con->prepare('INSERT INTO cart (cid,product_name,product_price,qty,total_price,product_code) VALUES (?,?,?,?,?,?)');
+	    $querys->bind_param('ssssss',$id,$pname,$pprice,$pqty,$total_price,$pcode);
 	    $querys->execute();
 		$querys->close();
         echo 'Rent Successfully.';
@@ -34,13 +32,13 @@
 
 	// Get no.of items available in the cart table
 	if (isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item') {
-
-	
-	  $stmt = $con->prepare('SELECT * FROM cart');
+    
+  		$stmt = $con->prepare('SELECT * FROM cart');
 	  $stmt->execute();
 	  $stmt->store_result();
 	  $rows = $stmt->num_rows;
 	  echo $rows;
+	
 	}
 
 	// Remove single items from cart
@@ -81,6 +79,9 @@
 	// Checkout and save customer info in the orders table
 	if (isset($_POST['action']) && isset($_POST['action']) == 'order') {
 	  $name = $_POST['name'];
+	  $id = $_POST['cid'];
+	  $pdate=$_POST['p_date'];
+	  $rdate=$_POST['r_date'];
 	  $email = $_POST['email'];
 	  $phone = $_POST['phone'];
 	  $products = $_POST['products'];
@@ -89,10 +90,13 @@
 	  ///$pmode = $_POST['pmode'];
 
 	  $data = '';
-
-	  $stmt = $con->prepare('INSERT INTO orders (name,email,phone,address,products,amount_paid)VALUES(?,?,?,?,?,?)');
+	  $stmt = $con->prepare('INSERT INTO orders (names,email,phone,aaddress,products,amount_paid)VALUES(?,?,?,?,?,?)');
 	  $stmt->bind_param('ssssss',$name,$email,$phone,$address,$products,$grand_total);
-	  $stmt->execute();
+	  if($stmt->execute()){
+	  $lastId = $con->insert_id;
+	  $stmts = $con->prepare('INSERT INTO user_rent(ord_id,costumer_id,pickup_date,return_date)VALUES(?,?,?,?)');
+	  $stmts->bind_param('ssss',$lastId,$id,$pdate,$rdate);
+	  $stmts->execute();
 	  $stmt2 = $con->prepare('DELETE FROM cart');
 	  $stmt2->execute();
 	  $data .= '<div class="text-center">
@@ -107,4 +111,5 @@
 						  </div>';
 	  echo $data;
 	}
+}
 ?>

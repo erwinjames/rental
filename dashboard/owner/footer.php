@@ -6,6 +6,7 @@
                     &nbsp;
               </footer>
               <script>
+                
 var xValues = ["2021", "2022", "2023", "2024", "2025"];
 var yValues = [0, 5000, 10000, 15000, 20000];
 var barColors = ["skyblue", "skyblue","skyblue","skyblue","skyblue"];

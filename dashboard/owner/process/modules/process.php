@@ -8,6 +8,10 @@ if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume") {
     //session_start();fetch_categories
     fetch_costume($con);
 }
+if($_POST["action"] == "ship_ownr_signout") {
+    session_start();
+    sign_out();
+}
 if(isset($_POST["action"]) && $_POST["action"] == "fetch_categories") {
     //session_start();
     fetch_cat($con);
@@ -207,5 +211,8 @@ function fetch_cat($c) {
 echo '</ul>';
 }
 
-
+function sign_out() {
+    session_destroy();
+    echo "Signout successfully!";
+}
 ?>

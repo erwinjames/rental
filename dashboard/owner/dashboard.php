@@ -10,6 +10,7 @@
          <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
            <!-- small box -->
+        
            <div class="small-box bg-blue">
              <div class="inner">
                <h3>13</h3>
@@ -23,47 +24,49 @@
          </div>
           <div class="col-lg-3 col-xs-6">
            <!-- small box -->
+           <?php
+           $sql = "SELECT * FROM tbl_costume";
+           if ($stmt = $con->prepare($sql)) {
+               $stmt->execute();
+               $stmt->store_result();
+              $total = $stmt->num_rows;
+           ?>
            <div class="small-box bg-green">
              <div class="inner">
-               <h3>123</h3>
+               <h3><?php echo $total ?></h3>
                <p>Costumes </p>
              </div>
              <div class="icon">
                <i class="bi bi-box-seam"></i>
              </div>
-             <a href="suppliers.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
+             <a href="costumes.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
            </div>
+          <?php }
+           ?>
          </div>
          <!-- ./col -->
          <div class="col-lg-3 col-xs-6">
            <!-- small box -->
+           <?php
+           $sql = "SELECT * FROM user_rented";
+           if ($stmt = $con->prepare($sql)) {
+               $stmt->execute();
+               $stmt->store_result();
+              $total = $stmt->num_rows;
+           ?>
            <div class="small-box bg-red">
              <div class="inner">
-               <h3>21</h3>
+               <h3><?php echo $total ?></h3>
                <p>Rented</p>
              </div>
              <div class="icon">
                <i class="bi bi-cart-check"></i>
              </div>
-             <a href="costumer.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
+             <a href="rented.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
            </div>
+           <?php } ?>
          </div>
-		 <div class="col-lg-3 col-xs-6">
-           <!-- small box -->
-           <div class="small-box bg-yellow">
-             <div class="inner">
-               <h3>23</h3>
-               <p>Sales</p>
-             </div>
-             <div class="icon">
-               <i class="bi bi-coin"></i>
-             </div>
-             <a href="sales.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
-           </div>
-         </div>
-
-         <!-- ./col -->
-       </div>
+  
 
         <div class="row">
           <div class="col-md-8">

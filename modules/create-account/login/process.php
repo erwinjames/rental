@@ -76,7 +76,7 @@ function shipSession($c, $u) {
                         $_SESSION['c_address'] = $address;
                         $_SESSION['c_number'] = $number;
                         $_SESSION['c_email'] = $email;
-                        $_SESSION['pre'] ="costumer" ;
+                        $_SESSION['admin'] =0;
                         echo "Login Successfully!";
                     }
                     else{
@@ -110,7 +110,7 @@ function adminSession($c, $s) {
                     if($id != '' && $name != '') {
                         $_SESSION['id'] = $id;
                         $_SESSION['name'] = $name;
-                        $_SESSION['pre'] = "Admin";
+                        $_SESSION['admin'] = 1;
                         echo "Admin Logging In!";
                     }
                     else{
