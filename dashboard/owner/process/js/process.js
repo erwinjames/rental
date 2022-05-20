@@ -90,6 +90,25 @@ $(document).ready(function() {
         });
     }
     });
+
+    $(document).ready(function() {
+        setTimeout(function() {
+            fetch_user_rental();
+        }, 100);
+    
+        function fetch_user_rental() {
+            var ren_action = "userRental";
+            $.ajax({
+                url: "./process/modules/process.php",
+                method: "POST",
+                data: { action: ren_action },
+                success: function(response) {
+                    $("#costume_list").html(response);
+                }
+            });
+        }
+        });
+
     $(document).ready(function() {
     $('form#add_costume_record').submit(function(e){
         e.preventDefault();

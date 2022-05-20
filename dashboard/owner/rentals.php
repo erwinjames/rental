@@ -18,16 +18,8 @@
                                             <th class="no-sort">&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                       <tr>
-                                            <td><a href="#" data-toggle="modal" data-target="#exampleModalCenter"><span data-toggle='tooltip' title="View Details">Erwin James Manugas</span></a></td>
-                                            <td>
-                                                <div class="text-centert">
-                                                    <a href="#" class="btn btn-success btn-sm"><i class="bi bi-check"></i> &nbsp; Accept</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-x"></i> &nbsp; Decline</a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <tbody id="userRental">
+                                   
                                     </tfoot>
                                 </table>
                            </div>

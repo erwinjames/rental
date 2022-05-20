@@ -8,6 +8,11 @@ if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume") {
     //session_start();fetch_categories
     fetch_costume($con);
 }
+if(isset($_POST["action"]) && $_POST["action"] == "userRental") {
+    //session_start();fetch_categories
+    fetch_user_rent($con);
+}
+
 if($_POST["action"] == "ship_ownr_signout") {
     session_start();
     sign_out();
@@ -210,6 +215,29 @@ function fetch_cat($c) {
 }
 echo '</ul>';
 }
+function fetch_user_rent(){
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    $stmt_ship_sd = $c->prepare("SELECT * FROM orders Where paid_status=0");
+    $stmt_ship_sd->execute();
+    $row_ship_sd = $stmt_ship_sd->get_result();
+    while ($row1 = $row_ship_sd->fetch_assoc()){
+        $output = '
+        <tr>
+        <td><a href="#" data-toggle="modal" data-target="#exampleModalCenter"><span data-toggle="tooltip" title="View Details">'.$row1['names'].'</span></a></td>
+        <td>
+            <div class="text-centert">
+                <a href="#" class="btn btn-success btn-sm"><i class="bi bi-check"></i> &nbsp; Accept</a>
+            <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-x"></i> &nbsp; Decline</a>
+            </div>
+        </td>
+    </tr>
+       ';
+    echo $output;
+}
+}
+
 
 function sign_out() {
     session_destroy();
