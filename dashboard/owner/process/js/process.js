@@ -75,17 +75,17 @@ $(document).ready(function(){
 });
 $(document).ready(function() {
     setTimeout(function() {
-        fetch_depart_detail();
+        fetch_costume();
     }, 100);
 
-    function fetch_depart_detail() {
-        var fep_action = "fetch_costume";
+    function fetch_costume() {
+        var f_costume_action = "fetch_costumes";
         $.ajax({
             url: "./process/modules/process.php",
             method: "POST",
-            data: { action: fep_action },
+            data: { action: f_costume_action },
             success: function(response) {
-                $("#costume_list").html(response);
+                $("#costumes_list").html(response);
             }
         });
     }
@@ -95,7 +95,7 @@ $(document).ready(function() {
         setTimeout(function() {
             fetch_user_rental();
         }, 100);
-    
+
         function fetch_user_rental() {
             var ren_action = "userRental";
             $.ajax({
@@ -103,7 +103,7 @@ $(document).ready(function() {
                 method: "POST",
                 data: { action: ren_action },
                 success: function(response) {
-                    $("#costume_list").html(response);
+                    $("#userRental").html(response);
                 }
             });
         }

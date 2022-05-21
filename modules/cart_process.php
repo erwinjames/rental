@@ -32,13 +32,13 @@
 
 	// Get no.of items available in the cart table
 	if (isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item') {
-    
+
   		$stmt = $con->prepare('SELECT * FROM cart');
 	  $stmt->execute();
 	  $stmt->store_result();
 	  $rows = $stmt->num_rows;
 	  echo $rows;
-	
+
 	}
 
 	// Remove single items from cart
@@ -92,12 +92,12 @@
 	  $stmt = $con->prepare('INSERT INTO orders (names,email,phone,aaddress,products,amount_paid,paid_status)VALUES(?,?,?,?,?,?,?)');
 	  $stmt->bind_param('sssssss',$name,$email,$phone,$address,$products,$grand_total,$stat);
 	  if($stmt->execute()){
-		$id = $_SESSION['c_id'];
+		$id = $_SESSION['id'];
 		  $lastid = $con->insert_id;
 		  $stmts = $con->prepare('INSERT INTO user_rent (ord_id,costumer_id,pickup_date,return_date)VALUES(?,?,?,?)');
 		  $stmts->bind_param('ssss',$lastid,$id,$pdate,$rdate);
     if($stmts->execute()){
-		$id = $_SESSION['c_id'];
+		$id = $_SESSION['id'];
 	  $stmt2 = $con->prepare('DELETE FROM cart WHERE cid=?');
 	  $stmt2 -> bind_param('s',$id);
 	  $stmt2->execute();

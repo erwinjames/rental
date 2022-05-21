@@ -59,7 +59,7 @@ function fetch_costume($c) {
 								</div>
 							</div> ';
     }
-     
+
       echo $output;
     $stmt->close();
 }

@@ -24,11 +24,11 @@
                                                                  <th class="no-sort">&nbsp;</th>
                                                              </tr>
                                                          </thead>
-                                                         <tbody id="costume_list">
+                                                         <tbody  id="costumes_list">
 
 
                                                           </tfoot>
-                                                         </table
+                                                        </table>
                            </div>
                         </div>
                     </div>
@@ -162,13 +162,13 @@
                                     <label>Category</label>
                                    <select class="form-control select2 select2-hidden-accessible" name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
                                    <option></option>
-                                        <?php 
-                                           $stmt_ship_sd = $con->prepare("SELECT * FROM tbl_costume_categories"); 
+                                        <?php
+                                           $stmt_ship_sd = $con->prepare("SELECT * FROM tbl_costume_categories");
                                            $stmt_ship_sd->execute();
                                            $row_ship_sd = $stmt_ship_sd->get_result();
                                            while ($row1 = $row_ship_sd->fetch_assoc()){
                                         ?>
-                              
+
                                         <option value="<?php echo $row1["id"]?>"><?php echo $row1["cat_name"]?></option>
                                        <?php } ?>
                                        </select>

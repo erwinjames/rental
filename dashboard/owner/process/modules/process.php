@@ -4,7 +4,7 @@ require "config.php";
     //session_start();fetch_categories
 //     fetch_costume_category($con);
 // }
-if(isset($_POST["action"]) && $_POST["action"] == "fetch_costume") {
+if(isset($_POST["action"]) && $_POST["action"] == "fetch_costumes") {
     //session_start();fetch_categories
     fetch_costume($con);
 }
@@ -142,6 +142,7 @@ function fetch_costume($c) {
 
    while($row = $result->fetch_array()){
         $output = '
+
  <tr>
                                             <td>'.$row['c_name'].'</td>
                                             <td class="text-center"> <img src="data:image/jpeg;base64,'.base64_encode($row["c_image"]).'" width="20%" class="img-thumbnail"></td>
@@ -157,26 +158,39 @@ data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i><
                                                 </div>
                                             </td>
        </tr>
-                                    >';
+                        ';
     echo $output;
    }
     $stmt->close();
 }
 
 function fetch_rented_cost($c) {
-    $stmt = $c->prepare("SELECT * FROM orders where paid_status = 1");
+    $stmt = $c->prepare("SELECT
+      o.id,
+      o.names,
+      o.email,
+      o.phone,
+      o.aaddress,
+      o.products,
+      o.amount_paid,
+      o.paid_status,
+      o.products,
+      ur.pickup_date,
+      ur.return_date
+      FROM orders o
+      JOIN user_rent ur ON o.id=ur.ord_id where o.paid_status = 1");
     $stmt->execute();
     $result = $stmt->get_result();
    while($row = $result->fetch_array()){
         $output = '
         <tr>
-            <td>'.$row['name'].'</td>
-            <td>'.$row['address'].'</td>
+            <td>'.$row['names'].'</td>
+            <td>'.$row['aaddress'].'</td>
             <td>'.$row['phone'].'</td>
             <td>'.$row['email'].'</td>
-            <td>'.$row['name'].'</td>
-            <td>'.$row['name'].'</td>
-            <td>'.$row['id'].'</td>
+              <td>'.$row['pickup_date'].'</td>
+                  <td>'.$row['return_date'].'</td>
+                        <td>'.$row['products'].'</td>
             <td><img src="assets/icon.png"></td>
             <td >
                 <div class="text-center">
@@ -206,8 +220,12 @@ function fetch_cat($c) {
             <div class="col-xs-10"><a href="view_category.php?cat='.$row1['cat_name'].'">'.$row1['cat_name'].'</a></div>
           </div>
           <div class="pull-right">
-            <a href="#" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span></a>
-              <a href="#" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span></a>
+            <button type="button" name="edit_role_btn" class="button small green update_role_btn" id="'.$row1["id"].'" data-toggle="modal" data-target="#manage"">
+                  <span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span>
+            </button>
+              <button type="button" name="rl_btn_delete" class="button small red delete_role_btn" id="'.$row1["id"].'">
+                <span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span>
+              </button>
             </div>
         </li>
        ';
