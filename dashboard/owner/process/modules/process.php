@@ -12,7 +12,12 @@ if(isset($_POST["action"]) && $_POST["action"] == "userRental") {
     //session_start();fetch_categories
     fetch_user_rent($con);
 }
-
+if(isset($_POST['action']) && $_POST['action'] == 'assgn_edit_id_form') {
+    assign_edit_id($con);
+}
+if(isset($_POST['action']) && $_POST['action'] == 'costme_edit_id_form') {
+    costume_edit_form($con);
+}
 if($_POST["action"] == "ship_ownr_signout") {
     session_start();
     sign_out();
@@ -33,7 +38,69 @@ if(isset($_POST["action"]) && $_POST["action"] == "add_category") {
     //session_start();
     adding_categories($con);
 }
+if(isset($_POST['action']) && $_POST['action'] == 'delete_inventorys') {
+    delete_invetory($con);
+}
+if(isset($_POST['action']) && $_POST['action'] == 'delete_cost') {
+    delete_costumes($con);
+}
+function delete_costumes($c) {
+    $cos_id = $_POST['delete_cost_id'];
+    $stmt4 = $c->prepare("DELETE FROM tbl_costume WHERE id=?");
+    $stmt4->bind_param('s',$cos_id);
+    echo $c->error;
+    $stmt4->execute();
+    $stmt4->close();
+    echo "Deleted Successfully!";
+}
+function costume_edit_form($con) {
+  ob_start();
+          $edit_ids = $_POST['edit_cost_id'];
+          $stmtss = "SELECT
+                      tc.c_name,
+                      TO_BASE64(tc.c_image),
+                      tc.c_category_id,
+                      tc.c_size,
+                      tc.c_availability,
+                      tc.c_price,
+                      tc.c_stock,
+                      tc.c_description,
+                      tcc.cat_name
+                      FROM tbl_costume tc
+                      JOIN tbl_costume_categories tcc ON tc.c_category_id=tcc.id WHERE tc.id=?";
+          $stmts = $con->prepare($stmtss);
+          $stmts->bind_param('s', $edit_ids);
+          $stmts->execute();
+          $results = $stmts->get_result();
+          $rows = $results->fetch_array();
+           ob_end_clean();
+        echo json_encode($rows);
 
+}
+
+
+function delete_invetory($c) {
+    $inv_id = $_POST['delete_invetory_id'];
+    $stmt3 = $c->prepare("DELETE FROM tbl_costume_categories WHERE id=?");
+    $stmt3->bind_param('s',$inv_id);
+    echo $c->error;
+    $stmt3->execute();
+    $stmt3->close();
+    echo "Deleted Successfully!";
+}
+
+function assign_edit_id($con) {
+  ob_start();
+          $edit_id = $_POST['cost_id'];
+          $stmtss = "SELECT cat_name FROM tbl_costume_categories WHERE id=?";
+          $stmts = $con->prepare($stmtss);
+          $stmts->bind_param('s', $edit_id);
+          $stmts->execute();
+          $results = $stmts->get_result();
+          $row = $results->fetch_array();
+           ob_end_clean();
+        echo json_encode($row);
+}
 
 function adding_categories($c) {
     ini_set('display_errors', 1);
@@ -151,10 +218,15 @@ function fetch_costume($c) {
                                             <td>'.$row['c_stock'].'</td>
                                             <td>
                                                 <div class="text-centert">
-                                                    <a href="#" class="text-red" data-toggle="modal" data-target="#delete"><span data-toggle="tooltip" title="Delete record"
-data-toggle="tooltip" title="Manage Record"><i class="bi bi-x-circle-fill"></i></span></a>
-                                                <a href="#" class="text-yellow" data-toggle="modal" data-target="#manage"><span data-toggle="tooltip" title="Manage record"
-data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i></span></a>
+
+<button type="button" name="delete_costume" class="text-red red delete_costume" id="'.$row["id"].'">
+<span data-toggle="tooltip" title="Delete record" data-toggle="tooltip" title="Delete Record"><i class="bi bi-x-circle-fill"></i></span>
+</button>
+
+<button type="button" name="edit_costume" class="text-yellow edit_costume" id="'.$row["id"].'" data-toggle="modal" data-target="#manages">
+<span data-toggle="tooltip" title="Manage record"
+data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i></span>
+</button>
                                                 </div>
                                             </td>
        </tr>
@@ -204,6 +276,8 @@ function fetch_rented_cost($c) {
     $stmt->close();
 }
 
+
+
 function fetch_cat($c) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -223,7 +297,7 @@ function fetch_cat($c) {
             <button type="button" name="edit_role_btn" class="button small green update_role_btn" id="'.$row1["id"].'" data-toggle="modal" data-target="#manage"">
                   <span data-toggle="tooltip" title="Edit"><i class="fa fa-edit text-yellow"></i></span>
             </button>
-              <button type="button" name="rl_btn_delete" class="button small red delete_role_btn" id="'.$row1["id"].'">
+              <button type="button" name="rl_btn_delete" class="button small red rl_btn_delete" id="'.$row1["id"].'">
                 <span data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-red"></i></span>
               </button>
             </div>

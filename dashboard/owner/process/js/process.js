@@ -32,6 +32,87 @@ $(document).ready(function() {
             }
         });
     }
+        $(document).on('click', '.rl_btn_delete', function() {
+        $(this).prop("disabled", true);
+        var dlt_role_id = $(this).attr("id");
+        var action_dlt = "delete_inventorys";
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            data: { action: action_dlt, delete_invetory_id: dlt_role_id },
+            success: function(response) {
+                alert(response);
+                setTimeout(function() {
+                    fetch_cat();
+                }, 100);
+                setTimeout(function() {
+                    $(this).prop("disabled", false);
+                }, 100);
+            }
+        });
+    });
+
+    $(document).on('click', '.delete_costume', function() {
+    $(this).prop("disabled", true);
+    var dlt_cost_id = $(this).attr("id");
+    var action_dlt = "delete_cost";
+    $.ajax({
+        url: "./process/modules/process.php",
+        method: "POST",
+        data: { action: action_dlt, delete_cost_id: dlt_cost_id },
+        success: function(response) {
+            alert(response);
+            setTimeout(function() {
+                fetch_costume();
+            }, 100);
+            setTimeout(function() {
+                $(this).prop("disabled", false);
+            }, 100);
+        }
+    });
+});
+
+    $(document).on('click', '.update_role_btn', function() {
+        $("#edit_role_btn").prop("disabled", true);
+        var edit_id = $(this).attr("id");
+        var edit_action = "assgn_edit_id_form";
+
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            dataType: 'json',
+            data: { action: edit_action, cost_id: edit_id },
+            success: function(response) {
+              console.log(response);
+                    $('#edit_costume').val(response.cat_name);
+          }
+        });
+    });
+    $(document).on('click', '.edit_costume', function() {
+        $("#edit_costume").prop("disabled", true);
+        var edit_id = $(this).attr("id");
+        var edit_cost_action = "costme_edit_id_form";
+        console.log(edit_id);
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            dataType: 'json',
+            data: { action: edit_cost_action, edit_cost_id: edit_id },
+            success: function(data) {
+              console.log(data);
+
+                    $('#costume_name').val(data.c_name);
+                      $('#attachment').html('<img src="data:image/jpeg;base64,base64'+data.c_image+'" />');;
+                        $('#cat').val(data.cat_name);
+                          $('#size').val(data.c_size);
+                            $('#price').val(data.c_price);
+                              $('#stock').val(data.c_stock);
+                                $('#description').val(data.c_description);
+                                $('#availability').val(data.c_availability);
+          }
+        });
+    });
+
     $('#add_category').validate();
     $('#add_category_btn').click(function(e) {
         if (document.querySelector('#add_category').checkValidity()) {
@@ -73,6 +154,7 @@ $(document).ready(function(){
         });
     }
 });
+
 $(document).ready(function() {
     setTimeout(function() {
         fetch_costume();

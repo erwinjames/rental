@@ -1,5 +1,5 @@
    <?php require('header.php'); ?>
-   
+
    <aside class="right-side">
         <section class="content-header">
             <h1 class="pull-left">Costumes Categories</h1>
@@ -12,7 +12,7 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                         <div id="fetch_categories" class="box-body">
-      
+
                         </div>
                     </div>
                 </div>
@@ -26,12 +26,12 @@
                   </div>
                   <div class="modal-body">
                         <div class="table-responsive">
-                            <form id="add_category"  method="post" enctype="multipart/form-data">   
+                            <form id="add_category"  method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>Categorty name</label>
                                    <input type="text" name="category_name" class="form-control" required/>
                                 </div>
-                            
+
                         </div>
                   </div>
                   <div class="modal-footer">
@@ -64,15 +64,15 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Manage Record</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Record</h5>
                   </div>
                   <div class="modal-body">
-                     <form>   
+                     <form>
                         <div class="form-group">
                           <label>Costumes name</label>
-                            <input type="text" name="code" class="form-control" value="" required/>
+                            <input type="text" id="edit_costume" name="edit_costume" class="form-control"/>
                         </div>
-                                
+
                       </form>
                   </div>
                   <div class="modal-footer">
