@@ -22,7 +22,6 @@
                                             <th>Pick-up Date</th>
                                             <th>Return Date Date</th>
                                             <th>Rented Item</th>
-                                            <th>Image</th>
                                             <th class="no-sort text-right">&nbsp;</th>
                                         </tr>
                                     </thead>

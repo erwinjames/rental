@@ -263,11 +263,10 @@ function fetch_rented_cost($c) {
               <td>'.$row['pickup_date'].'</td>
                   <td>'.$row['return_date'].'</td>
                         <td>'.$row['products'].'</td>
-            <td><img src="assets/icon.png"></td>
+
             <td >
                 <div class="text-center">
-                    <a href="#" class="btn btn-success btn-sm"><i class="bi bi-pen"></i> &nbsp; Manage</a>
-                  <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-x"></i> &nbsp; Delete</a>
+                    <a href="#" class="btn btn-success btn-sm"><i class="bi bi-pen"></i> &nbsp; RETURNED</a>
                 </div>
             </td>
         </tr>';
