@@ -67,18 +67,19 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Edit Record</h5>
                   </div>
                   <div class="modal-body">
-                     <form>
+                     <form id="edit_inventory_form">
                         <div class="form-group">
                           <label>Costumes name</label>
+                            <input type="hidden" id="cost_id_ajax" name="cost_id_ajax" value="">
                             <input type="text" id="edit_costume" name="edit_costume" class="form-control"/>
                         </div>
-
+                        <div class="modal-footer">
+                          <a  class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</a>
+                          <button type="submit" name="edit_inventory_btn" id="edit_inventory_btn" class="btn btn-primary"><i class="bi bi-check"></i> &nbsp; Update</button>
+                        </div>
                       </form>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="bi bi-check"></i> &nbsp; Update</button>
-                  </div>
+
                 </div>
               </div>
             </div>

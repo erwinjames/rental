@@ -52,6 +52,33 @@ $(document).ready(function() {
         });
     });
 
+    $("#edit_inventory_form").submit(function(e) {
+            e.preventDefault();
+            $("#edit_inventory_form").validate();
+            $("#edit_inventory_btn").prop("disabled", true);
+            $.ajax({
+                url: "./process/modules/process.php",
+                method: "POST",
+                data: $(this).serialize() + '&action=edit_inventory_forms',
+                success: function(response) {
+                    if (response == "Updated successfully!") {
+                        console.log(response);
+                        $('#edit_costume').val('');
+                    }
+                    setTimeout(function() {
+                        $("#edit_inventory_btn").prop("disabled", false);
+                    }, 100);
+                    setTimeout(function() {
+                                fetch_cat();
+                      }, 100);
+                      setTimeout(function() {
+                                  location.reload();
+                        }, 100);
+                }
+            });
+        });
+
+
     $(document).on('click', '.delete_costume', function() {
     $(this).prop("disabled", true);
     var dlt_cost_id = $(this).attr("id");
@@ -84,7 +111,9 @@ $(document).ready(function() {
             data: { action: edit_action, cost_id: edit_id },
             success: function(response) {
               console.log(response);
+                    $('#cost_id_ajax').val(response.id);
                     $('#edit_costume').val(response.cat_name);
+
           }
         });
     });

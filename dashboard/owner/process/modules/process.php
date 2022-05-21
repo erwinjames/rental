@@ -44,6 +44,19 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete_inventorys') {
 if(isset($_POST['action']) && $_POST['action'] == 'delete_cost') {
     delete_costumes($con);
 }
+if(isset($_POST['action']) && $_POST['action'] == 'edit_inventory_forms') {
+    edit_inventory_name($con);
+}
+function edit_inventory_name($c) {
+        $c_id = $_POST['cost_id_ajax'];
+        $edit_name = $_POST['edit_costume'];
+            $sql_updt = "UPDATE tbl_costume_categories SET cat_name=? WHERE id=?";
+            $stmt = $c->prepare($sql_updt);
+            $stmt->bind_param('ss',$edit_name,$c_id);
+            $stmt->execute();
+            $stmt->close();
+            echo "Updated successfully!";
+}
 function delete_costumes($c) {
     $cos_id = $_POST['delete_cost_id'];
     $stmt4 = $c->prepare("DELETE FROM tbl_costume WHERE id=?");
@@ -57,6 +70,7 @@ function costume_edit_form($con) {
   ob_start();
           $edit_ids = $_POST['edit_cost_id'];
           $stmtss = "SELECT
+                      tc.id,
                       tc.c_name,
                       TO_BASE64(tc.c_image),
                       tc.c_category_id,
@@ -92,7 +106,7 @@ function delete_invetory($c) {
 function assign_edit_id($con) {
   ob_start();
           $edit_id = $_POST['cost_id'];
-          $stmtss = "SELECT cat_name FROM tbl_costume_categories WHERE id=?";
+          $stmtss = "SELECT id,cat_name FROM tbl_costume_categories WHERE id=?";
           $stmts = $con->prepare($stmtss);
           $stmts->bind_param('s', $edit_id);
           $stmts->execute();
@@ -334,4 +348,5 @@ function sign_out() {
     session_destroy();
     echo "Signout successfully!";
 }
+
 ?>
