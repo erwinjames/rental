@@ -234,12 +234,13 @@ function fetch_costume($c) {
                                                 <div class="text-centert">
 
 <button type="button" name="delete_costume" class="text-red red delete_costume" id="'.$row["id"].'">
-<span data-toggle="tooltip" title="Delete record" data-toggle="tooltip" title="Delete Record"><i class="bi bi-x-circle-fill"></i></span>
+<span data-toggle="tooltip" title="Delete record" data-toggle="tooltip" title="Delete Record">
+<i class="fa fa-trash text-red"></i></span>
 </button>
 
-<button type="button" name="edit_costume" class="text-yellow edit_costume" id="'.$row["id"].'" data-toggle="modal" data-target="#manages">
+<button type="button" name="edit_costume" class="text-yellow edit_costume" id="'.$row["id"].'" data-toggle="modal" data-target="#manage">
 <span data-toggle="tooltip" title="Manage record"
-data-toggle="tooltip" title="Manage Record"><i class="bi bi-pencil-square"></i></span>
+data-toggle="tooltip" title="Manage Record"><i class="fa fa-edit text-yellow"></i></span>
 </button>
                                                 </div>
                                             </td>

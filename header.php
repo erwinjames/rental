@@ -281,26 +281,6 @@ input.dp-applied {
 								</form>
 								</li>
 								<?php }else{?>
-									<li><a  href="view_cart.php" class="cart-box" title="View Cart"><i class="fa fa-shopping-cart"></i></a>
-										<span id="cart-item"></span>
-									</li>
-													<?php 	if(isset($_SESSION['name'])){ ?>
-													<div class="shopping-cart-box">
-													<a href="#" class="close-shopping-cart-box" >Close</a>
-
-														<div id="shopping-cart-results">
-														</div>
-													</div>
-													<?php }else{?>
-														<div class="shopping-cart-box">
-													<a href="#" class="close-shopping-cart-box" >Close</a>
-
-														<div>
-															<p>Please Sign in</p>
-														</div>
-													</div>
-													<?php }?>
-
 									<li><a href="product_list.php">Shop</a></li>
 								<li><a href="login.php"><i class="fa fa-card"></i> Login</a>
 								</li>
