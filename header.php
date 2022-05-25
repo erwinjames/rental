@@ -100,14 +100,20 @@ $maximum_range = 400;
           pcode: pcode
         },
         success: function(response) {
-			console.log(response);
-          $("#message").html(response);
-          window.scrollTo(0, 0);
-          load_cart_item_number();
+						console.log(response);
+								setTimeout(function() {
+										alert(response);
+								}, 100);
+								setTimeout(function() {
+									window.scrollTo(0, 0);
+									load_cart_item_number();
+								}, 100);
+								setTimeout(function() {
+								      window.location = "http://localhost/rental/view_cart.php";
+								}, 100);
         }
       });
     });
-
     // Load total no.of items added in the cart and display in the navbar
     load_cart_item_number();
 

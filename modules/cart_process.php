@@ -7,7 +7,6 @@
 	  $pid = $_POST['pid'];
 	  $pname = $_POST['pname'];
 	  $pprice = $_POST['pprice'];
-	  $pimage = $_POST['pimage'];
 	  $pcode = $_POST['pcode'];
 	  $pqty = $_POST['pqty'];
 	  $id = $_POST['cids'];
