@@ -154,9 +154,9 @@ $(document).ready(function() {
                 data: $('#add_category').serialize() + '&action=add_category',
                 success: function(res) {
                     alert(res);
-                    // setTimeout(function() {
-                    //     fetch_category_detail();
-                    // }, 1000);
+                    setTimeout(function() {
+                        fetch_cat();
+                    }, 100);
                     setTimeout(function() {
                         $(':button[type="button"]').prop('disabled', false);
                     }, 1000);
@@ -242,6 +242,9 @@ $(document).ready(function() {
                     processData: false,
                     success: function(data) {
                         alert(data);
+                        setTimeout(function() {
+                            fetch_costume();
+                        }, 100);
                         //fetch_edit_cotume();
                         $('#add_costume_record')[0].reset();
 
