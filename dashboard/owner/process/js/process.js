@@ -182,6 +182,27 @@ $(document).ready(function(){
             }
         });
     }
+    $(document).on('click', '.returnItem', function() {
+        $(".returnItem").prop("disabled", true);
+        var returned_id = $(this).attr("id");
+        var returned_action = "returnedcostume";
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            data: { action: returned_action, returnId: returned_id },
+            success: function(response) {
+              console.log(response);
+              setTimeout(function() {
+                    fetch_rented_costume();
+              }, 100);
+                  setTimeout(function() {
+                      $(".returnItem").prop("disabled", false);
+                  }, 100);
+
+
+          }
+        });
+    });
 });
 
 $(document).ready(function() {
@@ -218,6 +239,80 @@ $(document).ready(function() {
                 }
             });
         }
+
+        $(document).on('click', '.acceptuser', function() {
+            $(".acceptuser").prop("disabled", true);
+            var accept_id = $(this).attr("id");
+            var accept_action = "acceptUserRental";
+            $.ajax({
+                url: "./process/modules/process.php",
+                method: "POST",
+                data: { action: accept_action, acceptId: accept_id },
+                success: function(response) {
+                  console.log(response);
+                  setTimeout(function() {
+                        fetch_user_rental();
+                  }, 100);
+                      setTimeout(function() {
+                          $(".acceptuser").prop("disabled", false);
+                      }, 100);
+
+
+              }
+            });
+        });returnItem
+
+        $(document).on('click', '.declineuser', function() {
+        $(this).prop("disabled", true);
+        var dcline_id = $(this).attr("id");
+        var action_dcline = "declineUsers";
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            data: { action: action_dcline, declineId: dcline_id },
+            success: function(response) {
+                alert(response);
+                setTimeout(function() {
+                    fetch_user_rental();
+                }, 100);
+                setTimeout(function() {
+                    $(this).prop("disabled", false);
+                }, 100);
+            }
+        });
+    });
+
+    $(document).on('click', '.modalId', function() {
+        $(".modalId").prop("disabled", true);
+        var modal_fetch_id = $(this).attr("id");
+        var fetch_modal_action = "modalFetch";
+
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            dataType: 'json',
+            data: { action: fetch_modal_action, modal_fe_id: modal_fetch_id },
+            success: function(response) {
+              console.log(response);
+                            setTimeout(function() {
+                              $('#runame').val(response.names);
+                              $('#ruaddress').val(response.aaddress);
+                                $('#rucontact').val(response.phone);
+                                  $('#rupickupD').val(response.pickup_date);
+                                    $('#ruReturnupD').val(response.return_date);
+                                      $('#ruItemName').val(response.products);
+                            }, 100);
+                            setTimeout(function() {
+                                fetch_user_rental();
+                            }, 100);
+                            setTimeout(function() {
+                                $(this).prop("disabled", false);
+                            }, 100);
+
+          }
+        });
+    });
+
         });
 
     $(document).ready(function() {

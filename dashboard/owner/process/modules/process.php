@@ -47,6 +47,67 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete_cost') {
 if(isset($_POST['action']) && $_POST['action'] == 'edit_inventory_forms') {
     edit_inventory_name($con);
 }
+if(isset($_POST['action']) && $_POST['action'] == 'acceptUserRental') {
+    acceptUserRent($con);
+}
+if(isset($_POST['action']) && $_POST['action'] == 'declineUsers') {
+    declineUse($con);
+}
+if(isset($_POST['action']) && $_POST['action'] == 'modalFetch') {
+    modalFetch($con);
+}
+if(isset($_POST['action']) && $_POST['action'] == 'returnedcostume') {
+    returnedcostumes($con);
+}
+function returnedcostumes($c) {
+           $r_ids = $_POST['returnId'];
+           $stat = 1;
+            $sql_updts = "UPDATE `user_rent` SET `p_return_stat` = ? WHERE `user_rent`.`ord_id` = ?";
+            $stmt4 = $c->prepare($sql_updts);
+            $stmt4->bind_param('ss',$stat,$r_ids);
+            if($stmt4->execute()){
+              echo "Updated successfully!";
+            }else{
+              echo "Not updated";
+            }
+            $stmt4->close();
+}
+function modalFetch($con) {
+    ob_start();
+          $fetch_modals_id = $_POST['modal_fe_id'];
+          $stmtss1= "SELECT *
+                        FROM orders
+                        LEFT JOIN user_rent ON orders.id=user_rent.ord_id
+                        Where orders.id=?";
+          $stmts = $con->prepare($stmtss1);
+          $stmts->bind_param('s', $fetch_modals_id);
+          echo $con->error;
+          $stmts->execute();
+          $results = $stmts->get_result();
+          $rows = $results->fetch_array();
+ob_end_clean();
+        echo json_encode($rows);
+}
+
+function declineUse($c) {
+    $dcline_id = $_POST['declineId'];
+    $stmt3 = $c->prepare("DELETE FROM orders WHERE id=?");
+    $stmt3->bind_param('s',$dcline_id);
+    echo $c->error;
+    $stmt3->execute();
+    $stmt3->close();
+    echo "Deleted Successfully!";
+}
+function acceptUserRent($c) {
+        $a_id = $_POST['acceptId'];
+            $sql_updt = "UPDATE orders SET paid_status=1 WHERE id=?";
+            $stmt = $c->prepare($sql_updt);
+            $stmt->bind_param('s',$a_id);
+            $stmt->execute();
+            $stmt->close();
+            echo "Updated successfully!";
+}
+
 function edit_inventory_name($c) {
         $c_id = $_POST['cost_id_ajax'];
         $edit_name = $_POST['edit_costume'];
@@ -265,7 +326,7 @@ function fetch_rented_cost($c) {
       ur.pickup_date,
       ur.return_date
       FROM orders o
-      JOIN user_rent ur ON o.id=ur.ord_id where o.paid_status = 1");
+      LEFT JOIN user_rent ur ON o.id=ur.ord_id where o.paid_status = 1 AND ur.p_return_stat = 0");
     $stmt->execute();
     $result = $stmt->get_result();
    while($row = $result->fetch_array()){
@@ -275,13 +336,13 @@ function fetch_rented_cost($c) {
             <td>'.$row['aaddress'].'</td>
             <td>'.$row['phone'].'</td>
             <td>'.$row['email'].'</td>
-              <td>'.$row['pickup_date'].'</td>
-                  <td>'.$row['return_date'].'</td>
-                        <td>'.$row['products'].'</td>
+            <td>'.$row['pickup_date'].'</td>
+            <td>'.$row['return_date'].'</td>
+            <td>'.$row['products'].'</td>
 
-            <td >
+            <td>
                 <div class="text-center">
-                    <a href="#" class="btn btn-success btn-sm"><i class="bi bi-pen"></i> &nbsp; RETURNED</a>
+                    <button type="button" class="btn btn-success btn-sm returnItem" id="'.$row["id"].'"><i class="bi bi-pen"></i> &nbsp; RETURNED</button>
                 </div>
             </td>
         </tr>';
@@ -331,11 +392,11 @@ function fetch_user_rent($c){
     while ($row1 = $row_ship_sd->fetch_assoc()){
         $output = '
         <tr>
-        <td><a href="#" data-toggle="modal" data-target="#exampleModalCenter"><span data-toggle="tooltip" title="View Details">'.$row1['names'].'</span></a></td>
+        <td><a href="#" data-toggle="modal" class="modalId" data-target="#exampleModalCenter" id="'.$row1["id"].'"><span data-toggle="tooltip" title="View Details">'.$row1['names'].'</span></a></td>
         <td>
             <div class="text-centert">
-                <a href="#" class="btn btn-success btn-sm"><i class="bi bi-check"></i> &nbsp; Accept</a>
-            <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-x"></i> &nbsp; Decline</a>
+                <button type="button" name="acceptRental" class="btn btn-success btn-sm acceptuser" id="'.$row1["id"].'"><i class="bi bi-check"></i> &nbsp; Accept</button>
+            <button type="button" name="declineRental" class="btn btn-danger btn-sm declineuser" id="'.$row1["id"].'"><i class="bi bi-x"></i> &nbsp; Decline</button>
             </div>
         </td>
     </tr>

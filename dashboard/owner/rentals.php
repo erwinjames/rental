@@ -1,5 +1,5 @@
    <?php require('header.php'); ?>
-   
+
    <aside class="right-side">
         <section class="content-header">
                   <h1 class="pull-left">Costumers List</h1>
@@ -19,7 +19,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="userRental">
-                                   
+
                                     </tfoot>
                                 </table>
                            </div>
@@ -36,12 +36,12 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
                   </div>
                   <div class="modal-body">
-                         <label>Fullname</label> : Erwin James Manugas <br>
-                         <label>Address</label> : Subang dako gamay <br>
-                         <label>Contact</label> : 634-34324-3243 <br>
-                         <label>Pick-up Date</label> : Now na <br>
-                         <label>Return Date</label> : Ngayun bukas at magpakailan man <br>
-                         <label>Item</label> : Brief ni erwin  <br>
+                         <label>Fullname</label> : <input type="text" id="runame" value='' readonly><br>
+                         <label>Address</label> : <input type="text" id="ruaddress" value='' readonly><br>
+                         <label>Contact</label> : <input type="text" id="rucontact" value='' readonly><br>
+                         <label>Pick-up Date</label> : <input type="text" id="rupickupD" value='' readonly><br>
+                         <label>Return Date</label> : <input type="text" id="ruReturnupD" value='' readonly><br>
+                         <label>Item</label> : <input type="text" id="ruItemName" value='' readonly><br>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-minus"></i> &nbsp; Close</button>
