@@ -80,6 +80,7 @@
 	  $name = $_POST['name'];
 	  $email = $_POST['email'];
 	  $phone = $_POST['phone'];
+		$pisd = $_POST['pids'];
 		$pdate = date('Y-m-d', strtotime($_POST['p_date']));
 		$rdate = date('Y-m-d', strtotime($_POST['r_date']));
 	  $products = $_POST['products'];
@@ -88,8 +89,8 @@
 	  ///$pmode = $_POST['pmode'];
 	 $stat = 0;
 	  $data = '';
-	  $stmt = $con->prepare('INSERT INTO orders (names,email,phone,aaddress,products,amount_paid,paid_status)VALUES(?,?,?,?,?,?,?)');
-	  $stmt->bind_param('sssssss',$name,$email,$phone,$address,$products,$grand_total,$stat);
+	  $stmt = $con->prepare('INSERT INTO orders (pid,names,email,phone,aaddress,products,amount_paid,paid_status)VALUES(?,?,?,?,?,?,?,?)');
+	  $stmt->bind_param('ssssssss',$pisd,$name,$email,$phone,$address,$products,$grand_total,$stat);
 	  if($stmt->execute()){
 		  $id = $_SESSION['id'];
 		  $stat = 0;

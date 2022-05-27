@@ -12,7 +12,7 @@
 // var yValues = [0, 5000, 10000, 15000, 20000];
 var barColors = ["skyblue", "skyblue","skyblue","skyblue","skyblue"];
 
-new Chart("myChart", {
+new Chart("myCharts", {
   type: "bar",
   data: {
     labels: xValues,
@@ -30,7 +30,33 @@ new Chart("myChart", {
   }
 });
 console.log(xValues);
-</script>    
+</script>
+<script>
+      var xValues = <?php echo json_encode($productname);?>;
+     var yValues =  <?php echo json_encode($sale);?>;
+// var xValues = ["2021", "2022", "2023", "2024", "2025"];
+// var yValues = [0, 5000, 10000, 15000, 20000];
+var barColors = ["skyblue", "skyblue","skyblue","skyblue","skyblue"];
+
+new Chart("myChart", {
+type: "bar",
+data: {
+labels: xValues,
+datasets: [{
+backgroundColor: barColors,
+data: yValues
+}]
+},
+options: {
+legend: {display: false},
+title: {
+display: true,
+text: "Yearly Income"
+}
+}
+});
+console.log(xValues);
+</script>
         <script>
           $.widget.bridge('uibutton', $.ui.button);
         </script>
@@ -77,10 +103,10 @@ console.log(xValues);
         <script src='assets/plugins/clipboard/clipboard.min.js'></script>
         <!-- AdminLTE App -->
         <script src="assets/dist/js/app.min.js" type="text/javascript"></script>
-      
 
-        <script src="assets/app.js" type="text/javascript"></script>   
-                       
+
+        <script src="assets/app.js" type="text/javascript"></script>
+
                    <script type="text/javascript">
             $(document).ready(function() {
                 // DATATABLES
@@ -104,9 +130,8 @@ console.log(xValues);
                 );
 
             });
-            
+
         </script>
-          
+
 </body>
 </html>
-

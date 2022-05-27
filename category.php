@@ -20,7 +20,7 @@
 	?>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4 class="panel-title"><a href="#"><?php echo $row['cat_name']; ?></a></h4>
+					<h4 class="panel-title"><a href="product_list.php?catid=<?php echo $row['id'];?>"><?php echo $row['cat_name']; ?></a></h4>
 				</div>
 			</div>
 	<?php }?>

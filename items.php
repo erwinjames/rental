@@ -25,8 +25,10 @@
     error_reporting(E_ALL);
     $user_id = $_SESSION['id'];
     $stmt_ship_sd = $con->prepare("SELECT *
-    							 FROM user_rent 
-    							 JOIN orders ON user_rent.ord_id = orders.id WHERE user_rent.costumer_id=?");
+    							 FROM user_rent
+    							 JOIN orders ON user_rent.ord_id = orders.id
+									 JOIN tbl_costume ON orders.pid = tbl_costume.id
+									 JOIN tbl_costume_categories ON tbl_costume.c_category_id = tbl_costume_categories.id WHERE user_rent.costumer_id=?");
     $stmt_ship_sd->bind_param('s',$user_id);
     $stmt_ship_sd->execute();
     $row_ship_sd = $stmt_ship_sd->get_result();
@@ -37,15 +39,16 @@
    $sta = "For Pickup";
    }
     ?>
-        <tr>					
+        <tr>
         						<td class="cart_description">
         						<center><h4>#<?php echo $row1['id'];?></h4></center>
 							</td>
 							<td class="cart_product">
-								<a href=""><img  width="100" src="assets/images/shop/product8.jpg" alt=""></a>
+								<a href="">	<a href="">	<img width="100" src="data:image/jpeg;base64,<?php echo base64_encode($row1['c_image'])?>" alt="" /></a></a>
+
 							</td>
 							<td class="cart_description">
-								<h4>Dress</h4>
+								<h4><?php echo $row1['cat_name'];?></h4>
 							</td>
 							<td class="cart_price">
 								<h4>Php <?php echo $row1['amount_paid']?></h4>
@@ -56,7 +59,7 @@
 						</tr>
 
 <?php  }?>
-						
+
 
 					</tbody>
 				</table>
