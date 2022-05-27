@@ -21,8 +21,8 @@
 	  $code = $r['product_code'] ?? '';
 	  $total_price = $pprice * $pqty;
 	  if (!$code){
-	    $querys = $con->prepare('INSERT INTO cart (cid,product_name,product_price,qty,total_price,product_code) VALUES (?,?,?,?,?,?)');
-	    $querys->bind_param('ssssss',$id,$pname,$pprice,$pqty,$total_price,$pcode);
+	    $querys = $con->prepare('INSERT INTO cart (pid,cid,product_name,product_price,qty,total_price,product_code) VALUES (?,?,?,?,?,?,?)');
+	    $querys->bind_param('sssssss',$pid,$id,$pname,$pprice,$pqty,$total_price,$pcode);
 	    $querys->execute();
 		$querys->close();
         echo 'Rent Successfully.';
@@ -86,32 +86,31 @@
 	  $grand_total = $_POST['grand_total'];
 	  $address = $_POST['address'];
 	  ///$pmode = $_POST['pmode'];
-		$stat = 0;
+	 $stat = 0;
 	  $data = '';
 	  $stmt = $con->prepare('INSERT INTO orders (names,email,phone,aaddress,products,amount_paid,paid_status)VALUES(?,?,?,?,?,?,?)');
 	  $stmt->bind_param('sssssss',$name,$email,$phone,$address,$products,$grand_total,$stat);
 	  if($stmt->execute()){
-		$id = $_SESSION['id'];
+		  $id = $_SESSION['id'];
+		  $stat = 0;
 		  $lastid = $con->insert_id;
-		  $stmts = $con->prepare('INSERT INTO user_rent (ord_id,costumer_id,pickup_date,return_date)VALUES(?,?,?,?)');
-		  $stmts->bind_param('ssss',$lastid,$id,$pdate,$rdate);
+		  $stmts = $con->prepare('INSERT INTO user_rent (ord_id,costumer_id,pickup_date,return_date,p_return_stat)VALUES(?,?,?,?,?)');
+		  $stmts->bind_param('sssss',$lastid,$id,$pdate,$rdate,$stat);
     if($stmts->execute()){
-		$id = $_SESSION['id'];
+    $lastid2=$con->insert_id;
+	  $id = $_SESSION['id'];
 	  $stmt2 = $con->prepare('DELETE FROM cart WHERE cid=?');
 	  $stmt2 -> bind_param('s',$id);
 	  $stmt2->execute();
-	  $data .= '<div class="text-center">
-								<h1 class="display-4 mt-2 text-danger">Thank You!</h1>
-								<h2 class="text-success">Your Order Placed Successfully!</h2>
-								<h4 class="bg-danger text-light rounded p-2">Items Purchased : ' . $products . '</h4>
-								<h4>Your Name : ' . $name . '</h4>
-								<h4>Your E-mail : ' . $email . '</h4>
-								<h4>Your Phone : ' . $phone . '</h4>
-								<h4>Total Amount Paid : ' . number_format($grand_total,2) . '</h4>
-
-						  </div>';
-	  echo $data;
+	  echo "http://localhost/rental/order_success.php?id=$lastid2";
+	  
 	}
+	else{
+	echo "NO";
+	}
+}
+else{
+echo "NO";
 }
 }
 ?>
