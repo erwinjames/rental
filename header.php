@@ -176,7 +176,40 @@ $maximum_range = 400;
      }
    });
    </script>
+	 <script type="text/javascript">
+  $(document).ready(function() {
 
+    // Sending Form data to the server
+    $("#placeOrder").submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+      	url: 'modules/cart_process.php',
+        method: 'post',
+        data: $('form').serialize() + "&action=order",
+        success: function(response) {
+          console.log(response);
+          window.location=response;
+        }
+      });
+    });
+
+    // Load total no.of items added in the cart and display in the navbar
+    load_cart_item_number();
+
+    function load_cart_item_number() {
+      $.ajax({
+    	url: 'modules/cart_process.php',
+        method: 'get',
+        data: {
+          cartItem: "cart_item"
+        },
+        success: function(response) {
+          $("#cart-item").html(response);
+        }
+      });
+    }
+  });
+  </script>
   <style>
 	progress-label-left
 	{

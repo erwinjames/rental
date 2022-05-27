@@ -15,7 +15,7 @@
                           </div>
                           <div class="modal-body">
                                 <div class="table-responsive">
-                                    <form id="add_costume_record" method="post" enctype="multipart/form-data">
+                                    <form id="add_costume_record"  enctype="multipart/form-data">
                                         <!-- <div class="form-group">
                                             <label>Costumes code</label>
                                            <input type="text" name="code" class="form-control" required/>
@@ -133,7 +133,7 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Manage Record</h5>
                   </div>
                   <div class="modal-body">
-                     <form>
+                     <form id="shit">
 
                                 <div class="form-group">
                                     <label>Costume name</label>

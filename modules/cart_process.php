@@ -21,7 +21,7 @@
 	  $code = $r['product_code'] ?? '';
 	  $total_price = $pprice * $pqty;
 	  if (!$code){
-	    $querys = $con->prepare('INSERT INTO cart (pid,cid,product_name,product_price,qty,total_price,product_code) VALUES (?,?,?,?,?,?,?)');
+	    $querys = $con->prepare('INSERT INTO cart(pid,cid,product_name,product_price,qty,total_price,product_code) VALUES (?,?,?,?,?,?,?)');
 	    $querys->bind_param('sssssss',$pid,$id,$pname,$pprice,$pqty,$total_price,$pcode);
 	    $querys->execute();
 		$querys->close();
@@ -103,7 +103,7 @@
 	  $stmt2 -> bind_param('s',$id);
 	  $stmt2->execute();
 	  echo "http://localhost/rental/order_success.php?id=$lastid2";
-	  
+
 	}
 	else{
 	echo "NO";
