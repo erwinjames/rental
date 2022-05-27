@@ -12,7 +12,7 @@ include "category.php";
 <?php}else{?>
   <?php
    $cat = $_GET['catid'];
-    $stmt_ship_sd = $con->prepare("SELECT * FROM tbl_costume WHERE c_category_id=?");
+    $stmt_ship_sd = $con->prepare("SELECT  * FROM tbl_costume WHERE c_category_id=?");
     $stmt_ship_sd->bind_param('s',$cat);
     $stmt_ship_sd->execute();
     $row_ship_sd = $stmt_ship_sd->get_result();
