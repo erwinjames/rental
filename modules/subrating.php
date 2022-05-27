@@ -5,17 +5,13 @@ if(isset($_POST["rating_data"]))
 ini_set('display_errors', 1);
  ini_set('display_startup_errors', 1);
  error_reporting(E_ALL);
-					$username=	$_POST["user_name"];
-					$rating=	$_POST["rating_data"];
-					$review=	$_POST["user_review"];
-	$query = "INSERT INTO review_table 
-	(user_name, user_rating, user_review) 
-	VALUES (?,?,?)";
-	$statement = $con->prepare($query);
-	$statement = bind_param('???',$username,$rating,$review);
+	$username=	$_POST["user_name"];
+	$rating=	$_POST["rating_data"];
+	$review=	$_POST["user_review"];
+	$statement = $con->prepare("INSERT INTO review_table (user_name,user_rating,user_review) VALUES (?,?,?)");
+	$statement -> bind_param('???',$username,$rating,$review);
 	$statement->execute();
 	echo "Your Review & Rating Successfully Submitted";
-
 }
 
 if(isset($_POST["action"]))
