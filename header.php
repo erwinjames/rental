@@ -27,6 +27,7 @@ $maximum_range = 400;
     <script src="assets/js/html5shiv.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+
     <link rel="shortcut icon" href="assets/images/ico/favicon.ico">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/ico/apple-touch-icon-144-precomposed.png">
@@ -175,170 +176,24 @@ $maximum_range = 400;
      }
    });
    </script>
-	 <script type="text/javascript">
-  $(document).ready(function() {
 
-    // Sending Form data to the server
-    $("#placeOrder").submit(function(e) {
-      e.preventDefault();
-      $.ajax({
-      	url: 'modules/cart_process.php',
-        method: 'post',
-        data: $('form').serialize() + "&action=order",
-        success: function(response) {
-          console.log(response);
-          window.location=response;
-        }
-      });
-    });
-
-    // Load total no.of items added in the cart and display in the navbar
-    load_cart_item_number();
-
-    function load_cart_item_number() {
-      $.ajax({
-    	url: 'modules/cart_process.php',
-        method: 'get',
-        data: {
-          cartItem: "cart_item"
-        },
-        success: function(response) {
-          $("#cart-item").html(response);
-        }
-      });
-    }
-  });
-  </script>
-  <script>
-  
-  $('#save_review').click(function(){
-        var user_name = $('#user_name').val();
-        var user_review = $('#user_review').val();
-        if(user_name == '' || user_review == '')
-        {
-            alert("Please Fill Both Field");
-            return false;
-        }
-        else
-        {
-            $.ajax({
-                url:"modules/subrating.php",
-                method:"POST",
-                data:{rating_data:rating_data, user_name:user_name, user_review:user_review},
-                success:function(data)
-                {
-                    $('#review_modal').modal('hide');
-
-                    load_rating_data();
-
-                    alert(data);
-                }
-            })
-        }
-
-    });
-
-    load_rating_data();
-
-    function load_rating_data()
-    {
-        $.ajax({
-            url:"submit_rating.php",
-            method:"POST",
-            data:{action:'load_data'},
-            dataType:"JSON",
-            success:function(data)
-            {
-                $('#average_rating').text(data.average_rating);
-                $('#total_review').text(data.total_review);
-
-                var count_star = 0;
-
-                $('.main_star').each(function(){
-                    count_star++;
-                    if(Math.ceil(data.average_rating) >= count_star)
-                    {
-                        $(this).addClass('text-warning');
-                        $(this).addClass('star-light');
-                    }
-                });
-
-                $('#total_five_star_review').text(data.five_star_review);
-
-                $('#total_four_star_review').text(data.four_star_review);
-
-                $('#total_three_star_review').text(data.three_star_review);
-
-                $('#total_two_star_review').text(data.two_star_review);
-
-                $('#total_one_star_review').text(data.one_star_review);
-
-                $('#five_star_progress').css('width', (data.five_star_review/data.total_review) * 100 + '%');
-
-                $('#four_star_progress').css('width', (data.four_star_review/data.total_review) * 100 + '%');
-
-                $('#three_star_progress').css('width', (data.three_star_review/data.total_review) * 100 + '%');
-
-                $('#two_star_progress').css('width', (data.two_star_review/data.total_review) * 100 + '%');
-
-                $('#one_star_progress').css('width', (data.one_star_review/data.total_review) * 100 + '%');
-
-                if(data.review_data.length > 0)
-                {
-                    var html = '';
-
-                    for(var count = 0; count < data.review_data.length; count++)
-                    {
-                        html += '<div class="row mb-3">';
-
-                        html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].user_name.charAt(0)+'</h3></div></div>';
-
-                        html += '<div class="col-sm-11">';
-
-                        html += '<div class="card">';
-
-                        html += '<div class="card-header"><b>'+data.review_data[count].user_name+'</b></div>';
-
-                        html += '<div class="card-body">';
-
-                        for(var star = 1; star <= 5; star++)
-                        {
-                            var class_name = '';
-
-                            if(data.review_data[count].rating >= star)
-                            {
-                                class_name = 'text-warning';
-                            }
-                            else
-                            {
-                                class_name = 'star-light';
-                            }
-
-                            html += '<i class="fas fa-star '+class_name+' mr-1"></i>';
-                        }
-
-                        html += '<br />';
-
-                        html += data.review_data[count].user_review;
-
-                        html += '</div>';
-
-                        html += '<div class="card-footer text-right">On '+data.review_data[count].datetime+'</div>';
-
-                        html += '</div>';
-
-                        html += '</div>';
-
-                        html += '</div>';
-                    }
-
-                    $('#review_content').html(html);
-                }
-            }
-        })
-    }
-  </script>
   <style>
+	progress-label-left
+	{
+	    float: left;
+	    margin-right: 0.5em;
+	    line-height: 1em;
+	}
+	.progress-label-right
+	{
+	    float: right;
+	    margin-left: 0.3em;
+	    line-height: 1em;
+	}
+	.star-light
+	{
+		color:#e9ecef;
+	}
 	  a.dp-choose-date {
 	float: left;
 	width: 16px;

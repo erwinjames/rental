@@ -1,21 +1,32 @@
 <?php
-require "config.php";
+
+
+$connect = new PDO("mysql:host=localhost;dbname=c_rental", "root", "");
+
 if(isset($_POST["rating_data"]))
 {
-ini_set('display_errors', 1);
- ini_set('display_startup_errors', 1);
- error_reporting(E_ALL);
-	$username=	$_POST["user_name"];
-	$rating=	$_POST["rating_data"];
-	$review=	$_POST["user_review"];
-	$statement = $con->prepare("INSERT INTO review_table (user_name,user_rating,user_review) VALUES (?,?,?)");
-	$statement -> bind_param('???',$username,$rating,$review);
-	$statement->execute();
+	$data = array(
+		':user_name'		=>	$_POST["user_name"],
+    ':cost_id'	   	=>	$_POST["costid"],
+		':user_rating'		=>	$_POST["rating_data"],
+		':user_review'		=>	$_POST["user_review"],
+		':datetime'			=>	time()
+	);
+
+	$query = "INSERT INTO review_table(cost_id,user_name, user_rating, user_review, datetime)VALUES (:cost_id, :user_name, :user_rating, :user_review, :datetime)
+	";
+
+	$statement = $connect->prepare($query);
+
+	$statement->execute($data);
+
 	echo "Your Review & Rating Successfully Submitted";
+
 }
 
 if(isset($_POST["action"]))
 {
+  $getId =$_POST['getId'];
 	$average_rating = 0;
 	$total_review = 0;
 	$five_star_review = 0;
@@ -26,11 +37,10 @@ if(isset($_POST["action"]))
 	$total_user_rating = 0;
 	$review_content = array();
 
-	$query = "
-	SELECT * FROM review_table
-	ORDER BY review_id DESC
-	";
-	$result = $con->query($query, PDO::FETCH_ASSOC);
+	$query = " SELECT * FROM review_table WHERE cost_id=$getId ORDER BY review_id DESC";
+
+	$result = $connect->query($query, PDO::FETCH_ASSOC);
+
 	foreach($result as $row)
 	{
 		$review_content[] = array(
@@ -44,6 +54,7 @@ if(isset($_POST["action"]))
 		{
 			$five_star_review++;
 		}
+
 		if($row["user_rating"] == '4')
 		{
 			$four_star_review++;

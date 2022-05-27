@@ -47,15 +47,15 @@
 
                                         <div class="form-group">
                                             <label>Category</label>
-                                           <select class="form-control select2 select2-hidden-accessible" name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
+                                           <select class="form-control select2 " name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
                                            <option></option>
                                                 <?php
-                                                   $stmt_ship_sd = $con->prepare("SELECT * FROM tbl_costume_categories");
-                                                   $stmt_ship_sd->execute();
-                                                   $row_ship_sd = $stmt_ship_sd->get_result();
+
+                                                   $stmt_ship_sds = $con->prepare("SELECT * FROM tbl_costume_categories");
+                                                   $stmt_ship_sds->execute();
+                                                   $row_ship_sd = $stmt_ship_sds->get_result();
                                                    while ($row1 = $row_ship_sd->fetch_assoc()){
                                                 ?>
-
                                                 <option value="<?php echo $row1["id"]?>"><?php echo $row1["cat_name"]?></option>
                                                <?php } ?>
                                                </select>
@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <select class="form-control select2 select2-hidden-accessible" name="cat" id="cat" required tabindex="-1" aria-hidden="true"/ style="width:100%">
+                                    <select class="form-control select2" name="cat" id="cat" required tabindex="-1" aria-hidden="true"/ style="width:100%">
 
                                          <?php
                                             $stmt_ship_sd = $con->prepare("SELECT * FROM tbl_costume_categories");
