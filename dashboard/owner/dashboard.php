@@ -13,14 +13,25 @@
 
            <div class="small-box bg-blue">
              <div class="inner">
-               <h3>13</h3>
+               <h3>
+                 <?php
+                 $stmt = $con->prepare('SELECT c_stock,SUM(c_stock) AS stock FROM tbl_costume');
+                 $stmt->execute();
+                 $result = $stmt->get_result();
+                 $row=$result->fetch_assoc();
+                $sum = $row['stock'];
+
+                echo $sum;
+                 ?>
+               </h3>
                <p>Stocks</p>
              </div>
              <div class="icon">
                <i class="bi bi-upc-scan"></i>
              </div>
-             <a href="allstocks.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
+             <a href="costumes.php" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
            </div>
+
          </div>
           <div class="col-lg-3 col-xs-6">
            <!-- small box -->

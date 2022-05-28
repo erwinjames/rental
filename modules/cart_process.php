@@ -67,9 +67,7 @@
 	  $qty = $_POST['qty'];
 	  $pid = $_POST['pid'];
 	  $pprice = $_POST['pprice'];
-
 	  $tprice = $qty * $pprice;
-
 	  $stmt = $con->prepare('UPDATE cart SET qty=?, total_price=? WHERE id=?');
 	  $stmt->bind_param('isi',$qty,$tprice,$pid);
 	  $stmt->execute();

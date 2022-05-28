@@ -135,11 +135,9 @@ $maximum_range = 400;
   </script>
 	<script type="text/javascript">
    $(document).ready(function() {
-
      // Change the item quantity
      $(".itemQty").on('change', function() {
        var $el = $(this).closest('tr');
-
        var pid = $el.find(".pid").val();
        var pprice = $el.find(".pprice").val();
        var qty = $el.find(".itemQty").val();

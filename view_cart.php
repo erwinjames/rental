@@ -47,7 +47,25 @@ if(!isset($_SESSION['id'])){
 					<tbody>
 					<?php
 				$cid= $_SESSION['id'];
-                $stmt = $con->prepare('SELECT * FROM cart WHERE cid=?');
+                $stmt = $con->prepare('SELECT
+																					c.id,
+																					c.pid,
+																					c.cid,
+																					c.product_name,
+																					c.product_price,
+																					c.qty,
+																					c.total_price,
+																					c.product_code,
+																					tc.c_name,
+																					tc.c_image,
+																					tc.c_category_id,
+																					tc.c_size,
+																					tc.c_availability,
+																					tc.c_price,
+																					tc.c_stock,
+																					tc.c_description
+									 												FROM cart c
+																					JOIN tbl_costume tc ON c.pid=tc.id WHERE c.cid=?');
 				$stmt->bind_param('s',$cid);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -56,7 +74,7 @@ if(!isset($_SESSION['id'])){
               ?>
 													<tr>
 													<input type="hidden" class="pid" value="<?= $row['id'] ?>">
-												  <td class="cart_product"><a><img  width="100" src='assets/images/shop/product8.jpg'></a></td>
+												  <td class="cart_product"><a><img  width="100" src="data:image/jpeg;base64,<?php echo base64_encode($row['c_image']); ?>" ></a></td>
 													<td class="cart_description"><?= $row['product_name'] ?></td>
 													<td class="cart_price"> <?= number_format($row['product_price'],2); ?></td>
                         							  <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">

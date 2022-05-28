@@ -300,7 +300,7 @@ $(document).ready(function() {
 
               }
             });
-        });returnItem
+        });
 
         $(document).on('click', '.declineuser', function() {
         $(this).prop("disabled", true);
@@ -356,10 +356,8 @@ $(document).ready(function() {
         });
 
 
-
-
         $(document).ready(function() {
-            $("#ship_ownr_signout").click(function(event) {
+            $("#onwer_sign_out").click(function(event) {
                 var signout = "ship_ownr_signout";
                 $.ajax({
                     url: "./process/modules/process.php",

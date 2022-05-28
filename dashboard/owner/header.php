@@ -100,7 +100,7 @@ $sale[]= $row['totalProfit'];
                                 <!-- Menu Footer-->
                                   <li class="user-footer">
                                       <div class="text-center">
-                                          <a href="#" id="ship_ownr_signout" class="btn btn-default btn-flat">Sign Out</a>
+                                          <button type="button" id="onwer_sign_out" class="btn btn-default btn-flat">Sign Out</button>
                                       </div>
                                   </li>
                             </ul>
