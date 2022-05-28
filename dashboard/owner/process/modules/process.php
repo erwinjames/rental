@@ -4,6 +4,7 @@ require "config.php";
     //session_start();fetch_categories
 //     fetch_costume_category($con);
 // }
+
 if(isset($_POST["action"]) && $_POST["action"] == "fetch_costumes") {
     //session_start();fetch_categories
     fetch_costume($con);
@@ -59,6 +60,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'modalFetch') {
 if(isset($_POST['action']) && $_POST['action'] == 'returnedcostume') {
     returnedcostumes($con);
 }
+
 function returnedcostumes($c) {
            $r_ids = $_POST['returnId'];
            $stat = 1;

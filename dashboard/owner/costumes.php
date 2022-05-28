@@ -133,21 +133,21 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Manage Record</h5>
                   </div>
                   <div class="modal-body">
-                     <form id="shit">
-
+                     <form id="shit_form" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>Costume name</label>
                                    <input type="text" id="costume_name" name="costume_name" class="form-control" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Image</label>
-                                   <input type="file" name="attachement[]"  class="form-control" multiple accept=".jpg, .png, .gif"/>
-                                   <div id="attachment"></div>
+
+                                    <input type="file" name="imahe" class="form-control" id="imahe"/>
+                                    <input type="hidden" name="actions" id="actions" value="shits_button" />
+
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <select class="form-control select2" name="cat" id="cat" required tabindex="-1" aria-hidden="true"/ style="width:100%">
-
+                                     <select class="form-control select2 " name="label_purpose" required tabindex="-1" aria-hidden="true"/ style="width:100%">
                                          <?php
                                             $stmt_ship_sd = $con->prepare("SELECT * FROM tbl_costume_categories");
                                             $stmt_ship_sd->execute();
@@ -177,14 +177,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                        <textarea id="description" name="Description" class="form-control" required></textarea>
+                                        <textarea id="description" name="description" class="form-control" required></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                   <input type="hidden" value='' id="pid" name="pid"/>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
+                                  <button type="submit" name="shits_button" id="shits_button" class="btn btn-primary"><i class="bi bi-check"></i> &nbsp; Update</button>
                                 </div>
                             </form>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="bi bi-check"></i> &nbsp; Update</button>
-                  </div>
+
                 </div>
               </div>
             </div>

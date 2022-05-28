@@ -200,6 +200,8 @@ $(document).ready(function() {
         }
     });
 
+
+
     $(document).on('click', '.update_role_btn', function() {
         $("#edit_role_btn").prop("disabled", true);
         var edit_id = $(this).attr("id");
@@ -218,6 +220,7 @@ $(document).ready(function() {
           }
         });
     });
+
     $(document).on('click', '.edit_costume', function() {
         $("#edit_costume").prop("disabled", true);
         var edit_id = $(this).attr("id");
@@ -230,7 +233,7 @@ $(document).ready(function() {
             data: { action: edit_cost_action, edit_cost_id: edit_id },
             success: function(data) {
               console.log(data);
-
+                    $('#pid').val(data.id);
                     $('#costume_name').val(data.c_name);
                       $('#attachment').html('<img src="data:image/jpeg;base64,base64'+data.c_image+'" />');;
                         $('#cat').val(data.cat_name);
@@ -261,7 +264,43 @@ $(document).ready(function() {
                         }
                       });
                   });
+
     });
+
+  $(document).ready(function() {
+    $("form#shit_form").submit(function(event) {
+    event.preventDefault();
+    var image_names = $('#imahe').val();
+    if (image_names == '') {
+        alert("Please Select Image");
+        return false;
+    }
+    else {
+        var extension = $('#imahe').val().split('.').pop().toLowerCase();
+        if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            alert("Invalid image File");
+            $('#imahe').val('');
+            return false;
+        } else {
+            $.ajax({
+                url: "./process/modules/editcostumes.php",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    alert(data);
+                    setTimeout(function() {
+                      fetch_costume();
+                      }, 100);
+                    // $('#imageModal').modal('hide');
+                }
+            });
+        }
+    }
+    });
+      });
+
 
     $(document).ready(function() {
         setTimeout(function() {
