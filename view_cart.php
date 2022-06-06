@@ -5,6 +5,9 @@ include "header.php";
 if(!isset($_SESSION['id'])){
 
 ?>
+
+			
+
 <section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -25,7 +28,12 @@ if(!isset($_SESSION['id'])){
 <?php } else {?>
 
 <section id="cart_items">
+
 		<div class="container">
+			  <div class="alert alert-success lead" role="alert" id="alert">
+					<span id="res-icon"></span>
+					<span id="res-message"></span>
+				   </div>
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="">Home</a></li>
@@ -77,7 +85,8 @@ if(!isset($_SESSION['id'])){
 												  <td class="cart_product"><a><img  width="100" src="data:image/jpeg;base64,<?php echo base64_encode($row['c_image']); ?>" ></a></td>
 													<td class="cart_description"><?= $row['product_name'] ?></td>
 													<td class="cart_price"> <?= number_format($row['product_price'],2); ?></td>
-                        							  <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+                        							                     <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+                        							                        <input type="hidden" class="pstock" value="<?= $row['c_stock'] ?>">
 													<td class="cart_quantity"><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:70px;"></td>
 													<td class="cart_total\"><p class="cart_total_price"><?= number_format($row['total_price'],2); ?></p></td>
 													<td class="<td class="cart_delete\"><a  href="modules/cart_process.php?remove=<?= $row['id'] ?>"  onclick="return confirm('Are you sure want to remove this item?');" class="cart_quantity_delete remove-item" data-code="$product_codes"><i class="fa fa-times"></i></a></td>

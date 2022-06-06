@@ -140,21 +140,36 @@ $maximum_range = 400;
        var $el = $(this).closest('tr');
        var pid = $el.find(".pid").val();
        var pprice = $el.find(".pprice").val();
+       var pstock = $el.find(".pstock").val();
        var qty = $el.find(".itemQty").val();
+       if(qty>pstock){
+ 			  $('#res-icon').val("");
+                        $('#res-message').html("");
+                        $('.alert').removeClass('alert-success');
+                        $('.alert').addClass('alert-danger');
+                        $('#res-icon').html("<i class='fa fa-exclamation-circle'></i>");
+                        $('#res-message').html("Not Enough Stocks");
+                        $('.alert').show(80);
+                        setTimeout(function() {
+                            $('.alert').fadeOut(10000);
+                        }, 3000);
        location.reload(true);
-       $.ajax({
-        url: 'modules/cart_process.php',
-         method: 'post',
-         cache: false,
-         data: {
-           qty: qty,
-           pid: pid,
-           pprice: pprice
-         },
-         success: function(response) {
-           console.log(response);
-         }
-       });
+       }else{
+		       $.ajax({
+			url: 'modules/cart_process.php',
+			 method: 'post',
+			 cache: false,
+			 data: {
+			   qty: qty,
+			   pid: pid,
+			   pprice: pprice
+			 },
+			 success: function(response) {
+			   console.log(response);
+			   location.reload(true);
+			 }
+		       });
+       }
      });
 
      // Load total no.of items added in the cart and display in the navbar
@@ -246,6 +261,84 @@ a.dp-choose-date.dp-disabled {
 input.dp-applied {
 	width: 140px;
 	float: left;
+}
+@media (min-width: 1200px)
+{
+  container.containers{
+    max-width: 1140px;
+  }
+}
+.d-flex{
+  display: flex;
+  flex-direction: row;
+  background: #f6f6f6;
+  border-radius: 0 0 5px 5px;
+  padding: 25px;
+}
+form.checkFrom{
+  flex: 4;
+}
+.Yorder{
+  flex: 2;
+}
+
+.required{
+  color: red;
+}
+.labels, .checkTable{
+  display: block;
+  margin: 15px;
+}
+.labels>span{
+  float: left;
+  width: 25%;
+  margin-top: 12px;
+  padding-right: 10px;
+}
+input[type="text"], input[type="tel"], input[type="email"], select
+{
+  width: 70%;
+  height: 30px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #dadada;
+  color: #888;
+}
+.Yorder{
+  margin-top: 15px;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid #dadada;
+}
+table.checkTable{
+  margin: 0;
+  padding: 0;
+}
+th.checkTh{
+  border-bottom: 1px solid #dadada;
+  padding: 10px 0;
+}
+tr.checkTr>td.checTD:nth-child(1){
+  text-align: left;
+  color: #2d2d2a;
+}
+tr.checkTr>td.checTD:nth-child(2){
+  text-align: right;
+  color: #52ad9c;
+}
+td.checTD{
+  border-bottom: 1px solid #dadada;
+  padding: 25px 25px 25px 0;
+}
+
+p{
+  display: block;
+  color: #888;
+  margin: 0;
+  padding-left: 25px;
+}
+.Yorder>div{
+  padding: 15px 0; 
 }
   </style>
 </head><!--/head-->
