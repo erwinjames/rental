@@ -42,6 +42,7 @@ $maximum_range = 400;
 	<script type="text/javascript" src="js/jquery.datePicker.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 	<script src="js/jquery.validate.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script src="js/process.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript">
@@ -84,11 +85,23 @@ $maximum_range = 400;
       var cid = $form.find(".cid").val();
       var pid = $form.find(".pid").val();
       var pname = $form.find(".pname").val();
+			var pstock = $form.find(".cstock").val();
       var pprice = $form.find(".pprice").val();
       var pimage = $form.find(".pimage").val();
       var pcode = $form.find(".pcode").val();
       var pqty = $form.find(".pqty").val();
-
+			if(pqty>pstock){
+			 $('#res-icon').val("");
+											 $('#res-message').html("");
+											 $('.alert').removeClass('alert-success');
+											 $('.alert').addClass('alert-danger');
+											 $('#res-icon').html("<i class='fa fa-exclamation-circle'></i>");
+											 $('#res-message').html("Not Enough Stocks");
+											 $('.alert').show(80);
+											 setTimeout(function() {
+													 $('.alert').fadeOut(10000);
+											 }, 3000);
+			}else{
       $.ajax({
         url: 'modules/cart_process.php',
         method: 'post',
@@ -115,6 +128,7 @@ $maximum_range = 400;
 								}, 100);
         }
       });
+		}
     });
     // Load total no.of items added in the cart and display in the navbar
     load_cart_item_number();
@@ -338,7 +352,7 @@ p{
   padding-left: 25px;
 }
 .Yorder>div{
-  padding: 15px 0; 
+  padding: 15px 0;
 }
   </style>
 </head><!--/head-->

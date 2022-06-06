@@ -5,7 +5,7 @@
 	$allItems = '';
 	$items = [];
 
-	$sql = "SELECT pid,CONCAT(product_name, '(',qty,')') AS ItemQty, total_price FROM cart";
+	$sql = "SELECT pid,qty,CONCAT(product_name, '(',qty,')') AS ItemQty, total_price FROM cart";
 	$stmt = $con->prepare($sql);
 	$stmt->execute();
 	$result = $stmt->get_result();
@@ -13,6 +13,7 @@
 	  $grand_total += $row['total_price'];
 	  $items[] = $row['ItemQty'];
 	  $pd = $row['pid'];
+		$qty = $row['qty'];
 	}
 	$allItems = implode(', ', $items);
 ?>
@@ -26,7 +27,7 @@
     </label>
     <label class="labels">
       <span>Phone <span class="required">*</span></span>
-      <input type="tel" placeholder="<?php echo $_SESSION['c_number'];?>" READONLY> 
+      <input type="tel" placeholder="<?php echo $_SESSION['c_number'];?>" READONLY>
     </label>
       <label class="labels">
       <span class="fname">Address<span class="required">*</span></span>
@@ -34,7 +35,7 @@
     </label>
     <label class="labels">
       <span>Email Address <span class="required">*</span></span>
-      <input type="email" placeholder="<?php echo $_SESSION['c_email'];?>" READONLY> 
+      <input type="email" placeholder="<?php echo $_SESSION['c_email'];?>" READONLY>
     </label>
   </form>
   <div class="Yorder">
@@ -61,7 +62,7 @@
         Make your payment directly into our gcash account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
     </p>
     <br>
-    
+
     <p>
       +(63)9236948643 <b>RENZ</b>
     </p>
@@ -92,10 +93,11 @@
 								</label>
 								<input type="hidden" name="cid" value="<?php echo $_SESSION["id"]; ?>">
 								<input type="hidden" name="pids" value="<?= $pd;  ?>">
-							       <input type="hidden" name="name" value="<?php echo $_SESSION["c_name"]; ?>">
+							   <input type="hidden" name="name" value="<?php echo $_SESSION["c_name"]; ?>">
 								<input type="hidden" name="email" value="<?php echo $_SESSION["c_email"]; ?>">
 								<input type="hidden" name="phone" value="<?php echo $_SESSION["c_number"]; ?>">
 								<input type="hidden" name="address" value="<?php echo $_SESSION["c_address"]; ?>">
+								<input type="hidden" name="pqty" value="<?= $qty; ?>">
 								<input type="hidden" name="products" value="<?= $allItems; ?>">
 								<input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
 								<label class="labels">

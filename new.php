@@ -13,7 +13,7 @@ $results = $con->query("SELECT tc.c_name,
 							   tc.c_description,
 							   tcc.cat_name
 							   FROM tbl_costume tc
-							   JOIN tbl_costume_categories tcc ON tc.c_category_id=tcc.id
+							   JOIN tbl_costume_categories tcc ON tc.c_category_id=tcc.id WHERE tc.c_stock!=0
 							   ORDER BY tc.id DESC ");
 if (!$results){
     printf("Error: %s\n", $con->error);

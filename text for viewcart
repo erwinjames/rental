@@ -1,0 +1,1 @@
+	<a href="index.php" style="margin-top: 19px; margin-left: 1em;" class="btn btn-default update <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Continue Shopping</a>

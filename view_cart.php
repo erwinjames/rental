@@ -6,7 +6,7 @@ if(!isset($_SESSION['id'])){
 
 ?>
 
-			
+
 
 <section id="cart_items">
 		<div class="container">
@@ -132,7 +132,6 @@ while ($row = $result->fetch_assoc()):
 
 					 <span>
 						  <hr>
-			 					<a href="index.php" style="margin-top: 19px; margin-left: 1em;" class="btn btn-default update <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Continue Shopping</a>
 							 <a href="checkout.php" class="btn btn-default check_out <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
 						</span>
 

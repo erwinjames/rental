@@ -82,13 +82,14 @@
 		$pdate = date('Y-m-d', strtotime($_POST['p_date']));
 		$rdate = date('Y-m-d', strtotime($_POST['r_date']));
 	  $products = $_POST['products'];
+		$qty = $_POST['pqty'];
 	  $grand_total = $_POST['grand_total'];
 	  $address = $_POST['address'];
 	  ///$pmode = $_POST['pmode'];
 	 $stat = 0;
 	  $data = '';
-	  $stmt = $con->prepare('INSERT INTO orders (pid,names,email,phone,aaddress,products,amount_paid,paid_status)VALUES(?,?,?,?,?,?,?,?)');
-	  $stmt->bind_param('ssssssss',$pisd,$name,$email,$phone,$address,$products,$grand_total,$stat);
+	  $stmt = $con->prepare('INSERT INTO orders (pid,names,email,phone,aaddress,products,qty,amount_paid,paid_status)VALUES(?,?,?,?,?,?,?,?,?)');
+	  $stmt->bind_param('sssssssss',$pisd,$name,$email,$phone,$address,$products,$qty,$grand_total,$stat);
 	  if($stmt->execute()){
 		  $id = $_SESSION['id'];
 		  $stat = 0;
@@ -100,8 +101,13 @@
 	  $id = $_SESSION['id'];
 	  $stmt2 = $con->prepare('DELETE FROM cart WHERE cid=?');
 	  $stmt2 -> bind_param('s',$id);
-	  $stmt2->execute();
-	  echo "http://localhost/rental/order_success.php?id=$lastid2";
+	  if($stmt2->execute()){
+			$stmt4 = $con->prepare('UPDATE tbl_costume SET c_stock=c_stock - ? WHERE id=?');
+		 $stmt4->bind_param('is',$qty,$pisd);
+		 $stmt4->execute();
+		  echo "http://localhost/rental/order_success.php?id=$lastid2";
+				}
+
 
 	}
 	else{

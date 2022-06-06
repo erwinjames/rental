@@ -55,7 +55,7 @@ $(document).ready(function(){
 
 	var rating_data = 0;
 
-    $('#add_review').click(function(){
+    $('.add_review').click(function(){
 
         $('#review_modal').modal('show');
 

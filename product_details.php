@@ -1,10 +1,10 @@
 <?php require('header.php'); ?>
 	<section>
 		<div class="container">
-				  <div class="alert alert-success lead" role="alert" id="alert">
-					<span id="res-icon"></span>
-					<span id="res-message"></span>
-				   </div>
+			<div class="alert alert-success lead" role="alert" id="alert">
+				<span id="res-icon"></span>
+				<span id="res-message"></span>
+				 </div>
 			<div class="row">
 					<?php require('category.php'); ?>
 					<?php
@@ -72,6 +72,7 @@
 																					<input type="text" value="1" class="pqty"/>
 																					<input type="hidden" class="cid" value="'.$_SESSION['id'].'">
 																					<input type="hidden" class="pid" value="'.$row['id'].'">
+																					<input type="hidden" class="cstock" value="'.$row['c_stock'].'">
 																					<input type="hidden" class="pname" value="'.$row['c_name'].'">
 																					<input type="hidden" class="pprice" value="'.$row['c_price'].'">
 																					<input type="hidden" class="pcode" value="'.$getCat.'">
@@ -89,7 +90,7 @@
 																			<p><b>Availability:</b>
 																				'.$row['c_availability'].'
 																			</p>
-																			<!-- <p><b>Condition:</b> New</p> -->
+																			<p><b>Stock:</b>'.$row['c_stock'].'</p>
 																			<p><b>Category:</b> '.$row['cat_name'].'</p>
 																			<a href=""><img src="assets/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 																		</div><!--/product-information-->
@@ -247,16 +248,16 @@
 														</div>
 												</p>
 						</div>
-						<div class="col-sm-4 text-center">
+						<!-- <div class="col-sm-4 text-center">
 							<h3 class="mt-4 mb-3">Write Review Here</h3>
 							<button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
 			<div class="mt-5" id="review_content"></div>
 		</div>
-		<div id="review_modal" class="modal" tabindex="-1" role="dialog">
+		<!-- <div id="review_modal" class="modal" tabindex="-1" role="dialog">
 		  	<div class="modal-dialog" role="document">
 		    	<div class="modal-content">
 			      	<div class="modal-header">
@@ -290,6 +291,6 @@
 			      	</div>
 		    	</div>
 		  	</div>
-		</div>
+		</div> -->
 	</section>
 <?php require('footer.php'); ?>
