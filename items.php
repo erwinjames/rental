@@ -60,45 +60,49 @@
 								<h4><?php echo   $sta;?></h4>
 							</td>
 							<td>
-									<button type="button" name="add_review" id="add_review" class="btn btn-primary review_modal">Review</button>
+									<button type="button" name="add_review" class="button small red add_review" id="<?php echo $row1["pid"]?>" data-toggle="modal" data-target="#review_modal">
+										Review
+									</button>
 							</td>
 						</tr>
 
-						<div id="review_modal" class="modal " tabindex="-1" role="dialog">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-											<div class="modal-header">
 
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<h4 class="text-center mt-2 mb-4">
+						<div class="modal fade" id="review_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Add Record</h5>
+								</div>
+								<div class="modal-body">
+									<h4 class="text-center mt-2 mb-4">
 													<i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
-																<i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
-																<i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
-																<i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
-																<i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
-												</h4>
-												<div class="form-group">
-												 <?php if(isset($_SESSION['id'])){?>
-													<input type="hidden" name="user_name" id="user_name" value="<?php echo $_SESSION['c_name'];?>" class="form-control" placeholder="Enter Your Name" />
-												<?php }else{?>
-													<input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
-													<?php } ?>
-												</div>
-												<div class="form-group">
-													<textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
-												</div>
-												<div class="form-group text-center mt-4">
-													<input type="hidden" id="costume_id" name="costume_id" value="<?php echo $_GET['costId']; ?>"></input>
-													<button type="button" class="btn btn-primary" id="save_review">Submit</button>
-												</div>
-											</div>
+													<i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
+													<i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
+													<i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
+													<i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
+									</h4>
+									<div class="form-group">
+									 <?php if(isset($_SESSION['id'])){?>
+										<input type="hidden" name="user_name" id="user_name" value="<?php echo $_SESSION['c_name'];?>" class="form-control" placeholder="Enter Your Name" />
+									<?php }else{?>
+										<input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
+										<?php } ?>
+									</div>
+									<div class="form-group">
+										<textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
+									</div>
+									<div class="form-group text-center mt-4">
+										<input type="hidden" id="costume_id" name="costume_id" value="<?php echo $row1['pid']; ?>"></input>
+										<button type="button" class="btn btn-primary" id="save_review">Submit</button>
 									</div>
 								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x"></i> &nbsp; Close</button>
+								</div>
+								</form>
+							</div>
 						</div>
+					</div>
 
 <?php  }?>
 
