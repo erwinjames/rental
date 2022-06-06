@@ -153,7 +153,7 @@
 																		<div class="product-information"><!--/product-information-->
 																			<h2>'.$row['c_name'].'</h2>
 																			<p>'.$row['c_description'].'</p>
-																		
+
 																		<form class="form-submit">
 																			<span>
 																					<span>Php '.$row['c_price'].'</span>
