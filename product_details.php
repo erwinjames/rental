@@ -1,12 +1,13 @@
 <?php require('header.php'); ?>
 	<section>
 		<div class="container">
+				  <div class="alert alert-success lead" role="alert" id="alert">
+					<span id="res-icon"></span>
+					<span id="res-message"></span>
+				   </div>
 			<div class="row">
 					<?php require('category.php'); ?>
-
-				<div class="col-sm-9 padding-right">
 					<?php
-
 					if(isset($_GET['costId'])){
 						if(isset($_SESSION['id'])){
 					$getCat = $_GET['costId'];
