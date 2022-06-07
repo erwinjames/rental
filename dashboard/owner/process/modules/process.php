@@ -63,6 +63,43 @@ if(isset($_POST['action']) && $_POST['action'] == 'returnedcostume') {
 if(isset($_POST['action']) && $_POST['action'] == 'edit_returned_forms') {
     edit_returned_forms($con);
 }
+if(isset($_POST["action"]) && $_POST["action"] == "fetch_return_rented") {
+    //session_start();
+    fetch_return_cost($con);
+}
+function fetch_return_cost($c) {
+    $stmt = $c->prepare("SELECT
+      o.id,
+      o.names,
+      o.email,
+      o.phone,
+      o.aaddress,
+      o.products,
+      o.amount_paid,
+      o.paid_status,
+      o.products,
+      ur.pickup_date,
+      ur.return_date
+      FROM orders o
+      LEFT JOIN user_rent ur ON o.id=ur.ord_id where o.paid_status = 1 AND ur.p_return_stat = 1");
+    $stmt->execute();
+    $result = $stmt->get_result();
+   while($row = $result->fetch_array()){
+        $output = '
+        <tr>
+            <td>'.$row['names'].'</td>
+            <td>'.$row['aaddress'].'</td>
+            <td>'.$row['phone'].'</td>
+            <td>'.$row['email'].'</td>
+            <td>'.$row['pickup_date'].'</td>
+            <td>'.$row['return_date'].'</td>
+            <td>'.$row['products'].'</td>
+        </tr>';
+    echo $output;
+   }
+    $stmt->close();
+}
+
 function edit_returned_forms($c) {
     $o_id = $_POST['orderID'];
     $r_qty = $_POST['qtys'];

@@ -107,6 +107,24 @@ $(document).ready(function() {
         });
 
 
+$(document).ready(function(){
+  setTimeout(function() {
+      fetch_return_costume();
+  }, 100);
+
+  function fetch_return_costume() {
+      var fcrs_action = "fetch_return_rented";
+      $.ajax({
+          url: "./process/modules/process.php",
+          method: "POST",
+          data: { action: fcrs_action },
+          success: function(response) {
+              $("#returneditems").html(response);
+          }
+      });
+  }
+
+  });
 
 
 $(document).ready(function(){
