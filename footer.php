@@ -152,11 +152,11 @@ $(document).ready(function(){
             dataType:"JSON",
             success:function(data)
             {
+							console.log(data);
                 $('#average_rating').text(data.average_rating);
                 $('#total_review').text(data.total_review);
 
                 var count_star = 0;
-
                 $('.main_star').each(function(){
                     count_star++;
                     if(Math.ceil(data.average_rating) >= count_star)

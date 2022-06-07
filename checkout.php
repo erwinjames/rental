@@ -4,12 +4,13 @@
 	$grand_total = 0;
 	$allItems = '';
 	$items = [];
-
+  $randomid = mt_rand(10000000,99999999);
 	$sql = "SELECT pid,qty,CONCAT(product_name, '(',qty,')') AS ItemQty, total_price FROM cart";
 	$stmt = $con->prepare($sql);
 	$stmt->execute();
 	$result = $stmt->get_result();
 	while ($row = $result->fetch_assoc()) {
+
 	  $grand_total += $row['total_price'];
 	  $items[] = $row['ItemQty'];
 	  $pd = $row['pid'];
@@ -39,6 +40,7 @@
     </label>
   </form>
   <div class="Yorder">
+
     <table class="checkTable">
       <tr class="checkTr">
         <th colspan="2" class="checkTh">Your order</th>
@@ -52,16 +54,23 @@
         <td class="checTD"><?= number_format($grand_total,2) ?></td>
       </tr>
     </table><br>
-          <div>
-      <input type="radio" name="dbt" value="gcash" required="TRUE" id="ship" checked> GCASH
+<form method="post" id="placeOrder">
+    <div>
+      <input type="radio" name="pymnt" value="gcash" required="TRUE" id="ship" checked> GCASH
     </div>
     <div class="bill-to" id="field1">
     <hr>
-      <center>  <img src="assets/images/qrcode.png" alt="" width="150"> </center>
+		  <center><span><b>order id:(<?php echo $randomid; ?>)</b></span>  </center>
+      <center>
+
+				<img src="assets/images/qrcode.png" alt="" width="150">
+
+			</center>
     <p>
 
         Make your payment directly into our gcash account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-    </p>
+
+	  </p>
     <br>
 
     <p>
@@ -70,10 +79,10 @@
         <hr>
 </div>
     <div>
-      <input type="radio" name="dbt" value="dbt" required="TRUE" disabled> Direct Bank Transfer
+      <input type="radio" name="pymnt" value="dbt" required="TRUE" disabled> Direct Bank Transfer
     </div>
     <div>
-      <input type="radio" name="dbt" required="TRUE"  value="cd" id="pick"> Cash
+      <input type="radio" name="pymnt" required="TRUE"  value="cashcounter" id="pick"> Cash
     </div>
   <div id="info">
     <hr>
@@ -83,27 +92,32 @@
     	    <hr>
 </div>
     <div>
-      <input type="radio" name="dbt" value="cd" disabled> Paypal <span>
+      <input type="radio" name="pymnt" value="cd" disabled> Paypal <span>
       <img src="https://www.logolynx.com/images/logolynx/c3/c36093ca9fb6c250f74d319550acac4d.jpeg" alt="" width="50">
       </span>
     </div>
     <hr>
-    		<form method="post" id="placeOrder">
-    								<label class="labels">
-                <span>Pickup Date:</span>
-								<input placeholder="Pickup date" name="p_date" type="text" class="start_date form-control"  required>
-                <span>Pickup Time:</span><input name="p_time" type="time" class="start_time form-control"  required>
-								</label>
 								<label class="labels">
-                  <span>Return Date:</span>
+              Pickup Date:
+								<input placeholder="Pickup date" name="p_date" type="text" class="start_date form-control"  required>
+								</label>
+									<br>
+								<label class="labels">
+								  Pickup Time:<input name="p_time" type="time" class="start_time form-control"  required>
+								</label>
+									<br>
+								<label class="labels">
+                Return Date:
 								<input placeholder="Return Date" name="r_date" type="text" class="form-control end_date"  required>
 								</label>
+
 								<input type="hidden" name="cid" value="<?php echo $_SESSION["id"]; ?>">
 								<input type="hidden" name="pids" value="<?= $pd;  ?>">
 							   <input type="hidden" name="name" value="<?php echo $_SESSION["c_name"]; ?>">
 								<input type="hidden" name="email" value="<?php echo $_SESSION["c_email"]; ?>">
 								<input type="hidden" name="phone" value="<?php echo $_SESSION["c_number"]; ?>">
 								<input type="hidden" name="address" value="<?php echo $_SESSION["c_address"]; ?>">
+								<input type="hidden" name="orderIds" value="<?php echo $randomid; ?>">
 								<input type="hidden" name="pqty" value="<?= $qty; ?>">
 								<input type="hidden" name="products" value="<?= $allItems; ?>">
 								<input type="hidden" name="grand_total" value="<?= $grand_total; ?>">

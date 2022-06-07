@@ -13,7 +13,9 @@
 						<tr class="cart_menu">
 							<td class="price">Order Number</td>
 							<td class="image">Item</td>
-							<td class="description"></td>
+							<td class="description">Description</td>
+							<td class="Pickup_Date">Pickup Date</td>
+							<td class="return_Date">Return Date</td>
 							<td class="price">Price</td>
 							<td>Status</td>
 							<td>Ratings/Review</td>
@@ -44,14 +46,20 @@
     ?>
         <tr>
         						<td class="cart_description">
-        						<center><h4>#<?php echo $row1['ord_id'];?></h4></center>
+        						<center><h4>#<?php echo $row1['orderid'];?></h4></center>
 							</td>
 							<td class="cart_product">
-								<a href="">	<a href="">	<img width="100" src="data:image/jpeg;base64,<?php echo base64_encode($row1['c_image'])?>" alt="" /></a></a>
+							<img width="70" src="data:image/jpeg;base64,<?php echo base64_encode($row1['c_image'])?>" alt="" />
 
 							</td>
 							<td class="cart_description">
 								<h4><?php echo $row1['cat_name'];?></h4>
+							</td>
+							<td class="cart_description">
+								<h4><?php echo $row1['pickup_date'];?></h4>
+							</td>
+							<td class="cart_description">
+								<h4><?php echo $row1['return_date'];?></h4>
 							</td>
 							<td class="cart_price">
 								<h4>Php <?php echo $row1['amount_paid']?></h4>
@@ -117,7 +125,7 @@
 			</div>
 		</div>
 
-	
+
 	</section>
 	<footer id="footer">
 </footer><!--/Footer-->
@@ -333,4 +341,3 @@ $(document).ready(function(){
 </script>
 </body>
 </html>
-

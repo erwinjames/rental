@@ -14,6 +14,8 @@
                                 <table id="dataTablesFull" class="table table-hover table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>Order ID:</th>
+                                            <th>Payment Mode</th>
                                             <th>Name</th>
                                             <th class="no-sort">&nbsp;</th>
                                         </tr>

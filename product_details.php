@@ -63,7 +63,13 @@
 																		<div class="product-information"><!--/product-information-->
 																			<h2>'.$row['c_name'].'</h2>
 																			<p>'.$row['c_description'].'</p>
-																			<img src="assets/images/product-details/rating.png" alt="" />
+																			<div class="mb-3">
+																										<i class="fas fa-star star-light mr-1 main_star"></i>
+																										<i class="fas fa-star star-light mr-1 main_star"></i>
+																										<i class="fas fa-star star-light mr-1 main_star"></i>
+																										<i class="fas fa-star star-light mr-1 main_star"></i>
+																										<i class="fas fa-star star-light mr-1 main_star"></i>
+																			</div>
 																		<form class="form-submit">
 																			<span>
 																					<span>Php '.$row['c_price'].'</span>
@@ -197,13 +203,6 @@
 							<h1 class="text-warning mt-4 mb-4">
 								<b><span id="average_rating">0.0</span> / 5</b>
 							</h1>
-							<div class="mb-3">
-								<i class="fas fa-star star-light mr-1 main_star"></i>
-														<i class="fas fa-star star-light mr-1 main_star"></i>
-														<i class="fas fa-star star-light mr-1 main_star"></i>
-														<i class="fas fa-star star-light mr-1 main_star"></i>
-														<i class="fas fa-star star-light mr-1 main_star"></i>
-							</div>
 							<h3><span id="total_review">0</span> Review</h3>
 						</div>
 						<div class="col-sm-4">

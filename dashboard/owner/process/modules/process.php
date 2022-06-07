@@ -67,15 +67,51 @@ function edit_returned_forms($c) {
     $o_id = $_POST['orderID'];
     $r_qty = $_POST['qtys'];
     $c_id = $_POST['pid'];
+    $stat = 1;
+
+    $stmtss1= "SELECT *
+                  FROM tbl_costume
+                  JOIN tbl_stocks ON tbl_costume.id = tbl_stocks.cost_id
+                  Where tbl_costume.id=?";
+    $stmts = $c->prepare($stmtss1);
+    $stmts->bind_param('s', $c_id);
+    echo $c->error;
+    $stmts->execute();
+    $results = $stmts->get_result();
+    $rows = $results->fetch_array();
+    $totalStock = $rows["c_stock"] + $r_qty;
+    if($totalStock > $rows['stocks']){
+         echo "RETURNED ITEMS IS GREATER THAN LAST STOCKS";
+    }else if($totalStock == $rows['stocks']){
+      $sql_updt6 = "UPDATE tbl_costume JOIN orders ON tbl_costume.id = orders.pid SET tbl_costume.c_stock = tbl_costume.c_stock + ? WHERE orders.id = ?";
+      $stmt69 = $c->prepare($sql_updt6);
+      $stmt69->bind_param('ss',$r_qty,$o_id);
+              if($stmt69->execute()){
+                $sql_updts = "UPDATE `user_rent` SET `p_return_stat` = ? WHERE `user_rent`.`ord_id` = ?";
+                $stmt4 = $c->prepare($sql_updts);
+                $stmt4->bind_param('ss',$stat,$o_id);
+                if($stmt4->execute()){
+                    echo "OKAY";
+                }else{
+                  echo "Not updated";
+                }
+                $stmt4->close();
+              }else{
+                  echo "Shit";
+              }
+      $stmt69->close();
+    }else{
         $sql_updt = "UPDATE tbl_costume JOIN orders ON tbl_costume.id = orders.pid SET tbl_costume.c_stock = tbl_costume.c_stock + ? WHERE orders.id = ?";
         $stmt = $c->prepare($sql_updt);
         $stmt->bind_param('ss',$r_qty,$o_id);
         if($stmt->execute()){
-        echo "Updated successfully!";
+
+        echo "OKAY";
         }else{
             echo "Shit";
         }
         $stmt->close();
+      }
 }
 
 function returnedcostumes($c) {
@@ -253,8 +289,14 @@ function add_costume($c) {
       echo $c->error;
       $statement = $c->prepare($query);
       $statement->bind_param('ss', $lastid,$image_file);
-      $statement->execute();
-      $statement->close();
+      if($statement->execute()){
+        $querys = ("INSERT INTO tbl_stocks(cost_id,stocks) VALUES (?,?)");
+        echo $c->error;
+        $statement1 = $c->prepare($querys);
+        $statement1->bind_param('ss', $lastid,$stak);
+        $statement1->execute();
+      }
+      $statement1->close();
      }
     }
     echo 'added successfully!';
@@ -427,6 +469,8 @@ function fetch_user_rent($c){
     while ($row1 = $row_ship_sd->fetch_assoc()){
         $output = '
         <tr>
+        <td>'.$row1["orderid"].'</td>
+        <td>'.$row1["payments"].'</td>
         <td><a href="#" data-toggle="modal" class="modalId" data-target="#exampleModalCenter" id="'.$row1["id"].'"><span data-toggle="tooltip" title="View Details">'.$row1['names'].'</span></a></td>
         <td>
             <div class="text-centert">

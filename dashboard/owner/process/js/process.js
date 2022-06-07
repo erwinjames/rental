@@ -137,17 +137,17 @@ $(document).ready(function(){
             data: { action: returned_action, returnId: returned_id },
             success: function(response) {
               console.log(response);
-              
-              $("#costName").val(response[7]);
+
+              $("#costName").val(response[8]);
               $("#orderID").val(response[1]);
-              $("#pid").val(response[7]);
+              $("#pid").val(response[8]);
                   setTimeout(function() {
                       $(".returnItem").prop("disabled", false);
                   }, 100);
           }
         });
     });
-    
+
     $("#returned_form").submit(function(e) {
         e.preventDefault();
         $("#returned_form").validate();
@@ -157,9 +157,7 @@ $(document).ready(function(){
             method: "POST",
             data: $(this).serialize() + '&action=edit_returned_forms',
             success: function(response) {
-  
-                    console.log(response);
-                   
+                    alert(response);
                 setTimeout(function() {
                     $("#returned_btn").prop("disabled", false);
                 }, 100);
