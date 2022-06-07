@@ -18,7 +18,7 @@ include "category.php";
     $stmt_ship_sd->execute();
     $row_ship_sd = $stmt_ship_sd->get_result();
    while($row1 = $row_ship_sd->fetch_assoc()){ ?>
-
+   
   <div class="col-md-3">
   <div class="product-image-wrapper">
   <div class="single-products">
