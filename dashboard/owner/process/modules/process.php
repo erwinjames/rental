@@ -60,20 +60,53 @@ if(isset($_POST['action']) && $_POST['action'] == 'modalFetch') {
 if(isset($_POST['action']) && $_POST['action'] == 'returnedcostume') {
     returnedcostumes($con);
 }
+if(isset($_POST['action']) && $_POST['action'] == 'edit_returned_forms') {
+    edit_returned_forms($con);
+}
+function edit_returned_forms($c) {
+    $o_id = $_POST['orderID'];
+    $r_qty = $_POST['qtys'];
+    $c_id = $_POST['pid'];
+        $sql_updt = "UPDATE tbl_costume JOIN orders ON tbl_costume.id = orders.pid SET tbl_costume.c_stock = tbl_costume.c_stock + ? WHERE orders.id = ?";
+        $stmt = $c->prepare($sql_updt);
+        $stmt->bind_param('ss',$r_qty,$o_id);
+        if($stmt->execute()){
+        echo "Updated successfully!";
+        }else{
+            echo "Shit";
+        }
+        $stmt->close();
+}
 
 function returnedcostumes($c) {
-           $r_ids = $_POST['returnId'];
-           $stat = 1;
-            $sql_updts = "UPDATE `user_rent` SET `p_return_stat` = ? WHERE `user_rent`.`ord_id` = ?";
-            $stmt4 = $c->prepare($sql_updts);
-            $stmt4->bind_param('ss',$stat,$r_ids);
-            if($stmt4->execute()){
-              echo "Updated successfully!";
-            }else{
-              echo "Not updated";
-            }
-            $stmt4->close();
+        //    $r_ids = $_POST['returnId'];
+        //    $stat = 1;
+        //     $sql_updts = "UPDATE `user_rent` SET `p_return_stat` = ? WHERE `user_rent`.`ord_id` = ?";
+        //     $stmt4 = $c->prepare($sql_updts);
+        //     $stmt4->bind_param('ss',$stat,$r_ids);
+        //     if($stmt4->execute()){
+        //       echo "Updated successfully!";
+        //     }else{
+        //       echo "Not updated";
+        //     }
+        //     $stmt4->close();
+        ob_start();
+        $fetch_modals_ids = $_POST['returnId'];
+        $stmtss1= "SELECT *
+                      FROM user_rent
+                      JOIN orders ON user_rent.ord_id = orders.id
+                      Where user_rent.ord_id=?";
+        $stmts = $c->prepare($stmtss1);
+        $stmts->bind_param('s', $fetch_modals_ids);
+        echo $c->error;
+        $stmts->execute();
+        $results = $stmts->get_result();
+        $rows = $results->fetch_array();
+    ob_end_clean();
+      echo json_encode($rows);
+
 }
+
 function modalFetch($con) {
     ob_start();
           $fetch_modals_id = $_POST['modal_fe_id'];
@@ -344,7 +377,7 @@ function fetch_rented_cost($c) {
 
             <td>
                 <div class="text-center">
-                    <button type="button" class="btn btn-success btn-sm returnItem" id="'.$row["id"].'"><i class="bi bi-pen"></i> &nbsp; RETURNED</button>
+                    <button type="button" class="btn btn-success btn-sm returnItem" id="'.$row["id"].'" data-toggle="modal" data-target="#managereturnd"><i class="bi bi-pen"></i> &nbsp; RETURNED</button>
                 </div>
             </td>
         </tr>';

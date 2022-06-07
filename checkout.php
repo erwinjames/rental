@@ -53,8 +53,9 @@
       </tr>
     </table><br>
           <div>
-      <input type="radio" name="dbt" value="gcash" required="TRUE" checked> GCASH
+      <input type="radio" name="dbt" value="gcash" required="TRUE" id="ship" checked> GCASH
     </div>
+    <div class="bill-to" id="field1">
     <hr>
       <center>  <img src="assets/images/qrcode.png" alt="" width="150"> </center>
     <p>
@@ -67,28 +68,34 @@
       +(63)9236948643 <b>RENZ</b>
     </p>
         <hr>
+</div>
     <div>
       <input type="radio" name="dbt" value="dbt" required="TRUE" disabled> Direct Bank Transfer
     </div>
     <div>
-      <input type="radio" name="dbt" required="TRUE"  value="cd"> Cash
+      <input type="radio" name="dbt" required="TRUE"  value="cd" id="pick"> Cash
     </div>
+  <div id="info">
     <hr>
     <p>
      		Cash on Pickup.
     	</p>
     	    <hr>
+</div>
     <div>
       <input type="radio" name="dbt" value="cd" disabled> Paypal <span>
       <img src="https://www.logolynx.com/images/logolynx/c3/c36093ca9fb6c250f74d319550acac4d.jpeg" alt="" width="50">
       </span>
     </div>
+    <hr>
     		<form method="post" id="placeOrder">
     								<label class="labels">
-								<input placeholder="Pickup date" name="p_date" type="text" class="start_date"  required>
-								<input name="p_time" type="time" class="start_time"  required>
+                <span>Pickup Date:</span>
+								<input placeholder="Pickup date" name="p_date" type="text" class="start_date form-control"  required>
+                <span>Pickup Time:</span><input name="p_time" type="time" class="start_time form-control"  required>
 								</label>
 								<label class="labels">
+                  <span>Return Date:</span>
 								<input placeholder="Return Date" name="r_date" type="text" class="form-control end_date"  required>
 								</label>
 								<input type="hidden" name="cid" value="<?php echo $_SESSION["id"]; ?>">
@@ -120,6 +127,7 @@
 			$('.bill-to').removeClass('hidden');
 			$('#info').addClass('hidden');
 		});
+
 	});
 </script>
 <?php require('footer.php'); ?>

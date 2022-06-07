@@ -6,11 +6,12 @@ include "header.php";
 <?php
 include "category.php";
 ?>
-<?php if(isset($_GET['catid'])){?>
+<?php if(!isset($_GET['catid'])){?>
 <form class="form-item" id="load_product">
 </form>
-<?php}else{?>
+
   <?php
+}else{
    $cat = $_GET['catid'];
     $stmt_ship_sd = $con->prepare("SELECT  * FROM tbl_costume WHERE c_category_id=?");
     $stmt_ship_sd->bind_param('s',$cat);

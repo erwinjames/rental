@@ -386,7 +386,7 @@ p{
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
-				<a href="index.php" style="color: #FE980F;font-size: 23px;">[ Renz Costumes ]</a>
+				<a href="index.php" style="color: #FE980F;font-size: 23px;"><img width="100%" src="image/logo2.png"></a>
  					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">

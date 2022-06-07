@@ -133,18 +133,43 @@ $(document).ready(function(){
         $.ajax({
             url: "./process/modules/process.php",
             method: "POST",
+            dataType: "json",
             data: { action: returned_action, returnId: returned_id },
             success: function(response) {
               console.log(response);
-              setTimeout(function() {
-                    fetch_rented_costume();
-              }, 100);
+              
+              $("#costName").val(response[7]);
+              $("#orderID").val(response[1]);
+              $("#pid").val(response[7]);
                   setTimeout(function() {
                       $(".returnItem").prop("disabled", false);
                   }, 100);
-
-
           }
+        });
+    });
+    
+    $("#returned_form").submit(function(e) {
+        e.preventDefault();
+        $("#returned_form").validate();
+        $("#returned_btn").prop("disabled", true);
+        $.ajax({
+            url: "./process/modules/process.php",
+            method: "POST",
+            data: $(this).serialize() + '&action=edit_returned_forms',
+            success: function(response) {
+  
+                    console.log(response);
+                   
+                setTimeout(function() {
+                    $("#returned_btn").prop("disabled", false);
+                }, 100);
+                setTimeout(function() {
+                    fetch_rented_costume();
+                  }, 100);
+                  setTimeout(function() {
+                              location.reload();
+                    }, 100);
+            }
         });
     });
 });
